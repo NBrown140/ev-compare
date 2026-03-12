@@ -25,7 +25,6 @@ export interface EV {
   cargo_volume_l: number | null;
   curb_weight_kg: number | null;
   on_sale: boolean;
-  source_url: string | null;
   // Computed
   price_per_range_km: number | null;
   price_per_kwh: number | null;

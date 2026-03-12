@@ -9,7 +9,7 @@ Vehicle data lives in CSV files under `data/markets/` (e.g., `eu.csv`, `us.csv`)
 To add or update vehicles:
 
 1. Fork this repo
-2. Edit (or create) the CSV for the relevant market in `data/markets/`
+2. Edit (or create) the CSV for the relevant market in `data/markets/`. Add your sources to `data/markets/sources.json`.
 3. Follow the column format in `data/schema.json` — run `pnpm run build:data` locally to validate
 4. Submit a pull request
 

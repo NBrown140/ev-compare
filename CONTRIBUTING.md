@@ -16,7 +16,7 @@ Thanks for helping keep EV data accurate and up to date!
 - **range_km**: Official rated range in kilometers
 - **range_rating**: `wltp` for EU, `epa` for US
 - **on_sale**: Set to `true` only if currently available for order
-- **source_url**: Link to the manufacturer's page or a reliable source
+- **sources**: Add source URLs to `data/sources.json` keyed by vehicle `id`. Use Wayback Machine archived URLs (`https://web.archive.org/web/YYYYMMDD/<url>`) for permanence
 
 ### Adding a new market
 

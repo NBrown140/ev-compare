@@ -20,7 +20,6 @@
     { "name": "power_kw", "type": "number", "required": false },
     { "name": "cargo_volume_l", "type": "number", "required": false },
     { "name": "curb_weight_kg", "type": "number", "required": false },
-    { "name": "on_sale", "type": "bool", "required": true },
-    { "name": "source_url", "type": "string", "required": false }
+    { "name": "on_sale", "type": "bool", "required": true }
   ]
 }
