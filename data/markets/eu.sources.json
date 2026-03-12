@@ -1,0 +1,272 @@
+{
+  "tesla-model-3-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.tesla.com/en_eu/model3",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "tesla-model-y-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.tesla.com/en_eu/modely",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "vw-id4-pro-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.volkswagen.de/de/modelle/id4.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "vw-id3-pro-s-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.volkswagen.de/de/modelle/id3.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "bmw-ix1-xdrive30-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.bmw.de/de/models/ix1.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "hyundai-ioniq-5-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.hyundai.com/eu/models/ioniq5.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "kia-ev6-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.kia.com/eu/models/ev6.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "byd-seal-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.byd.com/eu/seal",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "mg-mg4-xpower-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.mgmotor.eu/mg4-electric",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "peugeot-e-3008-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.peugeot.com/en/models/e-3008",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ]
+}

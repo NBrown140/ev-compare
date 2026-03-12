@@ -16,13 +16,34 @@ Thanks for helping keep EV data accurate and up to date!
 - **range_km**: Official rated range in kilometers
 - **range_rating**: `wltp` for EU, `epa` for US
 - **on_sale**: Set to `true` only if currently available for order
-- **sources**: Add source URLs to `data/sources.json` keyed by vehicle `id`. Use Wayback Machine archived URLs (`https://web.archive.org/web/YYYYMMDD/<url>`) for permanence
+
+### Sources
+
+Every CSV column (except `id`) must be backed by a source. Sources live in a JSON file alongside each market CSV (e.g., `us.sources.json` next to `us.csv`), keyed by vehicle `id`.
+
+Each source entry needs:
+- **url** — a Wayback Machine snapshot (`https://web.archive.org/web/YYYYMMDD/<url>`). You can create one at `https://web.archive.org/save/<url>`
+- **fields** — which CSV columns this source covers
+
+When data comes from multiple sources, add multiple entries and split the fields between them. The build will fail if any populated column is missing from all sources.
+
+```json
+{
+  "tesla-model-3-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.tesla.com/model3",
+      "fields": ["manufacturer", "model", "price_local", "range_km", "..."]
+    }
+  ]
+}
+```
 
 ### Adding a new market
 
 1. Create a new CSV file in `data/markets/` (e.g., `cn.csv`)
-2. Use the same column headers as existing files
-3. Include at least 5 vehicles with accurate data
+2. Create a matching sources file (e.g., `cn.sources.json`)
+3. Use the same column headers as existing files
+4. Include at least 5 vehicles with accurate data
 
 ## Development
 
@@ -39,5 +60,7 @@ The build script validates all CSV data against the schema. Your PR will fail CI
 - Required fields are missing
 - Values don't match expected types or enums
 - CSV parsing errors occur
+- A vehicle is missing sources, or a populated column has no source covering it
+- Archived URLs are not Wayback Machine links
 
 Run `pnpm run build:data` locally to check before submitting.

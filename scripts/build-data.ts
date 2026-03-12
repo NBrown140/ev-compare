@@ -20,16 +20,11 @@ const schema: { columns: Column[] } = JSON.parse(
 
 interface Source {
   url: string;
-  archived_url: string;
-  accessed: string;
-  fields?: string[];
+  fields: string[];
 }
 
 type SourcesMap = Record<string, Source[]>;
 
-const sources: SourcesMap = JSON.parse(
-  fs.readFileSync(path.join(DATA_DIR, "sources.json"), "utf-8")
-);
 
 function validate(
   row: Record<string, string>,
@@ -107,61 +102,80 @@ function parseRow(row: Record<string, string>) {
 }
 
 const WAYBACK_PREFIX = "https://web.archive.org/web/";
-const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+// Columns that don't need a source (derived, not sourced data)
+const SOURCE_EXEMPT_FIELDS = new Set(["id"]);
 
 function validateSources(
   sources: SourcesMap,
-  allVehicleIds: Set<string>
+  vehicleRows: Map<string, Record<string, string>>,
+  file: string
 ): string[] {
   const errors: string[] = [];
+  const colNames = schema.columns.map((c) => c.name);
 
   for (const [id, entries] of Object.entries(sources)) {
     if (!Array.isArray(entries) || entries.length === 0) {
-      errors.push(`sources.json: "${id}" must have at least one source entry`);
+      errors.push(`${file}: "${id}" must have at least one source entry`);
       continue;
     }
 
     for (let i = 0; i < entries.length; i++) {
       const entry = entries[i];
-      const loc = `sources.json: "${id}"[${i}]`;
+      const loc = `${file}: "${id}"[${i}]`;
 
       if (!entry.url || typeof entry.url !== "string") {
         errors.push(`${loc} — missing or invalid "url"`);
-      }
-
-      if (!entry.archived_url || typeof entry.archived_url !== "string") {
-        errors.push(`${loc} — missing or invalid "archived_url"`);
-      } else if (!entry.archived_url.startsWith(WAYBACK_PREFIX)) {
+      } else if (!entry.url.startsWith(WAYBACK_PREFIX)) {
         errors.push(
-          `${loc} — "archived_url" must be a Wayback Machine URL (start with ${WAYBACK_PREFIX})`
+          `${loc} — "url" must be a Wayback Machine URL (start with ${WAYBACK_PREFIX})`
         );
       }
 
-      if (!entry.accessed || typeof entry.accessed !== "string") {
-        errors.push(`${loc} — missing or invalid "accessed"`);
-      } else if (!DATE_RE.test(entry.accessed)) {
-        errors.push(`${loc} — "accessed" must be YYYY-MM-DD, got "${entry.accessed}"`);
-      }
-
-      if (entry.fields !== undefined) {
-        if (!Array.isArray(entry.fields)) {
-          errors.push(`${loc} — "fields" must be an array of strings`);
-        } else {
-          const colNames = schema.columns.map((c) => c.name);
-          for (const f of entry.fields) {
-            if (!colNames.includes(f)) {
-              errors.push(`${loc} — unknown field "${f}" in "fields"`);
-            }
+      if (!Array.isArray(entry.fields) || entry.fields.length === 0) {
+        errors.push(`${loc} — "fields" is required and must list at least one column`);
+      } else {
+        for (const f of entry.fields) {
+          if (!colNames.includes(f)) {
+            errors.push(`${loc} — unknown field "${f}" in "fields"`);
           }
         }
       }
     }
   }
 
-  // Check that every vehicle in the CSVs has sources
-  for (const id of allVehicleIds) {
+  // Check for orphaned source entries (not in CSV)
+  for (const id of Object.keys(sources)) {
+    if (!vehicleRows.has(id)) {
+      errors.push(`${file}: source entry "${id}" does not match any vehicle in the CSV`);
+    }
+  }
+
+  // Check that every vehicle in the CSV has sources
+  // and that every populated column is covered by at least one source
+  for (const [id, row] of vehicleRows) {
     if (!sources[id]) {
-      errors.push(`sources.json: missing sources for vehicle "${id}"`);
+      errors.push(`${file}: missing sources for vehicle "${id}"`);
+      continue;
+    }
+
+    // Collect all fields covered by sources for this vehicle
+    const coveredFields = new Set<string>();
+    for (const entry of sources[id]) {
+      if (Array.isArray(entry.fields)) {
+        for (const f of entry.fields) coveredFields.add(f);
+      }
+    }
+
+    // Check that every populated column has a source
+    for (const col of schema.columns) {
+      if (SOURCE_EXEMPT_FIELDS.has(col.name)) continue;
+      const val = row[col.name]?.trim() ?? "";
+      if (val !== "" && !coveredFields.has(col.name)) {
+        errors.push(
+          `${file}: "${id}" — column "${col.name}" has a value but no source covers it`
+        );
+      }
     }
   }
 
@@ -172,7 +186,6 @@ function validateSources(
 fs.mkdirSync(OUT_DIR, { recursive: true });
 const allErrors: string[] = [];
 const markets: string[] = [];
-const allVehicleIds = new Set<string>();
 
 const csvFiles = fs
   .readdirSync(MARKETS_DIR)
@@ -195,10 +208,23 @@ for (const file of csvFiles) {
     }
   }
 
+  const vehicleRows = new Map<string, Record<string, string>>();
   for (let i = 0; i < data.length; i++) {
     allErrors.push(...validate(data[i], i + 2, file));
     const id = data[i].id?.trim();
-    if (id) allVehicleIds.add(id);
+    if (id) vehicleRows.set(id, data[i]);
+  }
+
+  // Validate sources for this market
+  const sourcesFile = `${market}.sources.json`;
+  const sourcesPath = path.join(MARKETS_DIR, sourcesFile);
+  if (!fs.existsSync(sourcesPath)) {
+    allErrors.push(`${sourcesFile}: file not found (expected alongside ${file})`);
+  } else {
+    const sources: SourcesMap = JSON.parse(
+      fs.readFileSync(sourcesPath, "utf-8")
+    );
+    allErrors.push(...validateSources(sources, vehicleRows, sourcesFile));
   }
 
   if (allErrors.length === 0) {
@@ -209,9 +235,6 @@ for (const file of csvFiles) {
     );
   }
 }
-
-// Validate sources
-allErrors.push(...validateSources(sources, allVehicleIds));
 
 if (allErrors.length > 0) {
   console.error("Validation errors:");

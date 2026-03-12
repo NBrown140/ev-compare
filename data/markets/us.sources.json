@@ -1,0 +1,272 @@
+{
+  "tesla-model-3-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.tesla.com/model3",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "tesla-model-y-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.tesla.com/modely",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "chevy-equinox-ev-2lt-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.chevrolet.com/electric/equinox-ev",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "hyundai-ioniq-5-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.hyundaiusa.com/us/en/vehicles/ioniq-5",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "kia-ev6-lr-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.kia.com/us/en/ev6",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "ford-mustang-mach-e-premium-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.ford.com/suvs/mach-e/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "rivian-r1s-la-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://rivian.com/r1s",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "chevy-blazer-ev-rs-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.chevrolet.com/electric/blazer-ev",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "bmw-ix-xdrive50-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.bmwusa.com/models/ix",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ],
+  "tesla-cybertruck-awd-2025": [
+    {
+      "url": "https://web.archive.org/web/20250301/https://www.tesla.com/cybertruck",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "on_sale"
+      ]
+    }
+  ]
+}
