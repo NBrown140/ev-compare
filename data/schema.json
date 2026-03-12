@@ -1,0 +1,26 @@
+{
+  "columns": [
+    { "name": "id", "type": "string", "required": true },
+    { "name": "manufacturer", "type": "string", "required": true },
+    { "name": "model", "type": "string", "required": true },
+    { "name": "model_year", "type": "int", "required": true },
+    { "name": "variant", "type": "string", "required": false },
+    { "name": "segment", "type": "enum", "required": true, "values": ["sedan", "suv", "hatchback", "truck", "van", "crossover"] },
+    { "name": "seats", "type": "int", "required": true },
+    { "name": "price_local", "type": "number", "required": true },
+    { "name": "currency", "type": "string", "required": true },
+    { "name": "range_km", "type": "int", "required": true },
+    { "name": "range_rating", "type": "enum", "required": true, "values": ["wltp", "epa"] },
+    { "name": "battery_capacity_kwh", "type": "number", "required": true },
+    { "name": "battery_chemistry", "type": "enum", "required": false, "values": ["lfp", "nmc", "nca", "nmca", "other"] },
+    { "name": "efficiency_wh_km", "type": "number", "required": false },
+    { "name": "fast_charge_kw", "type": "number", "required": false },
+    { "name": "charge_10_80_min", "type": "number", "required": false },
+    { "name": "drivetrain", "type": "enum", "required": false, "values": ["fwd", "rwd", "awd"] },
+    { "name": "power_kw", "type": "number", "required": false },
+    { "name": "cargo_volume_l", "type": "number", "required": false },
+    { "name": "curb_weight_kg", "type": "number", "required": false },
+    { "name": "on_sale", "type": "bool", "required": true },
+    { "name": "source_url", "type": "string", "required": false }
+  ]
+}

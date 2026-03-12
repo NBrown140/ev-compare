@@ -1,0 +1,11 @@
+id,manufacturer,model,model_year,variant,segment,seats,price_local,currency,range_km,range_rating,battery_capacity_kwh,battery_chemistry,efficiency_wh_km,fast_charge_kw,charge_10_80_min,drivetrain,power_kw,cargo_volume_l,curb_weight_kg,on_sale,source_url
+tesla-model-3-lr-2025,Tesla,Model 3,2025,Long Range AWD,sedan,5,46990,EUR,702,wltp,78.1,nmc,131,250,30,awd,366,561,1828,true,https://www.tesla.com/en_eu/model3
+tesla-model-y-lr-2025,Tesla,Model Y,2025,Long Range AWD,suv,5,49990,EUR,568,wltp,78.1,nmc,159,250,30,awd,340,854,1979,true,https://www.tesla.com/en_eu/modely
+vw-id4-pro-2025,Volkswagen,ID.4,2025,Pro,suv,5,44995,EUR,572,wltp,82,nmc,157,175,28,rwd,210,543,2124,true,https://www.volkswagen.de/de/modelle/id4.html
+vw-id3-pro-s-2025,Volkswagen,ID.3,2025,Pro S,hatchback,5,40335,EUR,572,wltp,82,nmc,156,170,29,rwd,150,385,1940,true,https://www.volkswagen.de/de/modelle/id3.html
+bmw-ix1-xdrive30-2025,BMW,iX1,2025,xDrive30,crossover,5,49900,EUR,475,wltp,66.5,nmc,155,130,29,awd,230,490,2000,true,https://www.bmw.de/de/models/ix1.html
+hyundai-ioniq-5-lr-2025,Hyundai,IONIQ 5,2025,Long Range AWD,crossover,5,48900,EUR,507,wltp,84,nmc,175,240,18,awd,239,527,2100,true,https://www.hyundai.com/eu/models/ioniq5.html
+kia-ev6-lr-2025,Kia,EV6,2025,Long Range AWD,crossover,5,51490,EUR,506,wltp,84,nmc,176,240,18,awd,239,490,2090,true,https://www.kia.com/eu/models/ev6.html
+byd-seal-2025,BYD,Seal,2025,Excellence AWD,sedan,5,44900,EUR,520,wltp,82.5,lfp,161,150,26,awd,390,400,2135,true,https://www.byd.com/eu/seal
+mg-mg4-xpower-2025,MG,MG4,2025,XPower,hatchback,5,36490,EUR,435,wltp,64,lfp,156,144,26,awd,320,363,1836,true,https://www.mgmotor.eu/mg4-electric
+peugeot-e-3008-lr-2025,Peugeot,E-3008,2025,Long Range,suv,5,48400,EUR,700,wltp,98,nmc,152,160,30,fwd,157,520,2193,true,https://www.peugeot.com/en/models/e-3008

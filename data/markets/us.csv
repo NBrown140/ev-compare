@@ -1,0 +1,11 @@
+id,manufacturer,model,model_year,variant,segment,seats,price_local,currency,range_km,range_rating,battery_capacity_kwh,battery_chemistry,efficiency_wh_km,fast_charge_kw,charge_10_80_min,drivetrain,power_kw,cargo_volume_l,curb_weight_kg,on_sale,source_url
+tesla-model-3-lr-2025,Tesla,Model 3,2025,Long Range AWD,sedan,5,42490,USD,514,epa,78.1,nmc,152,250,30,awd,366,561,1828,true,https://www.tesla.com/model3
+tesla-model-y-lr-2025,Tesla,Model Y,2025,Long Range AWD,suv,5,44990,USD,483,epa,78.1,nmc,162,250,30,awd,340,854,1979,true,https://www.tesla.com/modely
+chevy-equinox-ev-2lt-2025,Chevrolet,Equinox EV,2025,2LT,suv,5,33900,USD,499,epa,85,nmc,170,150,32,fwd,159,793,2122,true,https://www.chevrolet.com/electric/equinox-ev
+hyundai-ioniq-5-lr-2025,Hyundai,IONIQ 5,2025,Long Range AWD,crossover,5,49650,USD,459,epa,84,nmc,183,240,18,awd,239,527,2100,true,https://www.hyundaiusa.com/us/en/vehicles/ioniq-5
+kia-ev6-lr-2025,Kia,EV6,2025,Long Range AWD,crossover,5,49095,USD,460,epa,84,nmc,183,240,18,awd,239,490,2090,true,https://www.kia.com/us/en/ev6
+ford-mustang-mach-e-premium-2025,Ford,Mustang Mach-E,2025,Premium AWD ER,suv,5,49995,USD,475,epa,91,nmc,192,150,33,awd,258,822,2110,true,https://www.ford.com/suvs/mach-e/
+rivian-r1s-la-2025,Rivian,R1S,2025,Large Pack,suv,7,75900,USD,515,epa,100,nmc,194,220,35,awd,533,1050,2870,true,https://rivian.com/r1s
+chevy-blazer-ev-rs-2025,Chevrolet,Blazer EV,2025,RS AWD,suv,5,51995,USD,449,epa,102,nmc,227,190,32,awd,214,863,2540,true,https://www.chevrolet.com/electric/blazer-ev
+bmw-ix-xdrive50-2025,BMW,iX,2025,xDrive50,suv,5,87100,USD,520,epa,111.5,nmc,214,200,35,awd,385,500,2585,true,https://www.bmwusa.com/models/ix
+tesla-cybertruck-awd-2025,Tesla,Cybertruck,2025,All-Wheel Drive,truck,5,79990,USD,515,epa,123,nmc,239,250,27,awd,448,1897,3104,true,https://www.tesla.com/cybertruck
