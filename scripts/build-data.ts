@@ -94,6 +94,7 @@ function parseRow(row: Record<string, string>) {
 }
 
 // Main
+fs.mkdirSync(OUT_DIR, { recursive: true });
 const allErrors: string[] = [];
 const markets: string[] = [];
 
