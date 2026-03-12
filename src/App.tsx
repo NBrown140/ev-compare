@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import MarketDashboard from "@/pages/MarketDashboard";
@@ -13,6 +14,7 @@ export default function App() {
       ) : (
         <Home onSelectMarket={setMarket} />
       )}
+      <SpeedInsights />
     </Layout>
   );
 }
