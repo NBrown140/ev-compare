@@ -182,6 +182,12 @@ function validateSources(
   return errors;
 }
 
+// Expected range rating per market
+const MARKET_RANGE_RATING: Record<string, string> = {
+  eu: "wltp",
+  us: "epa",
+};
+
 // Main
 fs.mkdirSync(OUT_DIR, { recursive: true });
 const allErrors: string[] = [];
@@ -211,6 +217,16 @@ for (const file of csvFiles) {
   const vehicleRows = new Map<string, Record<string, string>>();
   for (let i = 0; i < data.length; i++) {
     allErrors.push(...validate(data[i], i + 2, file));
+
+    // Enforce market-specific range rating
+    const expectedRating = MARKET_RANGE_RATING[market];
+    const actualRating = data[i].range_rating?.trim();
+    if (expectedRating && actualRating && actualRating !== expectedRating) {
+      allErrors.push(
+        `${file}:${i + 2} — range_rating must be "${expectedRating}" for market "${market}", got "${actualRating}"`
+      );
+    }
+
     const id = data[i].id?.trim();
     if (id) vehicleRows.set(id, data[i]);
   }
