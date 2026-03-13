@@ -15,8 +15,6 @@ Thanks for helping keep EV data accurate and up to date!
 - **price_local**: MSRP in local currency before incentives
 - **range_km**: Official rated range in kilometers
 - **range_rating**: `wltp` for EU, `epa` for US
-- **on_sale**: Set to `true` only if currently available for order
-
 ### Sources
 
 Every CSV column (except `id`) must be backed by a source. Sources live in a JSON file alongside each market CSV (e.g., `us.sources.json` next to `us.csv`), keyed by vehicle `id`.

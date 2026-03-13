@@ -2,6 +2,7 @@ export type Segment = "sedan" | "suv" | "hatchback" | "truck" | "van" | "crossov
 export type RangeRating = "wltp" | "epa";
 export type BatteryChemistry = "lfp" | "nmc" | "nca" | "nmca" | "other";
 export type Drivetrain = "fwd" | "rwd" | "awd";
+export type ChargePortType = "ccs" | "nacs" | "chademo" | "gbt" | "other";
 
 export interface EV {
   id: string;
@@ -22,9 +23,24 @@ export interface EV {
   charge_10_80_min: number | null;
   drivetrain: Drivetrain | null;
   power_kw: number | null;
+  torque_nm: number | null;
+  acceleration_0_100_s: number | null;
+  top_speed_kmh: number | null;
+  length_mm: number | null;
+  width_mm: number | null;
+  height_mm: number | null;
+  wheelbase_mm: number | null;
+  ground_clearance_mm: number | null;
   cargo_volume_l: number | null;
+  frunk_volume_l: number | null;
+  towing_capacity_kg: number | null;
   curb_weight_kg: number | null;
-  on_sale: boolean;
+  onboard_charger_kw: number | null;
+  charge_port_type: ChargePortType | null;
+  v2l_capable: boolean | null;
+  plug_and_charge: boolean | null;
+  range_city_km: number | null;
+  range_highway_km: number | null;
   // Computed
   price_per_range_km: number | null;
   price_per_kwh: number | null;

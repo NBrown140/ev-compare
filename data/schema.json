@@ -18,8 +18,23 @@
     { "name": "charge_10_80_min", "type": "number", "required": false },
     { "name": "drivetrain", "type": "enum", "required": false, "values": ["fwd", "rwd", "awd"] },
     { "name": "power_kw", "type": "number", "required": false },
+    { "name": "torque_nm", "type": "number", "required": false },
+    { "name": "acceleration_0_100_s", "type": "number", "required": false },
+    { "name": "top_speed_kmh", "type": "int", "required": false },
+    { "name": "length_mm", "type": "int", "required": false },
+    { "name": "width_mm", "type": "int", "required": false },
+    { "name": "height_mm", "type": "int", "required": false },
+    { "name": "wheelbase_mm", "type": "int", "required": false },
+    { "name": "ground_clearance_mm", "type": "int", "required": false },
     { "name": "cargo_volume_l", "type": "number", "required": false },
+    { "name": "frunk_volume_l", "type": "number", "required": false },
+    { "name": "towing_capacity_kg", "type": "number", "required": false },
     { "name": "curb_weight_kg", "type": "number", "required": false },
-    { "name": "on_sale", "type": "bool", "required": true }
+    { "name": "onboard_charger_kw", "type": "number", "required": false },
+    { "name": "charge_port_type", "type": "enum", "required": false, "values": ["ccs", "nacs", "chademo", "gbt", "other"] },
+    { "name": "v2l_capable", "type": "bool", "required": false },
+    { "name": "plug_and_charge", "type": "bool", "required": false },
+    { "name": "range_city_km", "type": "int", "required": false },
+    { "name": "range_highway_km", "type": "int", "required": false }
   ]
 }
