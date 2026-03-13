@@ -12,6 +12,7 @@ interface EVTableProps {
 const columns: { key: SortKey; label: string; align?: "right" }[] = [
   { key: "manufacturer", label: "Manufacturer" },
   { key: "model", label: "Model" },
+  { key: "model_year", label: "Year" },
   { key: "variant", label: "Variant" },
   { key: "segment", label: "Segment" },
   { key: "price_local", label: "Price", align: "right" },

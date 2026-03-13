@@ -43,12 +43,43 @@ When data comes from multiple sources, add multiple entries and split the fields
 3. Use the same column headers as existing files
 4. Include at least 5 vehicles with accurate data
 
-## Development
+## Useful Data Sources
+
+When researching EV specs, the following sources are generally reliable. Always cross-reference multiple sources and archive the URL via the Wayback Machine before adding it.
+
+### Primary sources (prefer these)
+
+- **Official manufacturer websites** — best for MSRP, range, battery, drivetrain, and dimensions (e.g., tesla.com/model3, hyundai.com/ioniq-5)
+- **EPA / WLTP official filings** — authoritative for range and efficiency ratings
+  - US EPA: [fueleconomy.gov](https://fueleconomy.gov)
+  - EU WLTP: typically published via manufacturer spec sheets
+
+### Aggregators and databases
+
+- **[ev-database.org](https://ev-database.org)** — comprehensive European-focused database with WLTP range, charging curves, and efficiency data
+- **[ev-specifications.com](https://ev-specifications.com)** — detailed specs including dimensions, weight, and performance
+- **[insideevs.com](https://insideevs.com)** — news and specs, useful for US pricing and real-world range tests
+- **[pushevs.com](https://pushevs.com)** — battery chemistry breakdowns and charging details
+- **[Wikipedia](https://en.wikipedia.org)** — good overview articles with sourced specs for most EV models
+
+### Charging-specific
+
+- **[fastned.nl/en/blog](https://fastned.nl/en/blog)** — real-world charging curve tests
+- **[electrek.co](https://electrek.co)** — news and pricing updates, especially for the US market
+
+### Pricing
+
+- **Official configurators** — always the best source for current MSRP
+- **[carwow.co.uk](https://www.carwow.co.uk)** / **[carwow.de](https://www.carwow.de)** — EU pricing comparisons
+- **[edmunds.com](https://www.edmunds.com)** — US pricing and incentives
+
+## Validating the schema locally
+
+This is not absolutely required as it will be validated in the CI, but it allows finding schema errors faster.
 
 ```bash
 pnpm install
 pnpm run build:data   # validate and build JSON from CSVs
-pnpm run dev           # start dev server
 ```
 
 ## Validation
