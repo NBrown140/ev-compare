@@ -1,4 +1,4 @@
-import { formatMarketName, formatCurrency, formatNumber } from "@/utils/format";
+import { formatMarketName, formatNumber } from "@/utils/format";
 import { getMarketData } from "@/data";
 import type { EV, Segment } from "@/types/ev";
 
@@ -8,9 +8,9 @@ interface MarketSelectorProps {
 }
 
 const marketDescriptions: Record<string, string> = {
-  eu: "European Union -- prices in EUR, WLTP range",
-  us: "United States -- prices in USD, EPA range",
-  uk: "United Kingdom -- prices in GBP, WLTP range",
+  eu: "European Union",
+  us: "United States",
+  uk: "United Kingdom",
 };
 
 const marketFlags: Record<string, string> = {
@@ -19,22 +19,9 @@ const marketFlags: Record<string, string> = {
   uk: "\u{1F1EC}\u{1F1E7}",
 };
 
-function percentile(sorted: number[], p: number): number {
-  const idx = (p / 100) * (sorted.length - 1);
-  const lo = Math.floor(idx);
-  const hi = Math.ceil(idx);
-  if (lo === hi) return sorted[lo];
-  return sorted[lo] + (sorted[hi] - sorted[lo]) * (idx - lo);
-}
-
 interface MarketStats {
   vehicleCount: number;
   manufacturerCount: number;
-  priceMin: number;
-  priceMax: number;
-  currency: string;
-  rangeMin: number;
-  rangeMax: number;
   segments: Segment[];
 }
 
@@ -43,17 +30,10 @@ function computeMarketStats(vehicles: EV[]): MarketStats | null {
 
   const manufacturers = new Set(vehicles.map((v) => v.manufacturer));
   const segments = [...new Set(vehicles.map((v) => v.segment))].sort();
-  const prices = vehicles.map((v) => v.price_local).sort((a, b) => a - b);
-  const ranges = vehicles.map((v) => v.range_km).sort((a, b) => a - b);
 
   return {
     vehicleCount: vehicles.length,
     manufacturerCount: manufacturers.size,
-    priceMin: prices[0],
-    priceMax: percentile(prices, 95),
-    currency: vehicles[0].currency,
-    rangeMin: ranges[0],
-    rangeMax: ranges[ranges.length - 1],
     segments: segments as Segment[],
   };
 }
@@ -90,11 +70,6 @@ export default function MarketSelector({
                 )}
                 {formatMarketName(market)}
               </div>
-              {stats && (
-                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
-                  {stats.currency}
-                </span>
-              )}
             </div>
             <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
               {marketDescriptions[market] ?? `${formatMarketName(market)} market`}
@@ -110,18 +85,6 @@ export default function MarketSelector({
                   <div>
                     <div className="text-gray-400 dark:text-gray-500 text-xs">Manufacturers</div>
                     <div className="font-semibold">{formatNumber(stats.manufacturerCount)}</div>
-                  </div>
-                  <div>
-                    <div className="text-gray-400 dark:text-gray-500 text-xs">Price range</div>
-                    <div className="font-semibold">
-                      {formatCurrency(stats.priceMin, stats.currency)} -- {formatCurrency(stats.priceMax, stats.currency)}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-gray-400 dark:text-gray-500 text-xs">Range</div>
-                    <div className="font-semibold">
-                      {formatNumber(stats.rangeMin)} -- {formatNumber(stats.rangeMax)} km
-                    </div>
                   </div>
                 </div>
 
