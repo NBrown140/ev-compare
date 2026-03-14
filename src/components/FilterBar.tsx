@@ -414,15 +414,14 @@ export default function FilterBar({
   // Count active advanced filters for badge
   const advancedCount = useAdvancedActiveCount(filters);
 
-  const hasActiveFilters =
-    filters.modelYears.length > 0 ||
-    filters.segment !== "all" ||
-    filters.manufacturer !== "all" ||
-    filters.priceRange.min != null ||
-    filters.priceRange.max != null ||
-    filters.rangeKm.min != null ||
-    filters.rangeKm.max != null ||
-    advancedCount > 0;
+  const basicCount =
+    (filters.modelYears.length > 0 ? 1 : 0) +
+    (filters.segment !== "all" ? 1 : 0) +
+    (filters.manufacturer && filters.manufacturer !== "all" ? 1 : 0) +
+    (filters.priceRange.min != null || filters.priceRange.max != null ? 1 : 0) +
+    (filters.rangeKm.min != null || filters.rangeKm.max != null ? 1 : 0);
+  const totalActiveCount = basicCount + advancedCount;
+  const hasActiveFilters = totalActiveCount > 0;
 
   return (
     <div className="rounded-xl border border-gray-200 dark:border-gray-700/80 bg-gray-50/60 dark:bg-gray-800/30">
@@ -443,12 +442,7 @@ export default function FilterBar({
           </span>
           {hasActiveFilters && (
             <span className="inline-flex items-center justify-center h-4 min-w-[16px] px-1 text-[10px] font-bold bg-blue-600 dark:bg-blue-500 text-white rounded-full leading-none">
-              {filters.modelYears.length +
-                (filters.segment !== "all" ? 1 : 0) +
-                (filters.manufacturer !== "all" ? 1 : 0) +
-                (filters.priceRange.min != null || filters.priceRange.max != null ? 1 : 0) +
-                (filters.rangeKm.min != null || filters.rangeKm.max != null ? 1 : 0) +
-                advancedCount}
+              {totalActiveCount}
             </span>
           )}
         </div>
