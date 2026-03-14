@@ -179,13 +179,14 @@ function SegmentViolinPlot({
     );
   }, [yMin, yMax]);
 
-  // Seeded random for stable jitter (seed must never be 0)
-  function seededRandom(seed: number) {
-    let s = ((seed + 1) * 16807) % 2147483647;
-    return () => {
-      s = (s * 16807) % 2147483647;
-      return s / 2147483647;
-    };
+  // Stable jitter value for a point derived from its string ID
+  function stableJitter(id: string): number {
+    let h = 2166136261;
+    for (let i = 0; i < id.length; i++) {
+      h ^= id.charCodeAt(i);
+      h = (h * 16777619) >>> 0;
+    }
+    return (h / 0xffffffff) - 0.5; // in (-0.5, 0.5)
   }
 
   return (
@@ -236,14 +237,13 @@ function SegmentViolinPlot({
             // Build violin path (mirrored KDE)
             if (maxDensity === 0 || seg.points.length < 2) {
               // Just draw dots for small groups
-              const rng = seededRandom(segIdx * 1000);
               return (
                 <g key={seg.segment}>
                   {seg.points.map((pt, pi) => (
                     <circle
                       key={pi}
                       data-category={pt[colorByKey]}
-                      cx={cx + (rng() - 0.5) * 12}
+                      cx={cx + stableJitter(pt.id) * 12}
                       cy={yScale(pt.rangePerPrice)}
                       r={5}
                       fill={colorMap.get(pt[colorByKey]) ?? "#93c5fd"}
@@ -297,8 +297,6 @@ function SegmentViolinPlot({
               })
               .join(" L");
 
-            const rng = seededRandom(segIdx * 1000);
-
             return (
               <g key={seg.segment}>
                 {/* Violin shape */}
@@ -323,7 +321,7 @@ function SegmentViolinPlot({
                     (nearestKde.density / maxDensity) *
                     violinMaxHalfWidth *
                     0.85;
-                  const jitter = (rng() - 0.5) * 2 * localWidth;
+                  const jitter = stableJitter(pt.id) * 2 * localWidth;
 
                   return (
                     <circle
