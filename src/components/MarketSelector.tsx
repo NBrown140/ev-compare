@@ -11,12 +11,14 @@ const marketDescriptions: Record<string, string> = {
   eu: "European Union",
   us: "United States",
   uk: "United Kingdom",
+  ca: "Canada",
 };
 
 const marketFlags: Record<string, string> = {
   eu: "\u{1F1EA}\u{1F1FA}",
   us: "\u{1F1FA}\u{1F1F8}",
   uk: "\u{1F1EC}\u{1F1E7}",
+  ca: "\u{1F1E8}\u{1F1E6}",
 };
 
 interface MarketStats {

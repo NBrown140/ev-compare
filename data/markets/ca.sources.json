@@ -1,0 +1,3768 @@
+{
+  "acura-zdx-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.acura.ca/zdx",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "towing_capacity_kg",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49101",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "acura-rsx-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.acura.ca/rsx",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "drivetrain",
+        "power_kw",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "curb_weight_kg",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "audi-q4-etron-45-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.audi.ca/en/models/q4-e-tron.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49800",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "audi-q4-etron-55-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.audi.ca/en/models/q4-e-tron.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49801",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "audi-s-etron-gt-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.audi.ca/en/models/e-tron-gt.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "frunk_volume_l",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49802",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "audi-rs-etron-gt-performance-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.audi.ca/en/models/rs-e-tron-gt.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "frunk_volume_l",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49803",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "bmw-i4-edrive40-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.bmw.ca/en/all-models/bmw-i/i4/2024/bmw-i4.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49850",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "bmw-i4-m50-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.bmw.ca/en/all-models/bmw-i/i4/2024/bmw-i4.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49851",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "bmw-i5-edrive40-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.bmw.ca/en/all-models/bmw-i/i5/2024/bmw-i5.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "towing_capacity_kg",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50100",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "bmw-i7-xdrive60-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.bmw.ca/en/all-models/bmw-i/i7/2024/bmw-i7.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "towing_capacity_kg",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50101",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "bmw-ix-xdrive60-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.bmw.ca/en/all-models/bmw-i/ix/2024/bmw-ix.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "towing_capacity_kg",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49852",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "bmw-ix-m70-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.bmw.ca/en/all-models/bmw-i/ix/2024/bmw-ix.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "towing_capacity_kg",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49853",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "bmw-ix3-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.bmw.ca/en/all-models/bmw-i/ix3/2026/bmw-ix3.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "cadillac-lyriq-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.cadillac.ca/en/lyriq.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49500",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "cadillac-lyriq-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.cadillac.ca/en/lyriq.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49501",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "cadillac-optiq-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.cadillac.ca/en/optiq.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "cadillac-escalade-iq-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.cadillac.ca/en/escalade-iq.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50300",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "chevrolet-bolt-ev-2027": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.chevrolet.ca/en/electric/bolt-ev.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "chevrolet-equinox-ev-1lt-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.chevrolet.ca/en/electric/equinox-ev.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49400",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "chevrolet-equinox-ev-rs-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.chevrolet.ca/en/electric/equinox-ev.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "curb_weight_kg",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49401",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "chevrolet-blazer-ev-rs-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.chevrolet.ca/en/electric/blazer-ev.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "acceleration_0_100_s",
+        "cargo_volume_l",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "top_speed_kmh",
+        "ground_clearance_mm",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49402",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "chevrolet-silverado-ev-rst-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.chevrolet.ca/en/electric/silverado-ev.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49403",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "fiat-500e-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fiat.ca/en/500e.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48500",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "ford-mustang-mach-e-select-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.ford.ca/suvs/mach-e/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49600",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "ford-mustang-mach-e-premium-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.ford.ca/suvs/mach-e/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49601",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "ford-f150-lightning-pro-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.ford.ca/trucks/f150/f150-lightning/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49700",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "ford-f150-lightning-xlt-er-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.ford.ca/trucks/f150/f150-lightning/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "ground_clearance_mm",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49701",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "genesis-gv60-performance-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.genesis.com/ca/en/models/luxury-suv-genesis/gv60.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49962",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "genesis-gv70-electrified-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.genesis.com/ca/en/models/luxury-suv-genesis/electrified-gv70.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49963",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "genesis-g80-electrified-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.genesis.com/ca/en/models/luxury-sedan-genesis/electrified-g80.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49651",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "gmc-hummer-ev-pickup-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.gmc.ca/en/hummer-ev.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49200",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "gmc-hummer-ev-suv-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.gmc.ca/en/hummer-ev-suv.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49201",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "gmc-sierra-ev-denali-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.gmc.ca/en/sierra-ev.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49202",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "honda-prologue-fwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.honda.ca/prologue",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "cargo_volume_l",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "acceleration_0_100_s",
+        "curb_weight_kg",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49900",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "honda-prologue-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.honda.ca/prologue",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "cargo_volume_l",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "curb_weight_kg",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49901",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "hyundai-ioniq5-lr-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.hyundaicanada.com/en/vehicles/ioniq5",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/bymodel/2026_Hyundai_IONIQ_5.shtml",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "hyundai-ioniq5-lr-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.hyundaicanada.com/en/vehicles/ioniq5",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/bymodel/2026_Hyundai_IONIQ_5.shtml",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "hyundai-ioniq5-n-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.hyundaicanada.com/en/vehicles/ioniq5-n",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/bymodel/2026_Hyundai_IONIQ_5_N.shtml",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "hyundai-ioniq6-lr-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.hyundaicanada.com/en/vehicles/ioniq6",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/bymodel/2026_Hyundai_IONIQ_6.shtml",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "hyundai-ioniq6-lr-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.hyundaicanada.com/en/vehicles/ioniq6",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/bymodel/2026_Hyundai_IONIQ_6.shtml",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "hyundai-kona-electric-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.hyundaicanada.com/en/vehicles/kona-electric",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/bymodel/2026_Hyundai_KONA_Electric.shtml",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "kia-ev5-lr-fwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.kia.com/ca/en/ev5.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "kia-ev5-lr-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.kia.com/ca/en/ev5.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "kia-ev6-lr-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.kia.com/ca/en/ev6.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50214",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "kia-ev6-lr-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.kia.com/ca/en/ev6.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50212",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "kia-ev6-gt-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.kia.com/ca/en/ev6.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50211",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "kia-ev9-lr-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.kia.com/ca/en/ev9.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49667",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "kia-niro-ev-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.kia.com/ca/en/niro-ev.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/bymodel/2026_Kia_Niro_EV.shtml",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "lexus-es350e-fwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.lexus.ca/en/vehicles/es",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "lexus-rz450e-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.lexus.ca/en/vehicles/rz",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49550",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "lucid-air-grand-touring-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.lucidmotors.com/ca/air/grand-touring",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49350",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "mercedes-eqb-250plus-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.mercedes-benz.ca/en/vehicles/passenger-cars/eqb",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48800",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "mercedes-eqe-350-sedan-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.mercedes-benz.ca/en/vehicles/passenger-cars/eqe-sedan",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48900",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "mercedes-eqe-350-suv-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.mercedes-benz.ca/en/vehicles/passenger-cars/eqe-suv",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "towing_capacity_kg",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48901",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "mercedes-eqs-450plus-sedan-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.mercedes-benz.ca/en/vehicles/passenger-cars/eqs-sedan",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48700",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "mercedes-eqs-450-suv-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.mercedes-benz.ca/en/vehicles/passenger-cars/eqs-suv",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "towing_capacity_kg",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48701",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "mini-cooper-se-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.mini.ca/en/models/mini-3-door/overview.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49050",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "mini-aceman-e-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.mini.ca/en/models/mini-aceman/overview.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49051",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "nissan-ariya-fwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.nissan.ca/en/vehicles/electric/ariya",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49000",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "nissan-ariya-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.nissan.ca/en/vehicles/electric/ariya",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49001",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "nissan-leaf-fwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.nissan.ca/en/vehicles/electric/leaf",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "polestar-2-sm-lr-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.polestar.com/en-ca/polestar-2/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49150",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "polestar-2-dm-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.polestar.com/en-ca/polestar-2/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49151",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "polestar-3-lr-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.polestar.com/en-ca/polestar-3/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49152",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "polestar-4-lr-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.polestar.com/en-ca/polestar-4/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49153",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "porsche-taycan-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.porsche.com/canada/en/models/taycan/taycan-models/taycan/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49250",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "porsche-taycan-4s-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.porsche.com/canada/en/models/taycan/taycan-models/taycan-4s/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49251",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "porsche-macan-ev-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.porsche.com/canada/en/models/macan/macan-models/macan/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49252",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "porsche-macan-ev-turbo-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.porsche.com/canada/en/models/macan/macan-models/macan-turbo/",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49253",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "rivian-r1t-large-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://rivian.com/ca/r1t",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49450",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "rivian-r1s-large-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://rivian.com/ca/r1s",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49451",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "subaru-solterra-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.subaru.ca/en/vehicles/solterra",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49550",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "subaru-uncharted-fwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.subaru.ca/en/vehicles/uncharted",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "tesla-model3-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.tesla.com/ca/model3",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50050",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "tesla-model3-lr-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.tesla.com/ca/model3",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50051",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "tesla-modely-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.tesla.com/ca/modely",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50052",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "tesla-modely-lr-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.tesla.com/ca/modely",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "plug_and_charge",
+        "v2l_capable"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50053",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "tesla-models-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.tesla.com/ca/models",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50054",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "tesla-modelx-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.tesla.com/ca/modelx",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50055",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "tesla-cybertruck-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.tesla.com/ca/cybertruck",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50056",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "toyota-bz4x-fwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.toyota.ca/en/vehicles/bz4x/features",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49550",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "toyota-bz4x-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.toyota.ca/en/vehicles/bz4x/features",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49551",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "toyota-bz-suv-fwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.toyota.ca/en/vehicles/bz-suv/features",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "toyota-chr-bev-fwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.toyota.ca/en/vehicles/chr-bev/features",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "drivetrain",
+        "power_kw",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "toyota-chr-bev-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.toyota.ca/en/vehicles/chr-bev/features",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "drivetrain",
+        "power_kw",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "fast_charge_kw",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "vw-id4-pro-rwd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.vw.ca/en/models/id4.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49750",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "vw-id4-pro-awd-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.vw.ca/en/models/id4.html",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49751",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "volvo-ex30-sm-er-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.volvocars.com/en-ca/cars/ex30",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49950",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "volvo-ex30-twin-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.volvocars.com/en-ca/cars/ex30",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "ground_clearance_mm",
+        "cargo_volume_l",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49951",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "volvo-ex40-twin-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.volvocars.com/en-ca/cars/ex40",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49952",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ],
+  "volvo-ec40-twin-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.volvocars.com/en-ca/cars/ec40",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "drivetrain",
+        "power_kw",
+        "torque_nm",
+        "acceleration_0_100_s",
+        "top_speed_kmh",
+        "length_mm",
+        "width_mm",
+        "height_mm",
+        "wheelbase_mm",
+        "cargo_volume_l",
+        "frunk_volume_l",
+        "towing_capacity_kg",
+        "curb_weight_kg",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49953",
+      "fields": [
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min"
+      ]
+    }
+  ]
+}
