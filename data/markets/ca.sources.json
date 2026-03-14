@@ -3026,6 +3026,93 @@
       ]
     }
   ],
+  "subaru-uncharted-fwd-lr-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.subaru.ca/en/vehicles/uncharted",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "subaru-uncharted-sport-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.subaru.ca/en/vehicles/uncharted",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
+  "subaru-uncharted-gt-2026": [
+    {
+      "url": "https://web.archive.org/web/20260301/https://www.subaru.ca/en/vehicles/uncharted",
+      "fields": [
+        "manufacturer",
+        "model",
+        "model_year",
+        "variant",
+        "segment",
+        "seats",
+        "price_local",
+        "currency",
+        "range_km",
+        "range_rating",
+        "battery_capacity_kwh",
+        "battery_chemistry",
+        "efficiency_wh_km",
+        "fast_charge_kw",
+        "charge_10_80_min",
+        "drivetrain",
+        "power_kw",
+        "top_speed_kmh",
+        "onboard_charger_kw",
+        "charge_port_type",
+        "v2l_capable",
+        "plug_and_charge"
+      ]
+    }
+  ],
   "tesla-model3-rwd-2026": [
     {
       "url": "https://web.archive.org/web/20260301/https://www.tesla.com/ca/model3",
