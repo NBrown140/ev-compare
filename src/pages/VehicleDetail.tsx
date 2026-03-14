@@ -1,7 +1,7 @@
 import type { EV } from "@/types/ev";
 import type { Source, SourcesMap } from "@/types/ev";
 import { formatCurrency, formatNumber } from "@/utils/format";
-import DetailComparisonChart from "@/components/DetailComparisonChart";
+import DetailViolinChart from "@/components/DetailViolinChart";
 
 interface VehicleDetailProps {
   vehicle: EV;
@@ -284,7 +284,7 @@ export default function VehicleDetail({
 
         {/* Chart - right column */}
         <div className="lg:col-span-2">
-          <DetailComparisonChart
+          <DetailViolinChart
             vehicle={vehicle}
             allVehicles={allVehicles}
             onSelectVehicle={onSelectVehicle}
