@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useMarketData, useMarketSources } from "@/hooks/useMarketData";
 import { useFilters } from "@/hooks/useFilters";
 import { formatMarketName, getMarketFlag } from "@/utils/format";
@@ -9,19 +8,23 @@ import VehicleDetail from "@/pages/VehicleDetail";
 
 interface MarketDashboardProps {
   market: string;
+  selectedVehicleId: string | null;
+  activeTab: "table" | "charts";
   onBack: () => void;
+  onSelectVehicle: (id: string | null) => void;
+  onTabChange: (tab: "table" | "charts") => void;
 }
 
 export default function MarketDashboard({
   market,
+  selectedVehicleId,
+  activeTab,
   onBack,
+  onSelectVehicle,
+  onTabChange,
 }: MarketDashboardProps) {
   const vehicles = useMarketData(market);
   const sources = useMarketSources(market);
-  const [selectedVehicleId, setSelectedVehicleId] = useState<string | null>(
-    null
-  );
-  const [activeTab, setActiveTab] = useState<"table" | "charts">("table");
   const {
     filters,
     setFilters,
@@ -43,8 +46,8 @@ export default function MarketDashboard({
         vehicle={selectedVehicle}
         allVehicles={vehicles}
         sources={sources}
-        onBack={() => setSelectedVehicleId(null)}
-        onSelectVehicle={setSelectedVehicleId}
+        onBack={() => onSelectVehicle(null)}
+        onSelectVehicle={onSelectVehicle}
       />
     );
   }
@@ -84,7 +87,7 @@ export default function MarketDashboard({
         {(["table", "charts"] as const).map((tab) => (
           <button
             key={tab}
-            onClick={() => setActiveTab(tab)}
+            onClick={() => onTabChange(tab)}
             className={`rounded-md px-6 py-2.5 text-base font-semibold capitalize transition-all ${
               activeTab === tab
                 ? "bg-white text-blue-600 shadow dark:bg-gray-700 dark:text-blue-400"
@@ -97,9 +100,12 @@ export default function MarketDashboard({
       </div>
 
       {activeTab === "table" ? (
-        <EVTable vehicles={filtered} onSelectVehicle={setSelectedVehicleId} />
+        <EVTable vehicles={filtered} onSelectVehicle={onSelectVehicle} />
       ) : (
-        <ComparisonChart vehicles={filtered} onSelectVehicle={setSelectedVehicleId} />
+        <ComparisonChart
+          vehicles={filtered}
+          onSelectVehicle={onSelectVehicle}
+        />
       )}
     </div>
   );
