@@ -15,7 +15,7 @@ export default function Layout({ children, onNavigateHome }: LayoutProps) {
             onClick={onNavigateHome}
             className="text-xl font-bold tracking-tight cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <span className="mr-2">⚡</span>EV Compare
+            <span className="text-blue-600 dark:text-blue-400">EV</span>{" "}Compare
           </button>
           <div className="flex items-center gap-4">
             <a
