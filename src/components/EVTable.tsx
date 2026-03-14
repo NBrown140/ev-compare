@@ -7,6 +7,8 @@ type SortDir = "asc" | "desc";
 
 interface EVTableProps {
   vehicles: EV[];
+  pageSize?: number;
+  onSelectVehicle?: (id: string) => void;
 }
 
 const columns: { key: SortKey; label: string; align?: "right" }[] = [
@@ -23,9 +25,10 @@ const columns: { key: SortKey; label: string; align?: "right" }[] = [
   { key: "fast_charge_kw", label: "DC Fast (kW)", align: "right" },
 ];
 
-export default function EVTable({ vehicles }: EVTableProps) {
+export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle }: EVTableProps) {
   const [sortKey, setSortKey] = useState<SortKey>("price_per_range_km");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
+  const [visibleCount, setVisibleCount] = useState(pageSize);
 
   const sorted = [...vehicles].sort((a, b) => {
     const av = a[sortKey];
@@ -91,10 +94,11 @@ export default function EVTable({ vehicles }: EVTableProps) {
           </tr>
         </thead>
         <tbody>
-          {sorted.map((v) => (
+          {sorted.slice(0, visibleCount).map((v) => (
             <tr
               key={v.id}
-              className="border-b border-gray-100 dark:border-gray-700 hover:bg-blue-50/50 dark:hover:bg-gray-700/50 transition-colors"
+              onClick={() => onSelectVehicle?.(v.id)}
+              className={`border-b border-gray-100 dark:border-gray-700 hover:bg-blue-50/50 dark:hover:bg-gray-700/50 transition-colors${onSelectVehicle ? " cursor-pointer" : ""}`}
             >
               {columns.map((col) => (
                 <td
@@ -110,6 +114,16 @@ export default function EVTable({ vehicles }: EVTableProps) {
           ))}
         </tbody>
       </table>
+      {sorted.length > visibleCount && (
+        <div className="flex justify-center py-3 border-t border-gray-200 dark:border-gray-700">
+          <button
+            onClick={() => setVisibleCount((c) => c + pageSize)}
+            className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 px-4 py-2"
+          >
+            Show more ({sorted.length - visibleCount} remaining)
+          </button>
+        </div>
+      )}
     </div>
   );
 }

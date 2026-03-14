@@ -1,11 +1,11 @@
-import { useMarketData } from "@/hooks/useMarketData";
+import { useState } from "react";
+import { useMarketData, useMarketSources } from "@/hooks/useMarketData";
 import { useFilters } from "@/hooks/useFilters";
-import { averagePrice, averageRange, bestValueEV } from "@/utils/metrics";
-import { formatCurrency, formatNumber, formatMarketName } from "@/utils/format";
+import { formatMarketName } from "@/utils/format";
 import FilterBar from "@/components/FilterBar";
 import EVTable from "@/components/EVTable";
 import ComparisonChart from "@/components/ComparisonChart";
-import MetricCard from "@/components/MetricCard";
+import VehicleDetail from "@/pages/VehicleDetail";
 
 interface MarketDashboardProps {
   market: string;
@@ -17,13 +17,35 @@ export default function MarketDashboard({
   onBack,
 }: MarketDashboardProps) {
   const vehicles = useMarketData(market);
-  const { filters, setFilters, filtered, manufacturers, resetFilters } =
-    useFilters(vehicles);
+  const sources = useMarketSources(market);
+  const [selectedVehicleId, setSelectedVehicleId] = useState<string | null>(
+    null
+  );
+  const [activeTab, setActiveTab] = useState<"table" | "charts">("table");
+  const {
+    filters,
+    setFilters,
+    filtered,
+    manufacturers,
+    modelYears,
+    bounds,
+    resetFilters,
+  } = useFilters(vehicles);
 
-  const currency = vehicles[0]?.currency ?? "USD";
-  const avgPrice = averagePrice(filtered);
-  const avgRange = averageRange(filtered);
-  const bestValue = bestValueEV(filtered);
+  const selectedVehicle = selectedVehicleId
+    ? vehicles.find((v) => v.id === selectedVehicleId) ?? null
+    : null;
+
+  if (selectedVehicle) {
+    return (
+      <VehicleDetail
+        vehicle={selectedVehicle}
+        allVehicles={vehicles}
+        sources={sources}
+        onBack={() => setSelectedVehicleId(null)}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -42,42 +64,36 @@ export default function MarketDashboard({
         </span>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        <MetricCard
-          label="Average Price"
-          value={formatCurrency(avgPrice, currency)}
-          sub={`${filtered.length} vehicles`}
-        />
-        <MetricCard
-          label="Average Range"
-          value={`${formatNumber(avgRange)} km`}
-          sub={vehicles[0]?.range_rating?.toUpperCase()}
-        />
-        <MetricCard
-          label="Best Value"
-          value={
-            bestValue
-              ? `${bestValue.manufacturer} ${bestValue.model}`
-              : "\u2014"
-          }
-          sub={
-            bestValue?.price_per_range_km != null
-              ? `${formatCurrency(bestValue.price_per_range_km, currency)}/km`
-              : undefined
-          }
-        />
-      </div>
-
       <FilterBar
         filters={filters}
         manufacturers={manufacturers}
+        modelYears={modelYears}
+        bounds={bounds}
         onChange={setFilters}
         onReset={resetFilters}
       />
 
-      <EVTable vehicles={filtered} />
+      <div className="inline-flex rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
+        {(["table", "charts"] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`rounded-md px-6 py-2.5 text-base font-semibold capitalize transition-all ${
+              activeTab === tab
+                ? "bg-white text-blue-600 shadow dark:bg-gray-700 dark:text-blue-400"
+                : "text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+            }`}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
 
-      <ComparisonChart vehicles={filtered} />
+      {activeTab === "table" ? (
+        <EVTable vehicles={filtered} onSelectVehicle={setSelectedVehicleId} />
+      ) : (
+        <ComparisonChart vehicles={filtered} />
+      )}
     </div>
   );
 }

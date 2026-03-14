@@ -234,13 +234,14 @@ for (const file of csvFiles) {
   // Validate sources for this market
   const sourcesFile = `${market}.sources.json`;
   const sourcesPath = path.join(MARKETS_DIR, sourcesFile);
+  let sources: SourcesMap | null = null;
   if (!fs.existsSync(sourcesPath)) {
     allErrors.push(`${sourcesFile}: file not found (expected alongside ${file})`);
   } else {
-    const sources: SourcesMap = JSON.parse(
+    sources = JSON.parse(
       fs.readFileSync(sourcesPath, "utf-8")
     );
-    allErrors.push(...validateSources(sources, vehicleRows, sourcesFile));
+    allErrors.push(...validateSources(sources!, vehicleRows, sourcesFile));
   }
 
   if (allErrors.length === 0) {
@@ -249,6 +250,12 @@ for (const file of csvFiles) {
       path.join(OUT_DIR, `${market}.json`),
       JSON.stringify(parsed, null, 2)
     );
+    if (sources) {
+      fs.writeFileSync(
+        path.join(OUT_DIR, `${market}.sources.json`),
+        JSON.stringify(sources, null, 2)
+      );
+    }
   }
 }
 

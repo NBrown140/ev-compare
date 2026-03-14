@@ -50,3 +50,10 @@ export interface MarketData {
   market: string;
   vehicles: EV[];
 }
+
+export interface Source {
+  url: string;
+  fields: string[];
+}
+
+export type SourcesMap = Record<string, Source[]>;
