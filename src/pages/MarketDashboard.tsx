@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMarketData, useMarketSources } from "@/hooks/useMarketData";
 import { useFilters } from "@/hooks/useFilters";
-import { formatMarketName } from "@/utils/format";
+import { formatMarketName, getMarketFlag } from "@/utils/format";
 import FilterBar from "@/components/FilterBar";
 import EVTable from "@/components/EVTable";
 import ComparisonChart from "@/components/ComparisonChart";
@@ -35,6 +35,7 @@ export default function MarketDashboard({
   const selectedVehicle = selectedVehicleId
     ? vehicles.find((v) => v.id === selectedVehicleId) ?? null
     : null;
+  const marketFlag = getMarketFlag(market);
 
   if (selectedVehicle) {
     return (
@@ -57,7 +58,12 @@ export default function MarketDashboard({
         >
           &larr; All markets
         </button>
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-2xl font-bold flex items-center gap-2">
+          {marketFlag && (
+            <span className="text-2xl leading-none" aria-hidden="true">
+              {marketFlag}
+            </span>
+          )}
           {formatMarketName(market)} Market
         </h2>
         <span className="text-sm text-gray-400 dark:text-gray-500">

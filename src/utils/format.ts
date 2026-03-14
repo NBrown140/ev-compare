@@ -30,6 +30,17 @@ export function formatMarketName(market: string): string {
   return market.toUpperCase();
 }
 
+const MARKET_FLAGS: Record<string, string> = {
+  ca: "🇨🇦",
+  eu: "🇪🇺",
+  uk: "🇬🇧",
+  us: "🇺🇸",
+};
+
+export function getMarketFlag(market: string): string | null {
+  return MARKET_FLAGS[market.toLowerCase()] ?? null;
+}
+
 const VARIANT_ABBREVIATIONS: Record<string, string> = {
   "Long Range": "LR",
   "All-Wheel Drive": "AWD",
