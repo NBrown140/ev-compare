@@ -78,6 +78,30 @@ export default function Home({ onSelectMarket }: HomeProps) {
           <StatItem label="Markets" value={formatNumber(totals.markets)} />
         </div>
       </div>
+
+      {/* Open data & contribute */}
+      <div className="mt-10 text-center text-xs text-gray-400 dark:text-gray-500 leading-relaxed space-y-1">
+        <p>
+          The full dataset is freely available as{" "}
+          <a
+            href="https://github.com/NBrown140/ev-compare/tree/main/data/markets"
+            className="underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+          >
+            CSV files on GitHub
+          </a>
+          .
+        </p>
+        <p>
+          Spot an error or a missing vehicle?{" "}
+          <a
+            href="https://github.com/NBrown140/ev-compare/blob/main/CONTRIBUTING.md"
+            className="underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+          >
+            See how to contribute
+          </a>
+          .
+        </p>
+      </div>
     </div>
   );
 }

@@ -36,9 +36,7 @@ export default function Layout({ children, onNavigateHome }: LayoutProps) {
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
         {children}
       </main>
-      <footer className="border-t border-gray-200 dark:border-gray-700 px-6 py-4 text-center text-sm text-gray-400 dark:text-gray-500">
-        Community-maintained EV data. Submit a PR to add or update vehicles.
-      </footer>
+      <footer className="px-6 py-4" />
     </div>
   );
 }
