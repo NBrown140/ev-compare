@@ -132,15 +132,21 @@ function SegmentViolinPlot({
   const svgRef = useRef<SVGSVGElement>(null);
   const dotsRef = useRef<SVGGElement>(null);
 
-  // DOM-based highlight: update opacity directly without re-rendering
+  // DOM-based highlight: update opacity and z-order directly without re-rendering
   useEffect(() => {
     const container = dotsRef.current;
     if (!container) return;
     const circles = container.querySelectorAll<SVGCircleElement>("circle[data-category]");
+    const toRaise: SVGCircleElement[] = [];
     for (const circle of circles) {
       const cat = circle.getAttribute("data-category");
       const match = !highlightCategory || cat === highlightCategory;
       circle.style.opacity = match ? "0.7" : "0.1";
+      if (highlightCategory && match) toRaise.push(circle);
+    }
+    // Move highlighted dots to end of their parent so they render on top
+    for (const circle of toRaise) {
+      circle.parentNode?.appendChild(circle);
     }
   }, [highlightCategory]);
   const [tooltip, setTooltip] = useState<{
@@ -730,27 +736,72 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
                 );
               }}
             />
-            <Scatter
-              data={scatterData}
-              fill="#3b82f6"
-              fillOpacity={0.7}
-              className={onSelectVehicle ? "cursor-pointer" : undefined}
-              onClick={(data) => {
-                const d = data as unknown as (typeof scatterData)[number];
-                if (d?.id) onSelectVehicle?.(d.id);
-              }}
-            >
-              {scatterData.map((entry, i) => {
-                const isHighlighted = !highlightCategory || entry[colorBy] === highlightCategory;
-                return (
+            {/* When highlighting, render dimmed dots first, highlighted on top */}
+            {highlightCategory ? (
+              <>
+                <Scatter
+                  data={scatterData.filter((d) => d[colorBy] !== highlightCategory)}
+                  fill="#3b82f6"
+                  fillOpacity={0.1}
+                  isAnimationActive={false}
+                  className={onSelectVehicle ? "cursor-pointer" : undefined}
+                  onClick={(data) => {
+                    const d = data as unknown as (typeof scatterData)[number];
+                    if (d?.id) onSelectVehicle?.(d.id);
+                  }}
+                >
+                  {scatterData
+                    .filter((d) => d[colorBy] !== highlightCategory)
+                    .map((entry, i) => (
+                      <Cell
+                        key={i}
+                        fill={colorMap.get(entry[colorBy]) ?? "#93c5fd"}
+                        fillOpacity={0.1}
+                      />
+                    ))}
+                </Scatter>
+                <Scatter
+                  data={scatterData.filter((d) => d[colorBy] === highlightCategory)}
+                  fill="#3b82f6"
+                  fillOpacity={0.7}
+                  isAnimationActive={false}
+                  className={onSelectVehicle ? "cursor-pointer" : undefined}
+                  onClick={(data) => {
+                    const d = data as unknown as (typeof scatterData)[number];
+                    if (d?.id) onSelectVehicle?.(d.id);
+                  }}
+                >
+                  {scatterData
+                    .filter((d) => d[colorBy] === highlightCategory)
+                    .map((entry, i) => (
+                      <Cell
+                        key={i}
+                        fill={colorMap.get(entry[colorBy]) ?? "#93c5fd"}
+                        fillOpacity={0.7}
+                      />
+                    ))}
+                </Scatter>
+              </>
+            ) : (
+              <Scatter
+                data={scatterData}
+                fill="#3b82f6"
+                fillOpacity={0.7}
+                className={onSelectVehicle ? "cursor-pointer" : undefined}
+                onClick={(data) => {
+                  const d = data as unknown as (typeof scatterData)[number];
+                  if (d?.id) onSelectVehicle?.(d.id);
+                }}
+              >
+                {scatterData.map((entry, i) => (
                   <Cell
                     key={i}
                     fill={colorMap.get(entry[colorBy]) ?? "#93c5fd"}
-                    fillOpacity={isHighlighted ? 0.7 : 0.1}
+                    fillOpacity={0.7}
                   />
-                );
-              })}
-            </Scatter>
+                ))}
+              </Scatter>
+            )}
             {trendlineData && (
               <Scatter
                 data={trendlineData.line}
