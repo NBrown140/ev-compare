@@ -16,6 +16,7 @@ import { removeOutliersIQR, linearRegression } from "@/utils/statistics";
 interface DetailComparisonChartProps {
   vehicle: EV;
   allVehicles: EV[];
+  onSelectVehicle?: (id: string) => void;
 }
 
 type FilterMode = "all" | "similar";
@@ -23,6 +24,7 @@ type FilterMode = "all" | "similar";
 export default function DetailComparisonChart({
   vehicle,
   allVehicles,
+  onSelectVehicle,
 }: DetailComparisonChartProps) {
   const { effectiveTheme } = useTheme();
   const isDark = effectiveTheme === "dark";
@@ -50,6 +52,7 @@ export default function DetailComparisonChart({
   const allOtherData = useMemo(
     () =>
       others.map((v) => ({
+        id: v.id,
         name: `${v.manufacturer} ${v.model}`,
         variant: v.variant,
         range_km: v.range_km,
@@ -70,6 +73,7 @@ export default function DetailComparisonChart({
   const currentData = useMemo(
     () => [
       {
+        id: vehicle.id,
         name: `${vehicle.manufacturer} ${vehicle.model}`,
         variant: vehicle.variant,
         range_km: vehicle.range_km,
@@ -176,8 +180,21 @@ export default function DetailComparisonChart({
             data={otherData}
             fill={isDark ? "#4b5563" : "#d1d5db"}
             opacity={0.6}
+            className={onSelectVehicle ? "cursor-pointer" : undefined}
+            onClick={(data) => {
+              const d = data as unknown as (typeof otherData)[number];
+              if (d?.id) onSelectVehicle?.(d.id);
+            }}
           />
-          <Scatter data={currentData} fill="#3b82f6">
+          <Scatter
+            data={currentData}
+            fill="#3b82f6"
+            className={onSelectVehicle ? "cursor-pointer" : undefined}
+            onClick={(data) => {
+              const d = data as unknown as (typeof currentData)[number];
+              if (d?.id) onSelectVehicle?.(d.id);
+            }}
+          >
             {currentData.map((_, i) => (
               <circle key={i} r={10} />
             ))}

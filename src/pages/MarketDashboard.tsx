@@ -43,6 +43,7 @@ export default function MarketDashboard({
         allVehicles={vehicles}
         sources={sources}
         onBack={() => setSelectedVehicleId(null)}
+        onSelectVehicle={setSelectedVehicleId}
       />
     );
   }
@@ -92,7 +93,7 @@ export default function MarketDashboard({
       {activeTab === "table" ? (
         <EVTable vehicles={filtered} onSelectVehicle={setSelectedVehicleId} />
       ) : (
-        <ComparisonChart vehicles={filtered} />
+        <ComparisonChart vehicles={filtered} onSelectVehicle={setSelectedVehicleId} />
       )}
     </div>
   );

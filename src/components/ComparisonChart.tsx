@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import {
   ScatterChart,
   Scatter,
@@ -20,6 +20,7 @@ import {
 
 interface ComparisonChartProps {
   vehicles: EV[];
+  onSelectVehicle?: (id: string) => void;
 }
 
 const PASTEL_COLORS = [
@@ -39,11 +40,40 @@ const PASTEL_COLORS = [
   "#fbcfe8", // rose
 ];
 
+const OTHER_LABEL = "Other";
+const OTHER_COLOR = "#d1d5db"; // gray-300
+
 function getCategoryColorMap(values: string[]): Map<string, string> {
-  const unique = [...new Set(values)].sort();
+  // Sort by frequency (most common first), then alphabetically for ties
+  const counts = new Map<string, number>();
+  for (const v of values) counts.set(v, (counts.get(v) ?? 0) + 1);
+  const sorted = [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([v]) => v);
   const map = new Map<string, string>();
-  unique.forEach((v, i) => map.set(v, PASTEL_COLORS[i % PASTEL_COLORS.length]));
+  sorted.forEach((v, i) => {
+    if (v === OTHER_LABEL) return;
+    map.set(v, PASTEL_COLORS[i % PASTEL_COLORS.length]);
+  });
+  // "Other" always last with gray
+  if (counts.has(OTHER_LABEL)) {
+    map.set(OTHER_LABEL, OTHER_COLOR);
+  }
   return map;
+}
+
+const MAX_NAMED_CATEGORIES = 10;
+
+/** Count distinct models per manufacturer, return set of top N. */
+function getTopManufacturers(vehicles: EV[], topN: number): Set<string> {
+  const modelsByMfr = new Map<string, Set<string>>();
+  for (const v of vehicles) {
+    if (!modelsByMfr.has(v.manufacturer)) modelsByMfr.set(v.manufacturer, new Set());
+    modelsByMfr.get(v.manufacturer)!.add(v.model);
+  }
+  const sorted = [...modelsByMfr.entries()]
+    .sort((a, b) => b[1].size - a[1].size || a[0].localeCompare(b[0]));
+  return new Set(sorted.slice(0, topN).map(([m]) => m));
 }
 
 type ColorByKey = "manufacturer" | "model_year" | "segment" | "drivetrain" | "battery_chemistry";
@@ -57,6 +87,7 @@ const COLOR_BY_OPTIONS: { key: ColorByKey; label: string }[] = [
 ];
 
 interface ViolinPoint {
+  id: string;
   name: string;
   variant: string | null;
   manufacturer: string;
@@ -83,18 +114,35 @@ function SegmentViolinPlot({
   data,
   colorMap,
   colorByKey,
+  highlightCategory,
   isDark,
   gridStroke,
   tickFill,
+  onSelectVehicle,
 }: {
   data: ViolinSegmentData[];
   colorMap: Map<string, string>;
   colorByKey: ColorByKey;
+  highlightCategory: string | null;
   isDark: boolean;
   gridStroke: string;
   tickFill: string;
+  onSelectVehicle?: (id: string) => void;
 }) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const dotsRef = useRef<SVGGElement>(null);
+
+  // DOM-based highlight: update opacity directly without re-rendering
+  useEffect(() => {
+    const container = dotsRef.current;
+    if (!container) return;
+    const circles = container.querySelectorAll<SVGCircleElement>("circle[data-category]");
+    for (const circle of circles) {
+      const cat = circle.getAttribute("data-category");
+      const match = !highlightCategory || cat === highlightCategory;
+      circle.style.opacity = match ? "0.7" : "0.1";
+    }
+  }, [highlightCategory]);
   const [tooltip, setTooltip] = useState<{
     x: number;
     y: number;
@@ -188,6 +236,7 @@ function SegmentViolinPlot({
           ))}
 
           {/* Each segment violin */}
+          <g ref={dotsRef}>
           {data.map((seg, segIdx) => {
             const cx = segIdx * bandWidth + bandWidth / 2;
             const maxDensity = Math.max(...seg.kde.map((k) => k.density));
@@ -201,11 +250,12 @@ function SegmentViolinPlot({
                   {seg.points.map((pt, pi) => (
                     <circle
                       key={pi}
+                      data-category={pt[colorByKey]}
                       cx={cx + (rng() - 0.5) * 12}
                       cy={yScale(pt.rangePerPrice)}
                       r={5}
                       fill={colorMap.get(pt[colorByKey]) ?? "#93c5fd"}
-                      fillOpacity={0.7}
+                      style={{ opacity: 0.7 }}
                       stroke={isDark ? "#1f2937" : "#fff"}
                       strokeWidth={1}
                       className="cursor-pointer"
@@ -220,6 +270,7 @@ function SegmentViolinPlot({
                         });
                       }}
                       onMouseLeave={() => setTooltip(null)}
+                      onClick={() => onSelectVehicle?.(pt.id)}
                     />
                   ))}
                   {/* Segment label */}
@@ -285,14 +336,15 @@ function SegmentViolinPlot({
                   return (
                     <circle
                       key={pi}
+                      data-category={pt[colorByKey]}
                       cx={cx + jitter}
                       cy={yScale(pt.rangePerPrice)}
                       r={5}
                       fill={colorMap.get(pt[colorByKey]) ?? "#93c5fd"}
-                      fillOpacity={0.7}
+                      style={{ opacity: 0.7 }}
                       stroke={isDark ? "#1f2937" : "#fff"}
                       strokeWidth={1}
-                      className="cursor-pointer transition-transform"
+                      className="cursor-pointer"
                       onMouseEnter={(e) => {
                         const svgRect =
                           svgRef.current?.getBoundingClientRect();
@@ -304,6 +356,7 @@ function SegmentViolinPlot({
                         });
                       }}
                       onMouseLeave={() => setTooltip(null)}
+                      onClick={() => onSelectVehicle?.(pt.id)}
                     />
                   );
                 })}
@@ -322,6 +375,7 @@ function SegmentViolinPlot({
               </g>
             );
           })}
+          </g>
 
           {/* Y-axis label */}
           <text
@@ -365,7 +419,7 @@ function SegmentViolinPlot({
   );
 }
 
-export default function ComparisonChart({ vehicles }: ComparisonChartProps) {
+export default function ComparisonChart({ vehicles, onSelectVehicle }: ComparisonChartProps) {
   const { effectiveTheme } = useTheme();
   const isDark = effectiveTheme === "dark";
   const gridStroke = isDark ? "#374151" : "#f0f0f0";
@@ -374,13 +428,44 @@ export default function ComparisonChart({ vehicles }: ComparisonChartProps) {
   const [hideOutliers, setHideOutliers] = useState(true);
   const [showTrendline, setShowTrendline] = useState(true);
   const [colorBy, setColorBy] = useState<ColorByKey>("manufacturer");
+  const [hoveredCategory, setHoveredCategoryRaw] = useState<string | null>(null);
+  const rafRef = useRef<number>(0);
+  const setHoveredCategory = useCallback((v: string | null) => {
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => setHoveredCategoryRaw(v));
+  }, []);
+  const [pinnedCategory, setPinnedCategory] = useState<string | null>(null);
+  const [expandOther, setExpandOther] = useState(false);
+  const highlightCategory = pinnedCategory ?? hoveredCategory;
+  const legendRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!pinnedCategory) return;
+    const handleClick = (e: MouseEvent) => {
+      if (legendRef.current?.contains(e.target as Node)) return;
+      setPinnedCategory(null);
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [pinnedCategory]);
+
+  const topManufacturers = useMemo(
+    () => getTopManufacturers(vehicles, MAX_NAMED_CATEGORIES),
+    [vehicles],
+  );
+
+  const shouldBucket = colorBy === "manufacturer" && !expandOther;
 
   const allScatterData = useMemo(
     () =>
       vehicles.map((v) => ({
+        id: v.id,
         name: `${v.manufacturer} ${v.model}`,
         variant: v.variant,
-        manufacturer: v.manufacturer,
+        manufacturer:
+          shouldBucket && !topManufacturers.has(v.manufacturer)
+            ? OTHER_LABEL
+            : v.manufacturer,
         model_year: String(v.model_year),
         segment: v.segment,
         drivetrain: v.drivetrain ?? "Unknown",
@@ -389,7 +474,7 @@ export default function ComparisonChart({ vehicles }: ComparisonChartProps) {
         price: v.price_local,
         currency: v.currency,
       })),
-    [vehicles],
+    [vehicles, topManufacturers, shouldBucket],
   );
 
   const scatterData = useMemo(
@@ -435,9 +520,13 @@ export default function ComparisonChart({ vehicles }: ComparisonChartProps) {
       const seg = v.segment;
       if (!bySegment.has(seg)) bySegment.set(seg, []);
       bySegment.get(seg)!.push({
+        id: v.id,
         name: `${v.manufacturer} ${v.model}`,
         variant: v.variant,
-        manufacturer: v.manufacturer,
+        manufacturer:
+          shouldBucket && !topManufacturers.has(v.manufacturer)
+            ? OTHER_LABEL
+            : v.manufacturer,
         model_year: String(v.model_year),
         segment: v.segment,
         drivetrain: v.drivetrain ?? "Unknown",
@@ -461,10 +550,124 @@ export default function ComparisonChart({ vehicles }: ComparisonChartProps) {
       });
     }
     return result;
-  }, [vehicles, filteredNames]);
+  }, [vehicles, filteredNames, topManufacturers, shouldBucket]);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
+      {/* Shared color controls */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 px-5 py-3 space-y-2.5">
+        <label className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
+          Color by
+          <select
+            value={colorBy}
+            onChange={(e) => {
+              setColorBy(e.target.value as ColorByKey);
+              setPinnedCategory(null);
+              setExpandOther(false);
+            }}
+            className="ml-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm px-2 py-0.5"
+          >
+            {COLOR_BY_OPTIONS.map((opt) => (
+              <option key={opt.key} value={opt.key}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <div ref={legendRef} className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-gray-600 dark:text-gray-400">
+          {[...colorMap.entries()].map(([label, color]) => {
+            if (label === OTHER_LABEL) {
+              // "Other" entry: expand/collapse toggle
+              const dimmed = highlightCategory != null && highlightCategory !== OTHER_LABEL;
+              const otherCount = vehicles.length - vehicles.filter((v) => topManufacturers.has(v.manufacturer)).length;
+              return (
+                <span
+                  key={label}
+                  className="flex items-center gap-1.5 cursor-pointer select-none transition-opacity text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                  style={{ opacity: dimmed ? 0.3 : 1 }}
+                  onMouseEnter={() => setHoveredCategory(label)}
+                  onMouseLeave={() => setHoveredCategory(null)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setExpandOther(true);
+                    setPinnedCategory(null);
+                  }}
+                >
+                  <span
+                    className="inline-block w-2.5 h-2.5 rounded-full"
+                    style={{ backgroundColor: color }}
+                  />
+                  Other ({otherCount})
+                  <span className="text-[10px] text-gray-400 dark:text-gray-500 ml-0.5">
+                    expand
+                  </span>
+                </span>
+              );
+            }
+
+            const active = highlightCategory != null && highlightCategory === label;
+            const dimmed = highlightCategory != null && !active;
+            return (
+              <span
+                key={label}
+                className={`flex items-center gap-1.5 cursor-pointer select-none transition-opacity ${
+                  pinnedCategory === label
+                    ? "font-semibold text-gray-900 dark:text-gray-100"
+                    : ""
+                }`}
+                style={{ opacity: dimmed ? 0.3 : 1 }}
+                onMouseEnter={() => setHoveredCategory(label)}
+                onMouseLeave={() => setHoveredCategory(null)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPinnedCategory(pinnedCategory === label ? null : label);
+                }}
+              >
+                <span
+                  className="inline-block w-2.5 h-2.5 rounded-full"
+                  style={{
+                    backgroundColor: color,
+                    boxShadow: pinnedCategory === label ? `0 0 0 2px ${color}40` : undefined,
+                  }}
+                />
+                {label}
+              </span>
+            );
+          })}
+          {expandOther && colorBy === "manufacturer" && (
+            <span
+              className="flex items-center gap-1 cursor-pointer select-none text-[10px] text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpandOther(false);
+                setPinnedCategory(null);
+              }}
+            >
+              collapse
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+        <h3 className="text-lg font-semibold mb-4">
+          Range per Price by Segment
+        </h3>
+        <SegmentViolinPlot
+          data={violinData}
+          colorMap={colorMap}
+          colorByKey={colorBy}
+          highlightCategory={highlightCategory}
+          isDark={isDark}
+          gridStroke={gridStroke}
+          tickFill={tickFill}
+          onSelectVehicle={onSelectVehicle}
+        />
+        <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+          Higher is better. Values show km per 1,000 in local currency.
+        </p>
+      </div>
+
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
         <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
           <h3 className="text-lg font-semibold">Range vs Price</h3>
@@ -486,20 +689,6 @@ export default function ComparisonChart({ vehicles }: ComparisonChartProps) {
                 className="rounded border-gray-300 dark:border-gray-600"
               />
               Trendline
-            </label>
-            <label className="flex items-center gap-1.5">
-              Color by
-              <select
-                value={colorBy}
-                onChange={(e) => setColorBy(e.target.value as ColorByKey)}
-                className="ml-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm px-2 py-0.5"
-              >
-                {COLOR_BY_OPTIONS.map((opt) => (
-                  <option key={opt.key} value={opt.key}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
             </label>
           </div>
         </div>
@@ -541,14 +730,26 @@ export default function ComparisonChart({ vehicles }: ComparisonChartProps) {
                 );
               }}
             />
-            <Scatter data={scatterData} fill="#3b82f6" fillOpacity={0.7}>
-              {scatterData.map((entry, i) => (
-                <Cell
-                  key={i}
-                  fill={colorMap.get(entry[colorBy]) ?? "#93c5fd"}
-                  fillOpacity={0.7}
-                />
-              ))}
+            <Scatter
+              data={scatterData}
+              fill="#3b82f6"
+              fillOpacity={0.7}
+              className={onSelectVehicle ? "cursor-pointer" : undefined}
+              onClick={(data) => {
+                const d = data as unknown as (typeof scatterData)[number];
+                if (d?.id) onSelectVehicle?.(d.id);
+              }}
+            >
+              {scatterData.map((entry, i) => {
+                const isHighlighted = !highlightCategory || entry[colorBy] === highlightCategory;
+                return (
+                  <Cell
+                    key={i}
+                    fill={colorMap.get(entry[colorBy]) ?? "#93c5fd"}
+                    fillOpacity={isHighlighted ? 0.7 : 0.1}
+                  />
+                );
+              })}
             </Scatter>
             {trendlineData && (
               <Scatter
@@ -561,35 +762,6 @@ export default function ComparisonChart({ vehicles }: ComparisonChartProps) {
             )}
           </ScatterChart>
         </ResponsiveContainer>
-        {/* Legend */}
-        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-gray-600 dark:text-gray-400">
-          {[...colorMap.entries()].map(([label, color]) => (
-            <span key={label} className="flex items-center gap-1.5">
-              <span
-                className="inline-block w-2.5 h-2.5 rounded-full"
-                style={{ backgroundColor: color, opacity: 0.85 }}
-              />
-              {label}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
-        <h3 className="text-lg font-semibold mb-4">
-          Range per Price by Segment
-        </h3>
-        <SegmentViolinPlot
-          data={violinData}
-          colorMap={colorMap}
-          colorByKey={colorBy}
-          isDark={isDark}
-          gridStroke={gridStroke}
-          tickFill={tickFill}
-        />
-        <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
-          Higher is better. Values show km per 1,000 in local currency.
-        </p>
       </div>
     </div>
   );

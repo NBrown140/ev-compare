@@ -414,117 +414,61 @@ export default function FilterBar({
   // Count active advanced filters for badge
   const advancedCount = useAdvancedActiveCount(filters);
 
+  const hasActiveFilters =
+    filters.modelYears.length > 0 ||
+    filters.segment !== "all" ||
+    filters.manufacturer !== "all" ||
+    filters.priceRange.min != null ||
+    filters.priceRange.max != null ||
+    filters.rangeKm.min != null ||
+    filters.rangeKm.max != null ||
+    advancedCount > 0;
+
   return (
-    <div className="space-y-4">
-      {/* Basic filters */}
-      <div className="flex flex-wrap gap-x-5 gap-y-4 items-end">
-        <fieldset className="flex flex-col text-sm">
-          <span className="text-gray-500 dark:text-gray-400 mb-1">
-            Model Year
-          </span>
-          <div className="flex gap-1.5 flex-wrap">
-            {modelYears.map((y) => {
-              const selected = filters.modelYears.includes(y);
-              return (
-                <button
-                  key={y}
-                  type="button"
-                  onClick={() => {
-                    const next = selected
-                      ? filters.modelYears.filter((v) => v !== y)
-                      : [...filters.modelYears, y];
-                    onChange({ ...filters, modelYears: next });
-                  }}
-                  className={`px-2.5 py-1.5 rounded-lg border text-sm transition-colors ${
-                    selected
-                      ? "bg-blue-600 text-white border-blue-600 dark:bg-blue-500 dark:border-blue-500"
-                      : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                  }`}
-                >
-                  {y}
-                </button>
-              );
-            })}
-            {filters.modelYears.length > 0 && (
-              <button
-                type="button"
-                onClick={() => onChange({ ...filters, modelYears: [] })}
-                className="px-2.5 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-              >
-                All
-              </button>
-            )}
-          </div>
-        </fieldset>
-
-        <label className="flex flex-col text-sm">
-          <span className="text-gray-500 dark:text-gray-400 mb-1">
-            Segment
-          </span>
-          <select
-            value={filters.segment}
-            onChange={(e) =>
-              onChange({
-                ...filters,
-                segment: e.target.value as Segment | "all",
-              })
-            }
-            className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 text-sm"
+    <div className="rounded-xl border border-gray-200 dark:border-gray-700/80 bg-gray-50/60 dark:bg-gray-800/30">
+      {/* Header bar */}
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-200/80 dark:border-gray-700/60">
+        <div className="flex items-center gap-2">
+          <svg
+            className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
           >
-            <option value="all">All segments</option>
-            {SEGMENTS.map((s) => (
-              <option key={s} value={s}>
-                {s.charAt(0).toUpperCase() + s.slice(1)}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <div className="flex flex-col text-sm">
-          <span className="text-gray-500 dark:text-gray-400 mb-1">
-            Manufacturer
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+          <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+            Filters
           </span>
-          <FuzzyCombobox
-            options={manufacturers}
-            value={filters.manufacturer}
-            onChange={(val) => onChange({ ...filters, manufacturer: val })}
-            placeholder="All manufacturers"
-          />
+          {hasActiveFilters && (
+            <span className="inline-flex items-center justify-center h-4 min-w-[16px] px-1 text-[10px] font-bold bg-blue-600 dark:bg-blue-500 text-white rounded-full leading-none">
+              {filters.modelYears.length +
+                (filters.segment !== "all" ? 1 : 0) +
+                (filters.manufacturer !== "all" ? 1 : 0) +
+                (filters.priceRange.min != null || filters.priceRange.max != null ? 1 : 0) +
+                (filters.rangeKm.min != null || filters.rangeKm.max != null ? 1 : 0) +
+                advancedCount}
+            </span>
+          )}
         </div>
 
-        <DualRangeSlider
-          label="Price"
-          value={filters.priceRange}
-          bound={bounds.price}
-          step={1000}
-          capped
-          onChange={(v) => onChange({ ...filters, priceRange: v })}
-        />
-
-        <DualRangeSlider
-          label="Range"
-          value={filters.rangeKm}
-          bound={bounds.range}
-          unit=" km"
-          step={10}
-          onChange={(v) => onChange({ ...filters, rangeKm: v })}
-        />
-
-        <div className="flex items-end gap-2">
-          <button
-            onClick={onReset}
-            className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 px-3 py-2"
-          >
-            Reset
-          </button>
-
+        <div className="flex items-center gap-1">
+          {hasActiveFilters && (
+            <button
+              onClick={onReset}
+              className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 px-2 py-1 rounded-md hover:bg-gray-200/60 dark:hover:bg-gray-700/50 transition-colors"
+            >
+              Clear all
+            </button>
+          )}
           <button
             onClick={() => setShowAdvanced((v) => !v)}
-            className="relative text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 px-3 py-2 flex items-center gap-1.5"
+            className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 px-2 py-1 rounded-md hover:bg-gray-200/60 dark:hover:bg-gray-700/50 transition-colors flex items-center gap-1"
           >
-            Advanced
-            {advancedCount > 0 && (
-              <span className="inline-flex items-center justify-center w-4.5 h-4.5 text-[10px] font-bold bg-blue-600 text-white rounded-full leading-none">
+            {showAdvanced ? "Less" : "More"}
+            {!showAdvanced && advancedCount > 0 && (
+              <span className="inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold bg-blue-600 text-white rounded-full leading-none">
                 {advancedCount}
               </span>
             )}
@@ -541,9 +485,106 @@ export default function FilterBar({
         </div>
       </div>
 
+      {/* Basic filters */}
+      <div className="px-4 py-3">
+        <div className="flex flex-wrap gap-x-5 gap-y-4 items-end">
+          <fieldset className="flex flex-col text-sm">
+            <span className="text-gray-500 dark:text-gray-400 mb-1">
+              Model Year
+            </span>
+            <div className="flex gap-1.5 flex-wrap">
+              {modelYears.map((y) => {
+                const selected = filters.modelYears.includes(y);
+                return (
+                  <button
+                    key={y}
+                    type="button"
+                    onClick={() => {
+                      const next = selected
+                        ? filters.modelYears.filter((v) => v !== y)
+                        : [...filters.modelYears, y];
+                      onChange({ ...filters, modelYears: next });
+                    }}
+                    className={`px-2.5 py-1.5 rounded-lg border text-sm transition-colors ${
+                      selected
+                        ? "bg-blue-600 text-white border-blue-600 dark:bg-blue-500 dark:border-blue-500"
+                        : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
+                    }`}
+                  >
+                    {y}
+                  </button>
+                );
+              })}
+              {filters.modelYears.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => onChange({ ...filters, modelYears: [] })}
+                  className="px-2.5 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+                >
+                  All
+                </button>
+              )}
+            </div>
+          </fieldset>
+
+          <label className="flex flex-col text-sm">
+            <span className="text-gray-500 dark:text-gray-400 mb-1">
+              Segment
+            </span>
+            <select
+              value={filters.segment}
+              onChange={(e) =>
+                onChange({
+                  ...filters,
+                  segment: e.target.value as Segment | "all",
+                })
+              }
+              className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 text-sm"
+            >
+              <option value="all">All segments</option>
+              {SEGMENTS.map((s) => (
+                <option key={s} value={s}>
+                  {s.charAt(0).toUpperCase() + s.slice(1)}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <div className="flex flex-col text-sm">
+            <span className="text-gray-500 dark:text-gray-400 mb-1">
+              Manufacturer
+            </span>
+            <FuzzyCombobox
+              options={manufacturers}
+              value={filters.manufacturer}
+              onChange={(val) => onChange({ ...filters, manufacturer: val })}
+              placeholder="All manufacturers"
+            />
+          </div>
+
+          <DualRangeSlider
+            label="Price"
+            value={filters.priceRange}
+            bound={bounds.price}
+            step={1000}
+            capped
+            onChange={(v) => onChange({ ...filters, priceRange: v })}
+          />
+
+          <DualRangeSlider
+            label="Range"
+            value={filters.rangeKm}
+            bound={bounds.range}
+            unit=" km"
+            step={10}
+            onChange={(v) => onChange({ ...filters, rangeKm: v })}
+          />
+        </div>
+      </div>
+
       {/* Advanced filters */}
       {showAdvanced && (
-        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-6">
+        <div className="border-t border-gray-200/80 dark:border-gray-700/60 px-4 py-4 space-y-6">
           {/* Battery & Charging */}
           <section>
             <h4 className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">

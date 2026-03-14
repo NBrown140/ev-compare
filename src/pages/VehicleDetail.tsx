@@ -8,6 +8,7 @@ interface VehicleDetailProps {
   allVehicles: EV[];
   sources: SourcesMap | null;
   onBack: () => void;
+  onSelectVehicle?: (id: string) => void;
 }
 
 const COMPUTED_FIELDS = new Set(["price_per_range_km", "price_per_kwh"]);
@@ -206,6 +207,7 @@ export default function VehicleDetail({
   allVehicles,
   sources,
   onBack,
+  onSelectVehicle,
 }: VehicleDetailProps) {
   const { fieldToNotes, footnotes } = buildFootnotes(vehicle.id, sources);
 
@@ -285,6 +287,7 @@ export default function VehicleDetail({
           <DetailComparisonChart
             vehicle={vehicle}
             allVehicles={allVehicles}
+            onSelectVehicle={onSelectVehicle}
           />
         </div>
       </div>
