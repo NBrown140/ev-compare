@@ -2,16 +2,21 @@ import ThemeToggle from "./ThemeToggle";
 
 interface LayoutProps {
   children: React.ReactNode;
+  onNavigateHome?: () => void;
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, onNavigateHome }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col">
       <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <h1 className="text-xl font-bold tracking-tight">
+          <button
+            type="button"
+            onClick={onNavigateHome}
+            className="text-xl font-bold tracking-tight cursor-pointer hover:opacity-80 transition-opacity"
+          >
             <span className="mr-2">⚡</span>EV Compare
-          </h1>
+          </button>
           <div className="flex items-center gap-4">
             <a
               href="https://github.com/NBrown140/ev-compare"

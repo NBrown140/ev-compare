@@ -9,7 +9,7 @@ export default function App() {
   const [market, setMarket] = useState<string | null>(null);
 
   return (
-    <Layout>
+    <Layout onNavigateHome={() => setMarket(null)}>
       {market ? (
         <MarketDashboard market={market} onBack={() => setMarket(null)} />
       ) : (

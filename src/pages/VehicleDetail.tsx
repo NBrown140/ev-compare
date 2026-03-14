@@ -216,7 +216,7 @@ export default function VehicleDetail({
       <div className="flex items-center gap-4">
         <button
           onClick={onBack}
-          className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+          className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 cursor-pointer hover:underline transition-colors"
         >
           &larr; Back to list
         </button>
