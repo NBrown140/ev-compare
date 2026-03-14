@@ -16,6 +16,7 @@ function fuzzyMatch(target: string, query: string): boolean {
 interface FuzzyComboboxProps {
   options: string[];
   multiple?: boolean;
+  searchable?: boolean;
   value?: string;
   values?: string[];
   onChange?: (value: string) => void;
@@ -26,6 +27,7 @@ interface FuzzyComboboxProps {
 export default function FuzzyCombobox({
   options,
   multiple: isMulti = false,
+  searchable = true,
   value = "",
   values = [],
   onChange,
@@ -171,7 +173,9 @@ export default function FuzzyCombobox({
         type="text"
         value={displayValue}
         placeholder={placeholder}
+        readOnly={!searchable}
         onChange={(e) => {
+          if (!searchable) return;
           setQuery(e.target.value);
           setOpen(true);
         }}

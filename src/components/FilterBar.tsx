@@ -416,7 +416,7 @@ export default function FilterBar({
 
   const basicCount =
     (filters.modelYears.length > 0 ? 1 : 0) +
-    (filters.segment !== "all" ? 1 : 0) +
+    (filters.segment.length > 0 ? 1 : 0) +
     (filters.manufacturer.length > 0 ? 1 : 0) +
     (filters.priceRange.min != null || filters.priceRange.max != null ? 1 : 0) +
     (filters.rangeKm.min != null || filters.rangeKm.max != null ? 1 : 0);
@@ -521,28 +521,19 @@ export default function FilterBar({
             </div>
           </fieldset>
 
-          <label className="flex flex-col text-sm">
-            <span className="text-gray-500 dark:text-gray-400 mb-1">
-              Segment
-            </span>
-            <select
-              value={filters.segment}
-              onChange={(e) =>
-                onChange({
-                  ...filters,
-                  segment: e.target.value as Segment | "all",
-                })
+          <div className="flex flex-col text-sm">
+            <span className="text-gray-500 dark:text-gray-400 mb-1">Segment</span>
+            <FuzzyCombobox
+              options={SEGMENTS.map((s) => s.charAt(0).toUpperCase() + s.slice(1))}
+              multiple
+              searchable={false}
+              values={filters.segment.map((s) => s.charAt(0).toUpperCase() + s.slice(1))}
+              onChangeMulti={(vals) =>
+                onChange({ ...filters, segment: vals.map((v) => v.toLowerCase()) as Segment[] })
               }
-              className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 text-sm"
-            >
-              <option value="all">All segments</option>
-              {SEGMENTS.map((s) => (
-                <option key={s} value={s}>
-                  {s.charAt(0).toUpperCase() + s.slice(1)}
-                </option>
-              ))}
-            </select>
-          </label>
+              placeholder="All segments"
+            />
+          </div>
 
           <div className="flex flex-col text-sm">
             <span className="text-gray-500 dark:text-gray-400 mb-1">

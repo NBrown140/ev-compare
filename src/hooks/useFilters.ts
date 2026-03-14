@@ -8,7 +8,7 @@ export interface RangeFilter {
 
 export interface Filters {
   // Basic
-  segment: Segment | "all";
+  segment: Segment[];
   manufacturer: string[];
   modelYears: number[];
   priceRange: RangeFilter;
@@ -63,7 +63,7 @@ const emptyRange: RangeFilter = { min: null, max: null };
 const currentYear = new Date().getFullYear();
 
 const defaultFilters: Filters = {
-  segment: "all",
+  segment: [],
   manufacturer: [],
   modelYears: [currentYear, currentYear - 1],
   priceRange: emptyRange,
@@ -156,7 +156,7 @@ export function useFilters(vehicles: EV[]) {
 
   const filtered = useMemo(() => {
     return vehicles.filter((v) => {
-      if (filters.segment !== "all" && v.segment !== filters.segment) return false;
+      if (filters.segment.length > 0 && !filters.segment.includes(v.segment)) return false;
       if (filters.manufacturer.length > 0 && !filters.manufacturer.includes(v.manufacturer)) return false;
       if (filters.modelYears.length > 0 && !filters.modelYears.includes(v.model_year)) return false;
       if (!inRange(v.price_local, filters.priceRange)) return false;
