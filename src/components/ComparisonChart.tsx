@@ -1,22 +1,8 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
-import {
-  ScatterChart,
-  Scatter,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
-} from "recharts";
 import type { EV, Segment } from "@/types/ev";
 import { formatCurrency, shortenVariant } from "@/utils/format";
 import { useTheme } from "@/hooks/useTheme";
-import {
-  removeOutliersIQR,
-  linearRegression,
-  gaussianKDE,
-} from "@/utils/statistics";
+import { gaussianKDE } from "@/utils/statistics";
 
 interface ComparisonChartProps {
   vehicles: EV[];
@@ -431,8 +417,6 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
   const gridStroke = isDark ? "#374151" : "#f0f0f0";
   const tickFill = isDark ? "#9ca3af" : "#666";
 
-  const [hideOutliers, setHideOutliers] = useState(true);
-  const [showTrendline, setShowTrendline] = useState(true);
   const [colorBy, setColorBy] = useState<ColorByKey>("manufacturer");
   const [hoveredCategory, setHoveredCategoryRaw] = useState<string | null>(null);
   const rafRef = useRef<number>(0);
@@ -483,28 +467,9 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
     [vehicles, topManufacturers, shouldBucket],
   );
 
-  const scatterData = useMemo(
-    () =>
-      hideOutliers
-        ? removeOutliersIQR(allScatterData, ["range_km", "price"])
-        : allScatterData,
-    [allScatterData, hideOutliers],
-  );
-
   const colorMap = useMemo(
-    () => getCategoryColorMap(scatterData.map((d) => d[colorBy])),
-    [scatterData, colorBy],
-  );
-
-  const trendlineData = useMemo(() => {
-    if (!showTrendline) return null;
-    const points = scatterData.map((d) => ({ x: d.range_km, y: d.price }));
-    return linearRegression(points, { x: "range_km", y: "price" });
-  }, [scatterData, showTrendline]);
-
-  const filteredNames = useMemo(
-    () => new Set(scatterData.map((d) => d.name)),
-    [scatterData],
+    () => getCategoryColorMap(allScatterData.map((d) => d[colorBy])),
+    [allScatterData, colorBy],
   );
 
   // Violin plot data: range per price by segment
@@ -520,7 +485,6 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
   const violinData = useMemo(() => {
     const bySegment = new Map<Segment, ViolinPoint[]>();
     for (const v of vehicles) {
-      if (!filteredNames.has(`${v.manufacturer} ${v.model}`)) continue;
       if (v.price_local <= 0) continue;
       const rangePerPrice = (v.range_km / v.price_local) * 1000;
       const seg = v.segment;
@@ -556,7 +520,7 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
       });
     }
     return result;
-  }, [vehicles, filteredNames, topManufacturers, shouldBucket]);
+  }, [vehicles, topManufacturers, shouldBucket]);
 
   return (
     <div className="space-y-6">
@@ -674,146 +638,6 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
         </p>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
-        <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-          <h3 className="text-lg font-semibold">Range vs Price</h3>
-          <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-            <label className="flex items-center gap-1.5 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={hideOutliers}
-                onChange={(e) => setHideOutliers(e.target.checked)}
-                className="rounded border-gray-300 dark:border-gray-600"
-              />
-              Hide outliers
-            </label>
-            <label className="flex items-center gap-1.5 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showTrendline}
-                onChange={(e) => setShowTrendline(e.target.checked)}
-                className="rounded border-gray-300 dark:border-gray-600"
-              />
-              Trendline
-            </label>
-          </div>
-        </div>
-        <ResponsiveContainer width="100%" height={350}>
-          <ScatterChart margin={{ top: 10, right: 30, bottom: 10, left: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke={gridStroke} />
-            <XAxis
-              dataKey="range_km"
-              name="Range"
-              unit=" km"
-              type="number"
-              tick={{ fontSize: 12, fill: tickFill }}
-            />
-            <YAxis
-              dataKey="price"
-              name="Price"
-              type="number"
-              tick={{ fontSize: 12, fill: tickFill }}
-              tickFormatter={(v: number) =>
-                `${Math.round(v / 1000)}k`
-              }
-            />
-            <Tooltip
-              content={({ payload }) => {
-                if (!payload?.length) return null;
-                const d = payload[0].payload as (typeof scatterData)[number];
-                if (!d.name) return null;
-                return (
-                  <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 shadow-lg text-sm">
-                    <div className="font-semibold">{d.name}</div>
-                    {d.variant && (
-                      <div className="text-gray-500 dark:text-gray-400">
-                        {shortenVariant(d.variant)}
-                      </div>
-                    )}
-                    <div>Range: {d.range_km} km</div>
-                    <div>Price: {formatCurrency(d.price, d.currency)}</div>
-                  </div>
-                );
-              }}
-            />
-            {/* When highlighting, render dimmed dots first, highlighted on top */}
-            {highlightCategory ? (
-              <>
-                <Scatter
-                  data={scatterData.filter((d) => d[colorBy] !== highlightCategory)}
-                  fill="#3b82f6"
-                  fillOpacity={0.1}
-                  isAnimationActive={false}
-                  className={onSelectVehicle ? "cursor-pointer" : undefined}
-                  onClick={(data) => {
-                    const d = data as unknown as (typeof scatterData)[number];
-                    if (d?.id) onSelectVehicle?.(d.id);
-                  }}
-                >
-                  {scatterData
-                    .filter((d) => d[colorBy] !== highlightCategory)
-                    .map((entry, i) => (
-                      <Cell
-                        key={i}
-                        fill={colorMap.get(entry[colorBy]) ?? "#93c5fd"}
-                        fillOpacity={0.1}
-                      />
-                    ))}
-                </Scatter>
-                <Scatter
-                  data={scatterData.filter((d) => d[colorBy] === highlightCategory)}
-                  fill="#3b82f6"
-                  fillOpacity={0.7}
-                  isAnimationActive={false}
-                  className={onSelectVehicle ? "cursor-pointer" : undefined}
-                  onClick={(data) => {
-                    const d = data as unknown as (typeof scatterData)[number];
-                    if (d?.id) onSelectVehicle?.(d.id);
-                  }}
-                >
-                  {scatterData
-                    .filter((d) => d[colorBy] === highlightCategory)
-                    .map((entry, i) => (
-                      <Cell
-                        key={i}
-                        fill={colorMap.get(entry[colorBy]) ?? "#93c5fd"}
-                        fillOpacity={0.7}
-                      />
-                    ))}
-                </Scatter>
-              </>
-            ) : (
-              <Scatter
-                data={scatterData}
-                fill="#3b82f6"
-                fillOpacity={0.7}
-                className={onSelectVehicle ? "cursor-pointer" : undefined}
-                onClick={(data) => {
-                  const d = data as unknown as (typeof scatterData)[number];
-                  if (d?.id) onSelectVehicle?.(d.id);
-                }}
-              >
-                {scatterData.map((entry, i) => (
-                  <Cell
-                    key={i}
-                    fill={colorMap.get(entry[colorBy]) ?? "#93c5fd"}
-                    fillOpacity={0.7}
-                  />
-                ))}
-              </Scatter>
-            )}
-            {trendlineData && (
-              <Scatter
-                data={trendlineData.line}
-                line={{ strokeDasharray: "6 3", stroke: isDark ? "#6b7280" : "#9ca3af", strokeWidth: 2 }}
-                shape={<></>}
-                legendType="none"
-                isAnimationActive={false}
-              />
-            )}
-          </ScatterChart>
-        </ResponsiveContainer>
-      </div>
     </div>
   );
 }
