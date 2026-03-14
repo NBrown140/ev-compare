@@ -417,7 +417,7 @@ export default function FilterBar({
   const basicCount =
     (filters.modelYears.length > 0 ? 1 : 0) +
     (filters.segment !== "all" ? 1 : 0) +
-    (filters.manufacturer && filters.manufacturer !== "all" ? 1 : 0) +
+    (filters.manufacturer.length > 0 ? 1 : 0) +
     (filters.priceRange.min != null || filters.priceRange.max != null ? 1 : 0) +
     (filters.rangeKm.min != null || filters.rangeKm.max != null ? 1 : 0);
   const totalActiveCount = basicCount + advancedCount;
@@ -546,12 +546,13 @@ export default function FilterBar({
 
           <div className="flex flex-col text-sm">
             <span className="text-gray-500 dark:text-gray-400 mb-1">
-              Manufacturer
+              Manufacturers
             </span>
             <FuzzyCombobox
               options={manufacturers}
-              value={filters.manufacturer}
-              onChange={(val) => onChange({ ...filters, manufacturer: val })}
+              multiple
+              values={filters.manufacturer}
+              onChangeMulti={(vals) => onChange({ ...filters, manufacturer: vals })}
               placeholder="All manufacturers"
             />
           </div>

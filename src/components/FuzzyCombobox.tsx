@@ -15,17 +15,24 @@ function fuzzyMatch(target: string, query: string): boolean {
 
 interface FuzzyComboboxProps {
   options: string[];
-  value: string;
-  onChange: (value: string) => void;
+  multiple?: boolean;
+  value?: string;
+  values?: string[];
+  onChange?: (value: string) => void;
+  onChangeMulti?: (values: string[]) => void;
   placeholder?: string;
 }
 
 export default function FuzzyCombobox({
   options,
-  value,
+  multiple: isMulti = false,
+  value = "",
+  values = [],
   onChange,
+  onChangeMulti,
   placeholder = "All",
 }: FuzzyComboboxProps) {
+
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(0);
@@ -33,9 +40,19 @@ export default function FuzzyCombobox({
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
+  // Derive selected set for multi mode
+  const selectedSet = isMulti ? new Set(values) : new Set<string>();
+  const hasSelection = isMulti ? values.length > 0 : !!value;
+
   const filtered = query
     ? options.filter((o) => fuzzyMatch(o, query))
-    : options;
+    : isMulti
+      ? [...options].sort((a, b) => {
+          const aSel = selectedSet.has(a) ? 0 : 1;
+          const bSel = selectedSet.has(b) ? 0 : 1;
+          return aSel - bSel;
+        })
+      : options;
 
   // Reset highlight when filtered list changes
   useEffect(() => {
@@ -46,11 +63,11 @@ export default function FuzzyCombobox({
   useEffect(() => {
     if (open && listRef.current) {
       const item = listRef.current.children[
-        value ? highlightIndex + 1 : highlightIndex
+        hasSelection ? highlightIndex + 1 : highlightIndex
       ] as HTMLElement | undefined;
       item?.scrollIntoView({ block: "nearest" });
     }
-  }, [highlightIndex, open, value]);
+  }, [highlightIndex, open, hasSelection]);
 
   // Close on outside click
   useEffect(() => {
@@ -66,11 +83,35 @@ export default function FuzzyCombobox({
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  function select(val: string) {
-    onChange(val);
+  function selectSingle(val: string) {
+    onChange?.(val);
     setQuery("");
     setOpen(false);
     inputRef.current?.blur();
+  }
+
+  function toggleMulti(val: string) {
+    const next = selectedSet.has(val)
+      ? values.filter((v: string) => v !== val)
+      : [...values, val];
+    onChangeMulti?.(next);
+  }
+
+  function clearAll() {
+    if (isMulti) {
+      onChangeMulti?.([]);
+    } else {
+      onChange?.("");
+    }
+    setQuery("");
+  }
+
+  function handleSelect(option: string) {
+    if (isMulti) {
+      toggleMulti(option);
+    } else {
+      selectSingle(option);
+    }
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {
@@ -82,7 +123,7 @@ export default function FuzzyCombobox({
       return;
     }
 
-    const totalItems = filtered.length + (value ? 1 : 0); // +1 for "All" option when a value is selected
+    const totalItems = filtered.length + (hasSelection ? 1 : 0);
 
     switch (e.key) {
       case "ArrowDown":
@@ -95,11 +136,12 @@ export default function FuzzyCombobox({
         break;
       case "Enter":
         e.preventDefault();
-        if (value && highlightIndex === 0) {
-          select("");
+        if (hasSelection && highlightIndex === 0) {
+          clearAll();
+          if (!isMulti) setOpen(false);
         } else {
-          const idx = value ? highlightIndex - 1 : highlightIndex;
-          if (filtered[idx]) select(filtered[idx]);
+          const idx = hasSelection ? highlightIndex - 1 : highlightIndex;
+          if (filtered[idx]) handleSelect(filtered[idx]);
         }
         break;
       case "Escape":
@@ -110,7 +152,17 @@ export default function FuzzyCombobox({
     }
   }
 
-  const displayValue = open ? query : value || "";
+  // Display value in the input
+  let displayValue: string;
+  if (open) {
+    displayValue = query;
+  } else if (isMulti) {
+    displayValue = values.length > 0
+      ? `${values.length} selected`
+      : "";
+  } else {
+    displayValue = value || "";
+  }
 
   return (
     <div ref={containerRef} className="relative">
@@ -135,9 +187,12 @@ export default function FuzzyCombobox({
           ref={listRef}
           className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-lg text-sm"
         >
-          {value && (
+          {hasSelection && (
             <li
-              onMouseDown={() => select("")}
+              onMouseDown={() => {
+                clearAll();
+                if (!isMulti) setOpen(false);
+              }}
               onMouseEnter={() => setHighlightIndex(0)}
               className={`px-3 py-2 cursor-pointer text-gray-500 dark:text-gray-400 ${
                 highlightIndex === 0
@@ -149,18 +204,26 @@ export default function FuzzyCombobox({
             </li>
           )}
           {filtered.map((option, i) => {
-            const idx = value ? i + 1 : i;
+            const idx = hasSelection ? i + 1 : i;
+            const isSelected = isMulti
+              ? selectedSet.has(option)
+              : option === value;
             return (
               <li
                 key={option}
-                onMouseDown={() => select(option)}
+                onMouseDown={() => handleSelect(option)}
                 onMouseEnter={() => setHighlightIndex(idx)}
-                className={`px-3 py-2 cursor-pointer ${
+                className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${
                   idx === highlightIndex
                     ? "bg-blue-50 dark:bg-blue-900/30"
                     : "hover:bg-gray-100 dark:hover:bg-gray-700"
-                } ${option === value ? "font-semibold text-blue-600 dark:text-blue-400" : "dark:text-gray-100"}`}
+                } ${isSelected ? "font-semibold text-blue-600 dark:text-blue-400" : "dark:text-gray-100"}`}
               >
+                {isMulti && (
+                  <span className="flex-shrink-0 w-4 text-center">
+                    {isSelected ? "\u2713" : ""}
+                  </span>
+                )}
                 {option}
               </li>
             );
