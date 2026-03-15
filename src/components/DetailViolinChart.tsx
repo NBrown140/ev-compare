@@ -23,12 +23,13 @@ interface ViolinPoint {
 const MARGIN = { top: 20, right: 20, bottom: 30, left: 55 };
 const HEIGHT = 350;
 
-function seededRandom(seed: number) {
-  let s = ((seed + 1) * 16807) % 2147483647;
-  return () => {
-    s = (s * 16807) % 2147483647;
-    return s / 2147483647;
-  };
+function stableJitter(id: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = (h * 16777619) >>> 0;
+  }
+  return (h / 0xffffffff) - 0.5;
 }
 
 export default function DetailViolinChart({
@@ -106,7 +107,6 @@ export default function DetailViolinChart({
   const violinMaxHalfWidth = Math.min(innerW * 0.38, 120);
   const maxDensity = kde.length ? Math.max(...kde.map((k) => k.density)) : 0;
 
-  const rng = seededRandom(42);
 
   const otherDotFill = isDark ? "#4b5563" : "#d1d5db";
 
@@ -199,7 +199,7 @@ export default function DetailViolinChart({
                         );
                       })()
                     : 6;
-                const jitter = (rng() - 0.5) * 2 * localWidth;
+                const jitter = stableJitter(pt.id) * 2 * localWidth;
                 return (
                   <circle
                     key={pi}
@@ -249,8 +249,7 @@ export default function DetailViolinChart({
                       );
                     })()
                   : 6;
-              // Use a fixed small jitter for the current vehicle so it's stable
-              const jitter = (rng() - 0.5) * 2 * localWidth * 0.3;
+              const jitter = stableJitter(currentPt.id) * 2 * localWidth;
               return (
                 <circle
                   cx={cx + jitter}
