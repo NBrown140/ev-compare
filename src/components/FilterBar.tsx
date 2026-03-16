@@ -447,16 +447,6 @@ export default function FilterBar({
           )}
         </div>
 
-        <div className="flex items-center gap-1">
-          {hasActiveFilters && (
-            <button
-              onClick={onReset}
-              className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 px-2 py-1 rounded-md hover:bg-gray-200/60 dark:hover:bg-gray-700/50 transition-colors"
-            >
-              Clear all
-            </button>
-          )}
-        </div>
       </div>
 
       {/* Basic filters */}
@@ -547,7 +537,7 @@ export default function FilterBar({
           />
         </div>
 
-        <div className="mt-3 flex items-center">
+        <div className="mt-3 flex items-center gap-2">
           <button
             onClick={() => setShowAdvanced((v) => !v)}
             className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 px-2 py-1 rounded-md hover:bg-gray-200/60 dark:hover:bg-gray-700/50 transition-colors flex items-center gap-1"
@@ -568,6 +558,14 @@ export default function FilterBar({
               <path d="M3 4.5l3 3 3-3" />
             </svg>
           </button>
+          {hasActiveFilters && (
+            <button
+              onClick={onReset}
+              className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 px-2 py-1 rounded-md hover:bg-gray-200/60 dark:hover:bg-gray-700/50 transition-colors"
+            >
+              Clear all
+            </button>
+          )}
         </div>
       </div>
 

@@ -85,6 +85,8 @@ export default function Home({ onSelectMarket }: HomeProps) {
           The full dataset is freely available as{" "}
           <a
             href="https://github.com/NBrown140/ev-compare/tree/main/data/markets"
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
             CSV files on GitHub
@@ -95,6 +97,8 @@ export default function Home({ onSelectMarket }: HomeProps) {
           Spot an error or a missing vehicle?{" "}
           <a
             href="https://github.com/NBrown140/ev-compare/blob/main/CONTRIBUTING.md"
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
             See how to contribute
