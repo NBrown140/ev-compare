@@ -1,6 +1,6 @@
 import type { EV } from "@/types/ev";
 import type { Source, SourcesMap } from "@/types/ev";
-import { formatCurrency, formatNumber } from "@/utils/format";
+import { SECTIONS, FIELD_LABELS, formatFieldValue } from "@/utils/vehicleFields";
 import DetailViolinChart from "@/components/DetailViolinChart";
 
 interface VehicleDetailProps {
@@ -9,179 +9,11 @@ interface VehicleDetailProps {
   sources: SourcesMap | null;
   onBack: () => void;
   onSelectVehicle?: (id: string) => void;
+  compareIds?: string[];
+  onToggleCompare?: (id: string) => void;
 }
 
 const COMPUTED_FIELDS = new Set(["price_per_range_km", "price_per_kwh"]);
-
-const FIELD_LABELS: Record<string, string> = {
-  manufacturer: "Manufacturer",
-  model: "Model",
-  model_year: "Model Year",
-  variant: "Variant",
-  segment: "Segment",
-  seats: "Seats",
-  price_local: "Price",
-  currency: "Currency",
-  range_km: "Range",
-  range_rating: "Range Rating",
-  battery_capacity_kwh: "Battery Capacity",
-  battery_chemistry: "Battery Chemistry",
-  efficiency_wh_km: "Efficiency",
-  fast_charge_kw: "DC Fast Charge",
-  charge_10_80_min: "Charge 10-80%",
-  charge_port_type: "Charge Port",
-  onboard_charger_kw: "Onboard Charger",
-  drivetrain: "Drivetrain",
-  power_kw: "Power",
-  torque_nm: "Torque",
-  acceleration_0_100_s: "0-100 km/h",
-  top_speed_kmh: "Top Speed",
-  length_mm: "Length",
-  width_mm: "Width",
-  height_mm: "Height",
-  wheelbase_mm: "Wheelbase",
-  ground_clearance_mm: "Ground Clearance",
-  cargo_volume_l: "Cargo Volume",
-  frunk_volume_l: "Frunk Volume",
-  towing_capacity_kg: "Towing Capacity",
-  curb_weight_kg: "Curb Weight",
-  v2l_capable: "V2L Capable",
-  plug_and_charge: "Plug & Charge",
-  range_city_km: "City Range",
-  range_highway_km: "Highway Range",
-  price_per_range_km: "Price per Range km",
-  price_per_kwh: "Price per kWh",
-};
-
-interface Section {
-  title: string;
-  fields: (keyof EV)[];
-}
-
-const SECTIONS: Section[] = [
-  {
-    title: "Overview",
-    fields: [
-      "manufacturer",
-      "model",
-      "model_year",
-      "variant",
-      "segment",
-      "seats",
-    ],
-  },
-  {
-    title: "Pricing",
-    fields: ["price_local", "currency", "price_per_range_km", "price_per_kwh"],
-  },
-  {
-    title: "Range & Efficiency",
-    fields: [
-      "range_km",
-      "range_rating",
-      "efficiency_wh_km",
-      "range_city_km",
-      "range_highway_km",
-    ],
-  },
-  {
-    title: "Battery & Charging",
-    fields: [
-      "battery_capacity_kwh",
-      "battery_chemistry",
-      "fast_charge_kw",
-      "charge_10_80_min",
-      "charge_port_type",
-      "onboard_charger_kw",
-    ],
-  },
-  {
-    title: "Performance",
-    fields: [
-      "drivetrain",
-      "power_kw",
-      "torque_nm",
-      "acceleration_0_100_s",
-      "top_speed_kmh",
-    ],
-  },
-  {
-    title: "Dimensions & Capacity",
-    fields: [
-      "length_mm",
-      "width_mm",
-      "height_mm",
-      "wheelbase_mm",
-      "ground_clearance_mm",
-      "cargo_volume_l",
-      "frunk_volume_l",
-      "towing_capacity_kg",
-      "curb_weight_kg",
-    ],
-  },
-  {
-    title: "Features",
-    fields: ["v2l_capable", "plug_and_charge"],
-  },
-];
-
-function formatFieldValue(vehicle: EV, field: keyof EV): string {
-  const value = vehicle[field];
-  if (value == null) return "\u2014";
-
-  switch (field) {
-    case "price_local":
-      return formatCurrency(value as number, vehicle.currency);
-    case "price_per_range_km":
-    case "price_per_kwh":
-      return formatCurrency(value as number, vehicle.currency);
-    case "range_km":
-    case "range_city_km":
-    case "range_highway_km":
-      return `${formatNumber(value as number)} km`;
-    case "battery_capacity_kwh":
-      return `${formatNumber(value as number, 1)} kWh`;
-    case "efficiency_wh_km":
-      return `${formatNumber(value as number)} Wh/km`;
-    case "fast_charge_kw":
-    case "onboard_charger_kw":
-      return `${formatNumber(value as number)} kW`;
-    case "power_kw":
-      return `${formatNumber(value as number)} kW`;
-    case "torque_nm":
-      return `${formatNumber(value as number)} Nm`;
-    case "acceleration_0_100_s":
-      return `${value}s`;
-    case "top_speed_kmh":
-      return `${formatNumber(value as number)} km/h`;
-    case "length_mm":
-    case "width_mm":
-    case "height_mm":
-    case "wheelbase_mm":
-    case "ground_clearance_mm":
-      return `${formatNumber(value as number)} mm`;
-    case "cargo_volume_l":
-    case "frunk_volume_l":
-      return `${formatNumber(value as number)} L`;
-    case "towing_capacity_kg":
-    case "curb_weight_kg":
-      return `${formatNumber(value as number)} kg`;
-    case "charge_10_80_min":
-      return `${formatNumber(value as number)} min`;
-    case "v2l_capable":
-    case "plug_and_charge":
-      return value ? "Yes" : "No";
-    case "range_rating":
-      return String(value).toUpperCase();
-    case "drivetrain":
-      return String(value).toUpperCase();
-    case "battery_chemistry":
-    case "charge_port_type":
-      return String(value).toUpperCase();
-    default:
-      return String(value);
-  }
-}
 
 function buildFootnotes(
   vehicleId: string,
@@ -208,8 +40,12 @@ export default function VehicleDetail({
   sources,
   onBack,
   onSelectVehicle,
+  compareIds,
+  onToggleCompare,
 }: VehicleDetailProps) {
   const { fieldToNotes, footnotes } = buildFootnotes(vehicle.id, sources);
+  const isInCompare = compareIds?.includes(vehicle.id) ?? false;
+  const compareFull = (compareIds?.length ?? 0) >= 5 && !isInCompare;
 
   return (
     <div className="space-y-6">
@@ -224,6 +60,23 @@ export default function VehicleDetail({
           {vehicle.manufacturer} {vehicle.model}
           {vehicle.variant ? ` ${vehicle.variant}` : ""}
         </h2>
+        {onToggleCompare && (
+          <button
+            onClick={() => onToggleCompare(vehicle.id)}
+            disabled={compareFull}
+            className={`ml-auto text-sm px-3 py-1.5 rounded-lg border transition-colors ${
+              isInCompare
+                ? "border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-600 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50"
+                : compareFull
+                  ? "border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed dark:border-gray-700 dark:bg-gray-800 dark:text-gray-600"
+                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+            }`}
+          >
+            {isInCompare
+              ? `Remove from compare (${compareIds!.length})`
+              : `Add to compare (${compareIds?.length ?? 0})`}
+          </button>
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">

@@ -9,6 +9,8 @@ interface EVTableProps {
   vehicles: EV[];
   pageSize?: number;
   onSelectVehicle?: (id: string) => void;
+  compareIds?: string[];
+  onToggleCompare?: (id: string) => void;
 }
 
 const columns: { key: SortKey; label: string; align?: "right" }[] = [
@@ -25,7 +27,8 @@ const columns: { key: SortKey; label: string; align?: "right" }[] = [
   { key: "fast_charge_kw", label: "DC Fast (kW)", align: "right" },
 ];
 
-export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle }: EVTableProps) {
+export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, compareIds, onToggleCompare }: EVTableProps) {
+  const compareFull = (compareIds?.length ?? 0) >= 5;
   const [sortKey, setSortKey] = useState<SortKey>("price_per_range_km");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [visibleCount, setVisibleCount] = useState(pageSize);
@@ -89,6 +92,9 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle }: EV
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-gray-50 dark:bg-gray-800">
+              {onToggleCompare && (
+                <th className="w-10 px-3 py-3 bg-gray-50 dark:bg-gray-800" />
+              )}
               {columns.map((col) => (
                 <th
                   key={col.key}
@@ -115,6 +121,7 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle }: EV
         <table className="w-full text-sm">
           <thead className="sr-only">
             <tr>
+              {onToggleCompare && <th className="w-10">Compare</th>}
               {columns.map((col) => (
                 <th key={col.key} className={`px-4 py-3 whitespace-nowrap ${col.align === "right" ? "text-right" : "text-left"}`}>
                   {col.label}
@@ -123,24 +130,40 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle }: EV
             </tr>
           </thead>
           <tbody>
-            {sorted.slice(0, visibleCount).map((v) => (
-              <tr
-                key={v.id}
-                onClick={() => onSelectVehicle?.(v.id)}
-                className={`border-b border-gray-100 dark:border-gray-700 hover:bg-blue-50/50 dark:hover:bg-gray-700/50 transition-colors${onSelectVehicle ? " cursor-pointer" : ""}`}
-              >
-                {columns.map((col) => (
-                  <td
-                    key={col.key}
-                    className={`px-4 py-3 whitespace-nowrap ${
-                      col.align === "right" ? "text-right tabular-nums" : ""
-                    }`}
-                  >
-                    {renderCell(v, col.key)}
-                  </td>
-                ))}
-              </tr>
-            ))}
+            {sorted.slice(0, visibleCount).map((v) => {
+              const isChecked = compareIds?.includes(v.id) ?? false;
+              const disabled = compareFull && !isChecked;
+              return (
+                <tr
+                  key={v.id}
+                  onClick={() => onSelectVehicle?.(v.id)}
+                  className={`border-b border-gray-100 dark:border-gray-700 hover:bg-blue-50/50 dark:hover:bg-gray-700/50 transition-colors${onSelectVehicle ? " cursor-pointer" : ""}`}
+                >
+                  {onToggleCompare && (
+                    <td className="w-10 px-3 py-3">
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        disabled={disabled}
+                        onChange={() => onToggleCompare(v.id)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
+                      />
+                    </td>
+                  )}
+                  {columns.map((col) => (
+                    <td
+                      key={col.key}
+                      className={`px-4 py-3 whitespace-nowrap ${
+                        col.align === "right" ? "text-right tabular-nums" : ""
+                      }`}
+                    >
+                      {renderCell(v, col.key)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

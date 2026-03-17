@@ -4,24 +4,38 @@ import { formatMarketName, getMarketFlag } from "@/utils/format";
 import FilterBar from "@/components/FilterBar";
 import EVTable from "@/components/EVTable";
 import ComparisonChart from "@/components/ComparisonChart";
+import CompareBar from "@/components/CompareBar";
 import VehicleDetail from "@/pages/VehicleDetail";
+import VehicleCompare from "@/pages/VehicleCompare";
 
 interface MarketDashboardProps {
   market: string;
   selectedVehicleId: string | null;
   activeTab: "table" | "charts";
+  compareIds: string[];
+  comparePage: boolean;
   onBack: () => void;
   onSelectVehicle: (id: string | null) => void;
   onTabChange: (tab: "table" | "charts") => void;
+  onToggleCompare: (id: string) => void;
+  onClearCompare: () => void;
+  onCompare: () => void;
+  onBackFromCompare: () => void;
 }
 
 export default function MarketDashboard({
   market,
   selectedVehicleId,
   activeTab,
+  compareIds,
+  comparePage,
   onBack,
   onSelectVehicle,
   onTabChange,
+  onToggleCompare,
+  onClearCompare,
+  onCompare,
+  onBackFromCompare,
 }: MarketDashboardProps) {
   const vehicles = useMarketData(market);
   const sources = useMarketSources(market);
@@ -40,6 +54,17 @@ export default function MarketDashboard({
     : null;
   const marketFlag = getMarketFlag(market);
 
+  if (comparePage) {
+    return (
+      <VehicleCompare
+        vehicles={vehicles}
+        compareIds={compareIds}
+        onBack={onBackFromCompare}
+        onToggleCompare={onToggleCompare}
+      />
+    );
+  }
+
   if (selectedVehicle) {
     return (
       <VehicleDetail
@@ -48,12 +73,14 @@ export default function MarketDashboard({
         sources={sources}
         onBack={() => onSelectVehicle(null)}
         onSelectVehicle={onSelectVehicle}
+        compareIds={compareIds}
+        onToggleCompare={onToggleCompare}
       />
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-20">
       <div className="flex items-center gap-4">
         <button
           onClick={onBack}
@@ -100,13 +127,26 @@ export default function MarketDashboard({
       </div>
 
       {activeTab === "table" ? (
-        <EVTable vehicles={filtered} onSelectVehicle={onSelectVehicle} />
+        <EVTable
+          vehicles={filtered}
+          onSelectVehicle={onSelectVehicle}
+          compareIds={compareIds}
+          onToggleCompare={onToggleCompare}
+        />
       ) : (
         <ComparisonChart
           vehicles={filtered}
           onSelectVehicle={onSelectVehicle}
         />
       )}
+
+      <CompareBar
+        vehicles={vehicles}
+        compareIds={compareIds}
+        onToggleCompare={onToggleCompare}
+        onClearCompare={onClearCompare}
+        onCompare={onCompare}
+      />
     </div>
   );
 }
