@@ -540,7 +540,7 @@ export default function FilterBar({
         <div className="mt-3 flex items-center gap-2">
           <button
             onClick={() => setShowAdvanced((v) => !v)}
-            className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 px-2 py-1 rounded-md hover:bg-gray-200/60 dark:hover:bg-gray-700/50 transition-colors flex items-center gap-1"
+            className="text-xs font-medium text-gray-700 dark:text-gray-200 bg-gray-200/70 dark:bg-gray-700/60 hover:bg-gray-300/80 dark:hover:bg-gray-600/70 px-2.5 py-1 rounded-md transition-colors flex items-center gap-1"
           >
             {showAdvanced ? "Less" : "More"}
             {!showAdvanced && advancedCount > 0 && (
