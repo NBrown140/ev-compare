@@ -20,8 +20,25 @@ Thanks for helping keep EV data accurate and up to date!
 Every CSV column (except `id`) must be backed by a source. Sources live in a JSON file alongside each market CSV (e.g., `us.sources.json` next to `us.csv`), keyed by vehicle `id`.
 
 Each source entry needs:
-- **url** — a Wayback Machine snapshot (`https://web.archive.org/web/YYYYMMDD/<url>`). You can create one at `https://web.archive.org/save/<url>`
+- **url** — a Wayback Machine snapshot with a **real** archive timestamp. To create one:
+  1. Go to `https://web.archive.org/save/<url>` and wait for the save to complete
+  2. Copy the resulting URL — it will look like `https://web.archive.org/web/20250315123456/https://example.com`
+  3. The timestamp must correspond to an actual snapshot, not an arbitrary date
+- **date_viewed** — the date you viewed the source page, in `YYYY-MM-DD` format (e.g. `"2025-03-17"`)
 - **fields** — which CSV columns this source covers
+
+You can verify and fix timestamps in bulk with:
+```bash
+pnpm run check:sources                        # report status without changes
+pnpm run fix:sources                          # save missing pages and fix timestamps
+pnpm run fix:sources -- --market us           # process a single market
+```
+
+To save new pages, you need Internet Archive API credentials (free at https://archive.org/account/s3.php):
+```bash
+export WAYBACK_ACCESS_KEY=your_access_key
+export WAYBACK_SECRET_KEY=your_secret_key
+```
 
 When data comes from multiple sources, add multiple entries and split the fields between them. The build will fail if any populated column is missing from all sources.
 
@@ -29,7 +46,8 @@ When data comes from multiple sources, add multiple entries and split the fields
 {
   "tesla-model-3-lr-2025": [
     {
-      "url": "https://web.archive.org/web/20250301/https://www.tesla.com/model3",
+      "url": "https://web.archive.org/web/20250315123456/https://www.tesla.com/model3",
+      "date_viewed": "2025-03-15",
       "fields": ["manufacturer", "model", "price_local", "range_km", "..."]
     }
   ]

@@ -20,6 +20,7 @@ const schema: { columns: Column[] } = JSON.parse(
 
 interface Source {
   url: string;
+  date_viewed: string;
   fields: string[];
 }
 
@@ -130,6 +131,12 @@ function validateSources(
         errors.push(
           `${loc} — "url" must be a Wayback Machine URL (start with ${WAYBACK_PREFIX})`
         );
+      }
+
+      if (!entry.date_viewed || typeof entry.date_viewed !== "string") {
+        errors.push(`${loc} — missing or invalid "date_viewed"`);
+      } else if (!/^\d{4}-\d{2}-\d{2}$/.test(entry.date_viewed)) {
+        errors.push(`${loc} — "date_viewed" must be in YYYY-MM-DD format, got "${entry.date_viewed}"`);
       }
 
       if (!Array.isArray(entry.fields) || entry.fields.length === 0) {

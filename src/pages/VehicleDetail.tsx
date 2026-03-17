@@ -307,7 +307,7 @@ export default function VehicleDetail({
                   rel="noopener noreferrer"
                   className="text-blue-600 dark:text-blue-400 hover:underline break-all"
                 >
-                  {source.url}
+                  {source.url.replace(/^https:\/\/web\.archive\.org\/web\/\d+\//, '')}
                 </a>
                 <span className="text-gray-400 dark:text-gray-500 ml-2">
                   ({source.fields.map((f) => FIELD_LABELS[f] ?? f).join(", ")})

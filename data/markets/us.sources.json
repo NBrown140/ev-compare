@@ -2,6 +2,7 @@
   "tesla-model-3-lr-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://www.tesla.com/model3",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",
@@ -28,6 +29,7 @@
   "tesla-model-y-lr-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://www.tesla.com/modely",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",
@@ -54,6 +56,7 @@
   "chevy-equinox-ev-2lt-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://www.chevrolet.com/electric/equinox-ev",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",
@@ -80,6 +83,7 @@
   "hyundai-ioniq-5-lr-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://www.hyundaiusa.com/us/en/vehicles/ioniq-5",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",
@@ -106,6 +110,7 @@
   "kia-ev6-lr-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://www.kia.com/us/en/ev6",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",
@@ -132,6 +137,7 @@
   "ford-mustang-mach-e-premium-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://www.ford.com/suvs/mach-e/",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",
@@ -158,6 +164,7 @@
   "rivian-r1s-la-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://rivian.com/r1s",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",
@@ -184,6 +191,7 @@
   "chevy-blazer-ev-rs-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://www.chevrolet.com/electric/blazer-ev",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",
@@ -210,6 +218,7 @@
   "bmw-ix-xdrive50-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://www.bmwusa.com/models/ix",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",
@@ -236,6 +245,7 @@
   "tesla-cybertruck-awd-2025": [
     {
       "url": "https://web.archive.org/web/20250301/https://www.tesla.com/cybertruck",
+      "date_viewed": "2026-03-17",
       "fields": [
         "manufacturer",
         "model",

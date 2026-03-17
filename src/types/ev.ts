@@ -53,6 +53,7 @@ export interface MarketData {
 
 export interface Source {
   url: string;
+  date_viewed: string;
   fields: string[];
 }
 

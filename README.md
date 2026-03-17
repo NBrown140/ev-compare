@@ -37,6 +37,22 @@ pnpm run preview      # preview the production build
 pnpm run lint         # run ESLint
 ```
 
+### Archiving sources
+
+Saving new pages requires Internet Archive API credentials (free at https://archive.org/account/s3.php):
+```bash
+export WAYBACK_ACCESS_KEY=your_access_key
+export WAYBACK_SECRET_KEY=your_secret_key
+```
+
+All source URLs must point to real Wayback Machine snapshots. Use the archive script to verify and fix timestamps, or save pages that haven't been archived yet:
+
+```bash
+pnpm run check:sources                        # report which URLs are valid/broken
+pnpm run fix:sources                          # save missing pages and fix timestamps
+pnpm run fix:sources -- --market us           # process a single market
+```
+
 
 ## License
 

@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "pnpm run build:data && vite",
     "build:data": "tsx scripts/build-data.ts",
+    "fix:sources": "tsx scripts/archive-sources.ts",
+    "check:sources": "tsx scripts/archive-sources.ts --check-only",
     "build": "pnpm run build:data && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
