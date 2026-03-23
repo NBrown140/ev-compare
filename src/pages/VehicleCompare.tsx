@@ -88,8 +88,9 @@ export default function VehicleCompare({
         No vehicles selected for comparison.
         <button
           onClick={onBack}
-          className="block mx-auto mt-4 text-blue-600 dark:text-blue-400 hover:underline"
+          className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-gray-800 pl-2.5 pr-3.5 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer mx-auto mt-4"
         >
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
           Back to list
         </button>
       </div>
@@ -101,9 +102,10 @@ export default function VehicleCompare({
       <div className="flex items-center gap-4">
         <button
           onClick={onBack}
-          className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 cursor-pointer hover:underline transition-colors"
+          className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-gray-800 pl-2.5 pr-3.5 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer"
         >
-          &larr; Back to list
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+          Back to list
         </button>
         <h2 className="text-2xl font-bold">
           Compare Vehicles ({compareVehicles.length})
