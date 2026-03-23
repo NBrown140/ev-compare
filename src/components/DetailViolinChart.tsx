@@ -7,6 +7,7 @@ import { gaussianKDE } from "@/utils/statistics";
 interface DetailViolinChartProps {
   vehicle: EV;
   allVehicles: EV[];
+  highlightIds?: string[];
   onSelectVehicle?: (id: string) => void;
 }
 
@@ -35,6 +36,7 @@ function stableJitter(id: string): number {
 export default function DetailViolinChart({
   vehicle,
   allVehicles,
+  highlightIds,
   onSelectVehicle,
 }: DetailViolinChartProps) {
   const { effectiveTheme } = useTheme();
@@ -109,6 +111,11 @@ export default function DetailViolinChart({
 
 
   const otherDotFill = isDark ? "#4b5563" : "#d1d5db";
+  const siblingDotFill = isDark ? "#7da2d1" : "#bdd0e7";
+  const highlightSet = useMemo(
+    () => new Set(highlightIds ?? []),
+    [highlightIds],
+  );
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
@@ -181,7 +188,7 @@ export default function DetailViolinChart({
 
             {/* Other vehicle dots (rendered first, below) */}
             {segmentPoints
-              .filter((pt) => pt.id !== vehicle.id)
+              .filter((pt) => pt.id !== vehicle.id && !highlightSet.has(pt.id))
               .map((pt, pi) => {
                 const localWidth =
                   maxDensity > 0
@@ -210,6 +217,54 @@ export default function DetailViolinChart({
                     opacity={0.6}
                     stroke={isDark ? "#1f2937" : "#fff"}
                     strokeWidth={1}
+                    className={onSelectVehicle ? "cursor-pointer" : undefined}
+                    onMouseEnter={(e) => {
+                      const svgRect =
+                        svgRef.current?.getBoundingClientRect();
+                      if (!svgRect) return;
+                      setTooltip({
+                        x: e.clientX - svgRect.left,
+                        y: e.clientY - svgRect.top - 10,
+                        point: pt,
+                      });
+                    }}
+                    onMouseLeave={() => setTooltip(null)}
+                    onClick={() => onSelectVehicle?.(pt.id)}
+                  />
+                );
+              })}
+
+            {/* Sibling trim dots (middle layer) */}
+            {segmentPoints
+              .filter((pt) => pt.id !== vehicle.id && highlightSet.has(pt.id))
+              .map((pt, pi) => {
+                const localWidth =
+                  maxDensity > 0
+                    ? (() => {
+                        const nearestKde = kde.reduce((best, k) =>
+                          Math.abs(k.value - pt.rangePerPrice) <
+                          Math.abs(best.value - pt.rangePerPrice)
+                            ? k
+                            : best,
+                        );
+                        return (
+                          (nearestKde.density / maxDensity) *
+                          violinMaxHalfWidth *
+                          0.85
+                        );
+                      })()
+                    : 6;
+                const jitter = stableJitter(pt.id) * 2 * localWidth;
+                return (
+                  <circle
+                    key={pi}
+                    cx={cx + jitter}
+                    cy={yScale(pt.rangePerPrice)}
+                    r={6}
+                    fill={siblingDotFill}
+                    opacity={0.8}
+                    stroke={isDark ? "#1f2937" : "#fff"}
+                    strokeWidth={1.5}
                     className={onSelectVehicle ? "cursor-pointer" : undefined}
                     onMouseEnter={(e) => {
                       const svgRect =

@@ -1,10 +1,12 @@
 import type { EV } from "@/types/ev";
 import type { Source, SourcesMap } from "@/types/ev";
 import { SECTIONS, FIELD_LABELS, formatFieldValue } from "@/utils/vehicleFields";
+import { formatCurrency } from "@/utils/format";
 import DetailViolinChart from "@/components/DetailViolinChart";
 
 interface VehicleDetailProps {
   vehicle: EV;
+  trims: EV[];
   allVehicles: EV[];
   sources: SourcesMap | null;
   onBack: () => void;
@@ -36,6 +38,7 @@ function buildFootnotes(
 
 export default function VehicleDetail({
   vehicle,
+  trims,
   allVehicles,
   sources,
   onBack,
@@ -57,8 +60,10 @@ export default function VehicleDetail({
           &larr; Back to list
         </button>
         <h2 className="text-2xl font-bold">
-          {vehicle.manufacturer} {vehicle.model}
-          {vehicle.variant ? ` ${vehicle.variant}` : ""}
+          {vehicle.manufacturer} {vehicle.model}{" "}
+          <span className="text-gray-400 dark:text-gray-500 font-normal">
+            ({vehicle.model_year})
+          </span>
         </h2>
         {onToggleCompare && (
           <button
@@ -78,6 +83,46 @@ export default function VehicleDetail({
           </button>
         )}
       </div>
+
+      {trims.length > 1 && (
+        <div className="flex gap-2 flex-wrap">
+          {trims.map((trim) => {
+            const isSelected = trim.id === vehicle.id;
+            return (
+              <button
+                key={trim.id}
+                onClick={() => onSelectVehicle?.(trim.id)}
+                className={`group relative px-4 py-2.5 rounded-lg border text-left transition-colors ${
+                  isSelected
+                    ? "border-blue-300 bg-blue-50 dark:border-blue-600 dark:bg-blue-950/40"
+                    : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600 dark:hover:bg-gray-750"
+                }`}
+              >
+                <span
+                  className={`block text-sm font-semibold ${
+                    isSelected
+                      ? "text-blue-700 dark:text-blue-300"
+                      : "text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
+                  }`}
+                >
+                  {trim.variant ?? "Standard"}
+                </span>
+                <span
+                  className={`block text-xs mt-0.5 tabular-nums ${
+                    isSelected
+                      ? "text-blue-500 dark:text-blue-400/70"
+                      : "text-gray-400 dark:text-gray-500"
+                  }`}
+                >
+                  {formatCurrency(trim.price_local, trim.currency)}
+                  {" / "}
+                  {trim.range_km} km
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Specs - left column */}
@@ -140,6 +185,7 @@ export default function VehicleDetail({
           <DetailViolinChart
             vehicle={vehicle}
             allVehicles={allVehicles}
+            highlightIds={trims.map((t) => t.id)}
             onSelectVehicle={onSelectVehicle}
           />
         </div>
