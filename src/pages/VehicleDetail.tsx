@@ -7,6 +7,7 @@ import DetailViolinChart from "@/components/DetailViolinChart";
 interface VehicleDetailProps {
   vehicle: EV;
   trims: EV[];
+  modelYears: EV[];
   allVehicles: EV[];
   sources: SourcesMap | null;
   onBack: () => void;
@@ -39,6 +40,7 @@ function buildFootnotes(
 export default function VehicleDetail({
   vehicle,
   trims,
+  modelYears,
   allVehicles,
   sources,
   onBack,
@@ -85,8 +87,35 @@ export default function VehicleDetail({
         )}
       </div>
 
+      {modelYears.length > 1 && (
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide mr-1">
+            Year
+          </span>
+          {modelYears.map((mv) => {
+            const isSelected = mv.model_year === vehicle.model_year;
+            return (
+              <button
+                key={mv.model_year}
+                onClick={() => onSelectVehicle?.(mv.id)}
+                className={`px-3 py-1.5 rounded-lg border text-sm font-medium transition-colors ${
+                  isSelected
+                    ? "border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-600 dark:bg-blue-950/40 dark:text-blue-300"
+                    : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:bg-gray-750"
+                }`}
+              >
+                {mv.model_year}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {trims.length > 1 && (
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap items-center">
+          <span className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide mr-1">
+            Trim
+          </span>
           {trims.map((trim) => {
             const isSelected = trim.id === vehicle.id;
             return (

@@ -7,7 +7,7 @@ import ComparisonChart from "@/components/ComparisonChart";
 import CompareBar from "@/components/CompareBar";
 import VehicleDetail from "@/pages/VehicleDetail";
 import VehicleCompare from "@/pages/VehicleCompare";
-import { getModelTrims } from "@/utils/vehicleGroup";
+import { getModelTrims, getModelYears } from "@/utils/vehicleGroup";
 
 interface MarketDashboardProps {
   market: string;
@@ -56,6 +56,9 @@ export default function MarketDashboard({
   const modelTrims = selectedVehicle
     ? getModelTrims(vehicles, selectedVehicle)
     : [];
+  const otherYears = selectedVehicle
+    ? getModelYears(vehicles, selectedVehicle)
+    : [];
   const marketFlag = getMarketFlag(market);
 
   if (comparePage) {
@@ -74,6 +77,7 @@ export default function MarketDashboard({
       <VehicleDetail
         vehicle={selectedVehicle}
         trims={modelTrims}
+        modelYears={otherYears}
         allVehicles={vehicles}
         sources={sources}
         onBack={() => onSelectVehicle(null)}
