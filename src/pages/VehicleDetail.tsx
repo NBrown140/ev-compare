@@ -53,7 +53,7 @@ export default function VehicleDetail({
   const compareFull = (compareIds?.length ?? 0) >= 5 && !isInCompare;
 
   return (
-    <div className="space-y-6">
+    <div className={`space-y-6 ${compareIds && compareIds.length > 0 ? "pb-20" : ""}`}>
       <div className="flex items-center gap-4">
         <button
           onClick={onBack}

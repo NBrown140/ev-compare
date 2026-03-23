@@ -74,17 +74,26 @@ export default function MarketDashboard({
 
   if (selectedVehicle) {
     return (
-      <VehicleDetail
-        vehicle={selectedVehicle}
-        trims={modelTrims}
-        modelYears={otherYears}
-        allVehicles={vehicles}
-        sources={sources}
-        onBack={() => onSelectVehicle(null)}
-        onSelectVehicle={onSelectVehicle}
-        compareIds={compareIds}
-        onToggleCompare={onToggleCompare}
-      />
+      <>
+        <VehicleDetail
+          vehicle={selectedVehicle}
+          trims={modelTrims}
+          modelYears={otherYears}
+          allVehicles={vehicles}
+          sources={sources}
+          onBack={() => onSelectVehicle(null)}
+          onSelectVehicle={onSelectVehicle}
+          compareIds={compareIds}
+          onToggleCompare={onToggleCompare}
+        />
+        <CompareBar
+          vehicles={vehicles}
+          compareIds={compareIds}
+          onToggleCompare={onToggleCompare}
+          onClearCompare={onClearCompare}
+          onCompare={onCompare}
+        />
+      </>
     );
   }
 
