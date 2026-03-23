@@ -38,7 +38,7 @@ export default function MarketDashboard({
   onCompare,
   onBackFromCompare,
 }: MarketDashboardProps) {
-  const vehicles = useMarketData(market);
+  const { data: vehicles, loading } = useMarketData(market);
   const sources = useMarketSources(market);
   const {
     filters,
@@ -60,6 +60,14 @@ export default function MarketDashboard({
     ? getModelYears(vehicles, selectedVehicle)
     : [];
   const marketFlag = getMarketFlag(market);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-32">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-blue-500 dark:border-gray-700 dark:border-t-blue-400" />
+      </div>
+    );
+  }
 
   if (comparePage) {
     return (

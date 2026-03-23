@@ -46,6 +46,14 @@ export interface EV {
   price_per_kwh: number | null;
 }
 
+export interface MarketSummary {
+  vehicleCount: number;
+  manufacturerCount: number;
+  segments: Segment[];
+}
+
+export type MarketSummaries = Record<string, MarketSummary>;
+
 export interface MarketData {
   market: string;
   vehicles: EV[];

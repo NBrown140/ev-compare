@@ -1,9 +1,10 @@
 import type { EV } from "@/types/ev";
-import type { SourcesMap } from "@/types/ev";
+import type { MarketSummaries, SourcesMap } from "@/types/ev";
+import summaries from "./generated/markets.json";
 
 const marketModules = import.meta.glob<EV[]>(
-  ["./generated/*.json", "!./generated/*.sources.json"],
-  { eager: true, import: "default" }
+  ["./generated/*.json", "!./generated/*.sources.json", "!./generated/markets.json"],
+  { import: "default" }
 );
 
 const sourcesModules = import.meta.glob<SourcesMap>(
@@ -11,16 +12,19 @@ const sourcesModules = import.meta.glob<SourcesMap>(
   { import: "default" }
 );
 
-export function getMarkets(): string[] {
-  return Object.keys(marketModules)
-    .map((p) => p.replace("./generated/", "").replace(".json", ""))
-    .filter((m) => m !== "markets")
-    .sort();
+export function getMarketSummaries(): MarketSummaries {
+  return summaries as MarketSummaries;
 }
 
-export function getMarketData(market: string): EV[] {
+export function getMarkets(): string[] {
+  return Object.keys(summaries).sort();
+}
+
+export async function getMarketData(market: string): Promise<EV[]> {
   const key = `./generated/${market}.json`;
-  return marketModules[key] ?? [];
+  const loader = marketModules[key];
+  if (!loader) return [];
+  return loader();
 }
 
 export async function getMarketSources(

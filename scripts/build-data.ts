@@ -196,9 +196,16 @@ const MARKET_RANGE_RATING: Record<string, string> = {
 };
 
 // Main
+interface MarketSummary {
+  vehicleCount: number;
+  manufacturerCount: number;
+  segments: string[];
+}
+
 fs.mkdirSync(OUT_DIR, { recursive: true });
 const allErrors: string[] = [];
 const markets: string[] = [];
+const summaries: Record<string, MarketSummary> = {};
 
 const csvFiles = fs
   .readdirSync(MARKETS_DIR)
@@ -263,6 +270,20 @@ for (const file of csvFiles) {
         JSON.stringify(sources, null, 2)
       );
     }
+
+    // Compute summary stats for the home page
+    const manufacturers = new Set<string>();
+    const segments = new Set<string>();
+    for (const row of parsed) {
+      const r = row as Record<string, unknown>;
+      if (r.manufacturer) manufacturers.add(r.manufacturer as string);
+      if (r.segment) segments.add(r.segment as string);
+    }
+    summaries[market] = {
+      vehicleCount: parsed.length,
+      manufacturerCount: manufacturers.size,
+      segments: [...segments].sort(),
+    };
   }
 }
 
@@ -274,7 +295,7 @@ if (allErrors.length > 0) {
 
 fs.writeFileSync(
   path.join(OUT_DIR, "markets.json"),
-  JSON.stringify(markets, null, 2)
+  JSON.stringify(summaries, null, 2)
 );
 
 console.log(

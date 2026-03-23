@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import MarketSelector from "@/components/MarketSelector";
-import { useMarkets } from "@/hooks/useMarketData";
-import { getMarketData } from "@/data";
+import { useMarkets, useMarketSummaries } from "@/hooks/useMarketData";
 import { formatNumber } from "@/utils/format";
 
 interface HomeProps {
@@ -23,21 +22,20 @@ function StatItem({ label, value }: { label: string; value: string }) {
 
 export default function Home({ onSelectMarket }: HomeProps) {
   const markets = useMarkets();
+  const summaries = useMarketSummaries();
 
   const totals = useMemo(() => {
     let vehicles = 0;
-    const manufacturers = new Set<string>();
+    let manufacturers = 0;
     for (const market of markets) {
-      const data = getMarketData(market);
-      vehicles += data.length;
-      for (const v of data) manufacturers.add(v.manufacturer);
+      const s = summaries[market];
+      if (s) {
+        vehicles += s.vehicleCount;
+        manufacturers += s.manufacturerCount;
+      }
     }
-    return {
-      vehicles,
-      manufacturers: manufacturers.size,
-      markets: markets.length,
-    };
-  }, [markets]);
+    return { vehicles, manufacturers, markets: markets.length };
+  }, [markets, summaries]);
 
   return (
     <div>

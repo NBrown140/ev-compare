@@ -1,6 +1,6 @@
 import { formatMarketName, formatNumber } from "@/utils/format";
-import { getMarketData } from "@/data";
-import type { EV, Segment } from "@/types/ev";
+import { getMarketSummaries } from "@/data";
+import type { Segment } from "@/types/ev";
 
 interface MarketSelectorProps {
   markets: string[];
@@ -21,25 +21,6 @@ const marketFlags: Record<string, string> = {
   ca: "\u{1F1E8}\u{1F1E6}",
 };
 
-interface MarketStats {
-  vehicleCount: number;
-  manufacturerCount: number;
-  segments: Segment[];
-}
-
-function computeMarketStats(vehicles: EV[]): MarketStats | null {
-  if (vehicles.length === 0) return null;
-
-  const manufacturers = new Set(vehicles.map((v) => v.manufacturer));
-  const segments = [...new Set(vehicles.map((v) => v.segment))].sort();
-
-  return {
-    vehicleCount: vehicles.length,
-    manufacturerCount: manufacturers.size,
-    segments: segments as Segment[],
-  };
-}
-
 const segmentLabels: Record<Segment, string> = {
   sedan: "Sedan",
   suv: "SUV",
@@ -49,6 +30,8 @@ const segmentLabels: Record<Segment, string> = {
   crossover: "CUV",
 };
 
+const summaries = getMarketSummaries();
+
 export default function MarketSelector({
   markets,
   onSelect,
@@ -56,8 +39,7 @@ export default function MarketSelector({
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {markets.map((market) => {
-        const vehicles = getMarketData(market);
-        const stats = computeMarketStats(vehicles);
+        const stats = summaries[market];
 
         return (
           <button
@@ -96,7 +78,7 @@ export default function MarketSelector({
                       key={seg}
                       className="text-xs px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
                     >
-                      {segmentLabels[seg] ?? seg}
+                      {segmentLabels[seg as Segment] ?? seg}
                     </span>
                   ))}
                 </div>
