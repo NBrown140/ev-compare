@@ -24,9 +24,9 @@ export default function CompareBar({
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 animate-slide-up">
       <div className="mx-auto max-w-7xl px-4 pb-4">
-        <div className="rounded-xl border border-gray-200 bg-white/95 backdrop-blur-sm shadow-lg dark:border-gray-700 dark:bg-gray-800/95 px-4 py-3">
+        <div className="rounded-xl border border-outline-variant bg-surface/95 backdrop-blur-sm shadow-lg px-4 py-3">
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-400 shrink-0">
+            <span className="text-sm font-medium text-outline shrink-0">
               {compareIds.length} selected
             </span>
 
@@ -34,14 +34,14 @@ export default function CompareBar({
               {selectedVehicles.map((v) => (
                 <span
                   key={v.id}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-sm text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-primary-container px-3 py-1 text-sm text-primary"
                 >
                   <span className="truncate max-w-[150px]">
                     {v.manufacturer} {v.model}
                   </span>
                   <button
                     onClick={() => onToggleCompare(v.id)}
-                    className="ml-0.5 text-blue-400 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-300 cursor-pointer"
+                    className="ml-0.5 text-primary hover:text-primary-dim cursor-pointer"
                     aria-label={`Remove ${v.manufacturer} ${v.model}`}
                   >
                     x
@@ -53,7 +53,7 @@ export default function CompareBar({
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={onClearCompare}
-                className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 cursor-pointer"
+                className="text-sm text-outline hover:text-on-surface cursor-pointer"
               >
                 Clear all
               </button>
@@ -62,8 +62,8 @@ export default function CompareBar({
                 disabled={compareIds.length < 2}
                 className={`text-sm font-medium px-4 py-1.5 rounded-lg transition-colors cursor-pointer ${
                   compareIds.length >= 2
-                    ? "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
-                    : "bg-gray-200 text-gray-400 cursor-not-allowed dark:bg-gray-700 dark:text-gray-500"
+                    ? "bg-primary text-on-primary hover:bg-primary-dim"
+                    : "bg-surface-container text-outline cursor-not-allowed"
                 }`}
               >
                 Compare

@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useRef } from "react";
 import type { EV } from "@/types/ev";
 import { formatCurrency, shortenVariant } from "@/utils/format";
-import { useTheme } from "@/hooks/useTheme";
+import { useChartColors } from "@/hooks/useChartColors";
 import { gaussianKDE } from "@/utils/statistics";
 
 interface DetailViolinChartProps {
@@ -39,10 +39,7 @@ export default function DetailViolinChart({
   highlightIds,
   onSelectVehicle,
 }: DetailViolinChartProps) {
-  const { effectiveTheme } = useTheme();
-  const isDark = effectiveTheme === "dark";
-  const gridStroke = isDark ? "#374151" : "#f0f0f0";
-  const tickFill = isDark ? "#9ca3af" : "#666";
+  const chartColors = useChartColors();
 
   const svgRef = useRef<SVGSVGElement>(null);
   const [tooltip, setTooltip] = useState<{
@@ -109,16 +106,13 @@ export default function DetailViolinChart({
   const violinMaxHalfWidth = Math.min(innerW * 0.38, 120);
   const maxDensity = kde.length ? Math.max(...kde.map((k) => k.density)) : 0;
 
-
-  const otherDotFill = isDark ? "#4b5563" : "#d1d5db";
-  const siblingDotFill = isDark ? "#7da2d1" : "#bdd0e7";
   const highlightSet = useMemo(
     () => new Set(highlightIds ?? []),
     [highlightIds],
   );
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+    <div className="bg-surface rounded-xl border border-outline-variant p-6">
       <h3 className="text-lg font-semibold mb-4">
         Range per Price — {vehicle.segment}
       </h3>
@@ -138,7 +132,7 @@ export default function DetailViolinChart({
                 x2={innerW}
                 y1={yScale(tick)}
                 y2={yScale(tick)}
-                stroke={gridStroke}
+                stroke={chartColors.gridStroke}
                 strokeDasharray="3 3"
               />
             ))}
@@ -152,7 +146,7 @@ export default function DetailViolinChart({
                 dy="0.35em"
                 textAnchor="end"
                 fontSize={12}
-                fill={tickFill}
+                fill={chartColors.tickFill}
               >
                 {tick.toFixed(1)}
               </text>
@@ -178,9 +172,9 @@ export default function DetailViolinChart({
               return (
                 <path
                   d={`M ${rightPath} L ${leftPath} Z`}
-                  fill={isDark ? "#374151" : "#e5e7eb"}
+                  fill={chartColors.violinFill}
                   fillOpacity={0.5}
-                  stroke={isDark ? "#4b5563" : "#d1d5db"}
+                  stroke={chartColors.violinStroke}
                   strokeWidth={1}
                 />
               );
@@ -213,9 +207,9 @@ export default function DetailViolinChart({
                     cx={cx + jitter}
                     cy={yScale(pt.rangePerPrice)}
                     r={5}
-                    fill={otherDotFill}
+                    fill={chartColors.otherDotFill}
                     opacity={0.6}
-                    stroke={isDark ? "#1f2937" : "#fff"}
+                    stroke={chartColors.dotStroke}
                     strokeWidth={1}
                     className={onSelectVehicle ? "cursor-pointer" : undefined}
                     onMouseEnter={(e) => {
@@ -261,9 +255,9 @@ export default function DetailViolinChart({
                     cx={cx + jitter}
                     cy={yScale(pt.rangePerPrice)}
                     r={6}
-                    fill={siblingDotFill}
+                    fill={chartColors.siblingDotFill}
                     opacity={0.8}
-                    stroke={isDark ? "#1f2937" : "#fff"}
+                    stroke={chartColors.dotStroke}
                     strokeWidth={1.5}
                     className={onSelectVehicle ? "cursor-pointer" : undefined}
                     onMouseEnter={(e) => {
@@ -310,8 +304,8 @@ export default function DetailViolinChart({
                   cx={cx + jitter}
                   cy={yScale(currentPt.rangePerPrice)}
                   r={8}
-                  fill="#3b82f6"
-                  stroke={isDark ? "#1f2937" : "#fff"}
+                  fill={chartColors.currentDotFill}
+                  stroke={chartColors.dotStroke}
                   strokeWidth={2}
                   className="cursor-pointer"
                   onMouseEnter={(e) => {
@@ -334,7 +328,7 @@ export default function DetailViolinChart({
               transform={`translate(-42,${innerH / 2}) rotate(-90)`}
               textAnchor="middle"
               fontSize={12}
-              fill={tickFill}
+              fill={chartColors.tickFill}
             >
               km / 1,000 currency
             </text>
@@ -344,7 +338,7 @@ export default function DetailViolinChart({
         {/* Tooltip */}
         {tooltip && (
           <div
-            className="absolute pointer-events-none z-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 shadow-lg text-sm"
+            className="absolute pointer-events-none z-10 bg-surface border border-outline-variant rounded-lg p-3 shadow-lg text-sm"
             style={{
               left: tooltip.x,
               top: tooltip.y,
@@ -353,7 +347,7 @@ export default function DetailViolinChart({
           >
             <div className="font-semibold">{tooltip.point.name}</div>
             {tooltip.point.variant && (
-              <div className="text-gray-500 dark:text-gray-400">
+              <div className="text-outline">
                 {shortenVariant(tooltip.point.variant)}
               </div>
             )}
@@ -369,7 +363,7 @@ export default function DetailViolinChart({
           </div>
         )}
       </div>
-      <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+      <p className="text-xs text-outline mt-2">
         Current vehicle highlighted in blue. Higher is better.
       </p>
     </div>

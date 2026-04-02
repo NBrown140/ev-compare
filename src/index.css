@@ -1,8 +1,75 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @variant dark (&:where(.dark, .dark *));
 
+/* --- Design tokens: light mode (default) --- */
+:root {
+  --ds-background: #fbf9f5;
+  --ds-surface: #fbf9f5;
+  --ds-surface-container-low: #f5f1eb;
+  --ds-surface-container: #efebe5;
+  --ds-surface-container-highest: #e5e1db;
+  --ds-on-surface: #31332f;
+  --ds-primary: #406471;
+  --ds-primary-container: #c4dce4;
+  --ds-primary-dim: #335259;
+  --ds-on-primary: #ffffff;
+  --ds-secondary: #7e572e;
+  --ds-secondary-container: #f0dcc8;
+  --ds-tertiary: #b07020;
+  --ds-error: #a83836;
+  --ds-error-container: #fce4e3;
+  --ds-outline: #827d76;
+  --ds-outline-variant: #c9c4bd;
+}
+
+/* --- Design tokens: dark mode --- */
+.dark {
+  --ds-background: #1a1c1e;
+  --ds-surface: #1e2022;
+  --ds-surface-container-low: #252729;
+  --ds-surface-container: #2b2d2f;
+  --ds-surface-container-highest: #3a3c3e;
+  --ds-on-surface: #e2e3e0;
+  --ds-primary: #0fc3eb;
+  --ds-primary-container: #004d5e;
+  --ds-primary-dim: #0a9ec0;
+  --ds-on-primary: #003544;
+  --ds-secondary: #507e8d;
+  --ds-secondary-container: #354f59;
+  --ds-tertiary: #fe9d3f;
+  --ds-error: #ffb4ab;
+  --ds-error-container: #6e1412;
+  --ds-outline: #8c9093;
+  --ds-outline-variant: #44474e;
+}
+
+/* --- Register tokens with Tailwind v4 --- */
+@theme {
+  --color-background: var(--ds-background);
+  --color-surface: var(--ds-surface);
+  --color-surface-container-low: var(--ds-surface-container-low);
+  --color-surface-container: var(--ds-surface-container);
+  --color-surface-container-highest: var(--ds-surface-container-highest);
+  --color-on-surface: var(--ds-on-surface);
+  --color-primary: var(--ds-primary);
+  --color-primary-container: var(--ds-primary-container);
+  --color-primary-dim: var(--ds-primary-dim);
+  --color-on-primary: var(--ds-on-primary);
+  --color-secondary: var(--ds-secondary);
+  --color-secondary-container: var(--ds-secondary-container);
+  --color-tertiary: var(--ds-tertiary);
+  --color-error: var(--ds-error);
+  --color-error-container: var(--ds-error-container);
+  --color-outline: var(--ds-outline);
+  --color-outline-variant: var(--ds-outline-variant);
+
+  --font-headline: 'Space Grotesk', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+/* --- Animations --- */
 @keyframes fade-in-up {
   from {
     opacity: 0;

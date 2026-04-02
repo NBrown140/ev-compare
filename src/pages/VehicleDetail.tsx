@@ -57,14 +57,14 @@ export default function VehicleDetail({
       <div className="flex items-center gap-4">
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-gray-800 pl-2.5 pr-3.5 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-low pl-2.5 pr-3.5 py-1.5 text-sm font-medium text-outline hover:bg-surface-container transition-colors cursor-pointer"
         >
           <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
           Back to list
         </button>
         <h2 className="text-2xl font-bold">
           {vehicle.manufacturer} {vehicle.model}{" "}
-          <span className="text-gray-400 dark:text-gray-500 font-normal">
+          <span className="text-outline font-normal">
             ({vehicle.model_year})
           </span>
         </h2>
@@ -74,10 +74,10 @@ export default function VehicleDetail({
             disabled={compareFull}
             className={`ml-auto text-sm px-3 py-1.5 rounded-lg border transition-colors ${
               isInCompare
-                ? "border-blue-300 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-600 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50"
+                ? "border-primary-dim bg-primary-container text-primary hover:bg-primary-container/70"
                 : compareFull
-                  ? "border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed dark:border-gray-700 dark:bg-gray-800 dark:text-gray-600"
-                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                  ? "border-outline-variant bg-surface-container-low text-outline cursor-not-allowed"
+                  : "border-outline-variant bg-surface text-on-surface hover:bg-surface-container-low"
             }`}
           >
             {isInCompare
@@ -89,7 +89,7 @@ export default function VehicleDetail({
 
       {modelYears.length > 1 && (
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide mr-1">
+          <span className="text-xs font-medium text-outline uppercase tracking-wide mr-1">
             Year
           </span>
           {modelYears.map((mv) => {
@@ -100,8 +100,8 @@ export default function VehicleDetail({
                 onClick={() => onSelectVehicle?.(mv.id)}
                 className={`px-3 py-1.5 rounded-lg border text-sm font-medium transition-colors ${
                   isSelected
-                    ? "border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-600 dark:bg-blue-950/40 dark:text-blue-300"
-                    : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:bg-gray-750"
+                    ? "border-primary-dim bg-primary-container text-primary"
+                    : "border-outline-variant bg-surface text-outline hover:border-outline hover:bg-surface-container-low"
                 }`}
               >
                 {mv.model_year}
@@ -113,7 +113,7 @@ export default function VehicleDetail({
 
       {trims.length > 1 && (
         <div className="flex gap-2 flex-wrap items-center">
-          <span className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide mr-1">
+          <span className="text-xs font-medium text-outline uppercase tracking-wide mr-1">
             Trim
           </span>
           {trims.map((trim) => {
@@ -124,15 +124,15 @@ export default function VehicleDetail({
                 onClick={() => onSelectVehicle?.(trim.id)}
                 className={`group relative px-4 py-2.5 rounded-lg border text-left transition-colors ${
                   isSelected
-                    ? "border-blue-300 bg-blue-50 dark:border-blue-600 dark:bg-blue-950/40"
-                    : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600 dark:hover:bg-gray-750"
+                    ? "border-primary-dim bg-primary-container"
+                    : "border-outline-variant bg-surface hover:border-outline hover:bg-surface-container-low"
                 }`}
               >
                 <span
                   className={`block text-sm font-semibold ${
                     isSelected
-                      ? "text-blue-700 dark:text-blue-300"
-                      : "text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-gray-100"
+                      ? "text-primary"
+                      : "text-on-surface group-hover:text-on-surface"
                   }`}
                 >
                   {trim.variant ?? "Standard"}
@@ -140,8 +140,8 @@ export default function VehicleDetail({
                 <span
                   className={`block text-xs mt-0.5 tabular-nums ${
                     isSelected
-                      ? "text-blue-500 dark:text-blue-400/70"
-                      : "text-gray-400 dark:text-gray-500"
+                      ? "text-primary/70"
+                      : "text-outline"
                   }`}
                 >
                   {formatCurrency(trim.price_local, trim.currency)}
@@ -165,12 +165,12 @@ export default function VehicleDetail({
             return (
               <div
                 key={section.title}
-                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5"
+                className="bg-surface rounded-xl border border-outline-variant p-5"
               >
-                <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
+                <h3 className="text-sm font-semibold text-outline uppercase tracking-wide mb-3">
                   {section.title}
                 </h3>
-                <dl className="divide-y divide-gray-100 dark:divide-gray-700">
+                <dl className="divide-y divide-outline-variant/30">
                   {visibleFields.map((field) => {
                     const notes = fieldToNotes.get(field);
                     const showNotes =
@@ -180,13 +180,13 @@ export default function VehicleDetail({
                         key={field}
                         className="flex justify-between py-2 text-sm"
                       >
-                        <dt className="text-gray-500 dark:text-gray-400">
+                        <dt className="text-outline">
                           {FIELD_LABELS[field] ?? field}
                         </dt>
                         <dd className="font-medium text-right">
                           {formatFieldValue(vehicle, field)}
                           {showNotes && (
-                            <sup className="ml-1 text-xs text-blue-500">
+                            <sup className="ml-1 text-xs text-primary">
                               {notes.map((n, i) => (
                                 <span key={n}>
                                   {i > 0 && ","}
@@ -223,8 +223,8 @@ export default function VehicleDetail({
 
       {/* Footnotes */}
       {footnotes.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-          <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">
+        <div className="bg-surface rounded-xl border border-outline-variant p-5">
+          <h3 className="text-sm font-semibold text-outline uppercase tracking-wide mb-3">
             Sources
           </h3>
           <ol className="list-decimal list-inside space-y-2 text-sm">
@@ -234,11 +234,11 @@ export default function VehicleDetail({
                   href={source.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline break-all"
+                  className="text-primary hover:underline break-all"
                 >
                   {source.url.replace(/^https:\/\/web\.archive\.org\/web\/\d+\//, '')}
                 </a>
-                <span className="text-gray-400 dark:text-gray-500 ml-2">
+                <span className="text-outline ml-2">
                   ({source.fields.map((f) => FIELD_LABELS[f] ?? f).join(", ")})
                 </span>
               </li>

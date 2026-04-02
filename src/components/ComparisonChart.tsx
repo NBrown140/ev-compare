@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import type { EV, Segment } from "@/types/ev";
 import { formatCurrency, shortenVariant } from "@/utils/format";
-import { useTheme } from "@/hooks/useTheme";
+import { useChartColors } from "@/hooks/useChartColors";
 import { gaussianKDE } from "@/utils/statistics";
 
 interface ComparisonChartProps {
@@ -101,18 +101,14 @@ function SegmentViolinPlot({
   colorMap,
   colorByKey,
   highlightCategory,
-  isDark,
-  gridStroke,
-  tickFill,
+  chartColors,
   onSelectVehicle,
 }: {
   data: ViolinSegmentData[];
   colorMap: Map<string, string>;
   colorByKey: ColorByKey;
   highlightCategory: string | null;
-  isDark: boolean;
-  gridStroke: string;
-  tickFill: string;
+  chartColors: ReturnType<typeof useChartColors>;
   onSelectVehicle?: (id: string) => void;
 }) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -208,7 +204,7 @@ function SegmentViolinPlot({
               x2={innerW}
               y1={yScale(tick)}
               y2={yScale(tick)}
-              stroke={gridStroke}
+              stroke={chartColors.gridStroke}
               strokeDasharray="3 3"
             />
           ))}
@@ -222,7 +218,7 @@ function SegmentViolinPlot({
               dy="0.35em"
               textAnchor="end"
               fontSize={12}
-              fill={tickFill}
+              fill={chartColors.tickFill}
             >
               {tick.toFixed(1)}
             </text>
@@ -248,7 +244,7 @@ function SegmentViolinPlot({
                       r={5}
                       fill={colorMap.get(pt[colorByKey]) ?? "#93c5fd"}
                       style={{ opacity: 0.7 }}
-                      stroke={isDark ? "#1f2937" : "#fff"}
+                      stroke={chartColors.dotStroke}
                       strokeWidth={1}
                       className="cursor-pointer"
                       onMouseEnter={(e) => {
@@ -271,7 +267,7 @@ function SegmentViolinPlot({
                     y={innerH + 24}
                     textAnchor="middle"
                     fontSize={12}
-                    fill={tickFill}
+                    fill={chartColors.tickFill}
                     className="capitalize"
                   >
                     {seg.segment}
@@ -302,9 +298,9 @@ function SegmentViolinPlot({
                 {/* Violin shape */}
                 <path
                   d={`M ${rightPath} L ${leftPath} Z`}
-                  fill={isDark ? "#374151" : "#e5e7eb"}
+                  fill={chartColors.violinFill}
                   fillOpacity={0.5}
-                  stroke={isDark ? "#4b5563" : "#d1d5db"}
+                  stroke={chartColors.violinStroke}
                   strokeWidth={1}
                 />
 
@@ -332,7 +328,7 @@ function SegmentViolinPlot({
                       r={5}
                       fill={colorMap.get(pt[colorByKey]) ?? "#93c5fd"}
                       style={{ opacity: 0.7 }}
-                      stroke={isDark ? "#1f2937" : "#fff"}
+                      stroke={chartColors.dotStroke}
                       strokeWidth={1}
                       className="cursor-pointer"
                       onMouseEnter={(e) => {
@@ -357,7 +353,7 @@ function SegmentViolinPlot({
                   y={innerH + 24}
                   textAnchor="middle"
                   fontSize={12}
-                  fill={tickFill}
+                  fill={chartColors.tickFill}
                   className="capitalize"
                 >
                   {seg.segment}
@@ -372,7 +368,7 @@ function SegmentViolinPlot({
             transform={`translate(-42,${innerH / 2}) rotate(-90)`}
             textAnchor="middle"
             fontSize={12}
-            fill={tickFill}
+            fill={chartColors.tickFill}
           >
             km / 1,000 currency
           </text>
@@ -382,7 +378,7 @@ function SegmentViolinPlot({
       {/* Tooltip */}
       {tooltip && (
         <div
-          className="absolute pointer-events-none z-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 shadow-lg text-sm"
+          className="absolute pointer-events-none z-10 bg-surface border border-outline-variant rounded-lg p-3 shadow-lg text-sm"
           style={{
             left: tooltip.x,
             top: tooltip.y,
@@ -391,7 +387,7 @@ function SegmentViolinPlot({
         >
           <div className="font-semibold">{tooltip.point.name}</div>
           {tooltip.point.variant && (
-            <div className="text-gray-500 dark:text-gray-400">
+            <div className="text-outline">
               {shortenVariant(tooltip.point.variant)}
             </div>
           )}
@@ -410,10 +406,7 @@ function SegmentViolinPlot({
 }
 
 export default function ComparisonChart({ vehicles, onSelectVehicle }: ComparisonChartProps) {
-  const { effectiveTheme } = useTheme();
-  const isDark = effectiveTheme === "dark";
-  const gridStroke = isDark ? "#374151" : "#f0f0f0";
-  const tickFill = isDark ? "#9ca3af" : "#666";
+  const chartColors = useChartColors();
 
   const [colorBy, setColorBy] = useState<ColorByKey>("manufacturer");
   const [hoveredCategory, setHoveredCategoryRaw] = useState<string | null>(null);
@@ -523,8 +516,8 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
   return (
     <div className="space-y-6">
       {/* Shared color controls */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 px-5 py-3 space-y-2.5">
-        <label className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400">
+      <div className="bg-surface rounded-xl border border-outline-variant px-5 py-3 space-y-2.5">
+        <label className="flex items-center gap-1.5 text-sm text-outline">
           Color by
           <select
             value={colorBy}
@@ -533,7 +526,7 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
               setPinnedCategory(null);
               setExpandOther(false);
             }}
-            className="ml-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm px-2 py-0.5"
+            className="ml-1 rounded border border-outline-variant bg-surface text-on-surface text-sm px-2 py-0.5"
           >
             {COLOR_BY_OPTIONS.map((opt) => (
               <option key={opt.key} value={opt.key}>
@@ -542,7 +535,7 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
             ))}
           </select>
         </label>
-        <div ref={legendRef} className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-gray-600 dark:text-gray-400">
+        <div ref={legendRef} className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-outline">
           {[...colorMap.entries()].map(([label, color]) => {
             if (label === OTHER_LABEL) {
               // "Other" entry: expand/collapse toggle
@@ -551,7 +544,7 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
               return (
                 <span
                   key={label}
-                  className="flex items-center gap-1.5 cursor-pointer select-none transition-opacity text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                  className="flex items-center gap-1.5 cursor-pointer select-none transition-opacity text-outline hover:text-on-surface"
                   style={{ opacity: dimmed ? 0.3 : 1 }}
                   onMouseEnter={() => setHoveredCategory(label)}
                   onMouseLeave={() => setHoveredCategory(null)}
@@ -566,7 +559,7 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
                     style={{ backgroundColor: color }}
                   />
                   Other ({otherCount})
-                  <span className="text-[10px] text-gray-400 dark:text-gray-500 ml-0.5">
+                  <span className="text-[10px] text-outline ml-0.5">
                     expand
                   </span>
                 </span>
@@ -580,7 +573,7 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
                 key={label}
                 className={`flex items-center gap-1.5 cursor-pointer select-none transition-opacity ${
                   pinnedCategory === label
-                    ? "font-semibold text-gray-900 dark:text-gray-100"
+                    ? "font-semibold text-on-surface"
                     : ""
                 }`}
                 style={{ opacity: dimmed ? 0.3 : 1 }}
@@ -604,7 +597,7 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
           })}
           {expandOther && colorBy === "manufacturer" && (
             <span
-              className="flex items-center gap-1 cursor-pointer select-none text-[10px] text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
+              className="flex items-center gap-1 cursor-pointer select-none text-[10px] text-outline hover:text-on-surface"
               onClick={(e) => {
                 e.stopPropagation();
                 setExpandOther(false);
@@ -617,7 +610,7 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+      <div className="bg-surface rounded-xl border border-outline-variant p-6">
         <h3 className="text-lg font-semibold mb-4">
           Range per Price by Segment
         </h3>
@@ -626,12 +619,10 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
           colorMap={colorMap}
           colorByKey={colorBy}
           highlightCategory={highlightCategory}
-          isDark={isDark}
-          gridStroke={gridStroke}
-          tickFill={tickFill}
+          chartColors={chartColors}
           onSelectVehicle={onSelectVehicle}
         />
-        <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+        <p className="text-xs text-outline mt-2">
           Higher is better. Values show km per 1,000 in local currency.
         </p>
       </div>

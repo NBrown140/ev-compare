@@ -83,23 +83,23 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, comp
   };
 
   return (
-    <div className="rounded-xl border border-gray-200 dark:border-gray-700">
+    <div className="rounded-xl border border-outline-variant">
       {/* Sticky header */}
       <div
         ref={headRef}
-        className="sticky top-0 z-10 overflow-hidden rounded-t-xl border-b border-gray-200 dark:border-gray-700"
+        className="sticky top-0 z-10 overflow-hidden rounded-t-xl border-b border-outline-variant"
       >
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-gray-50 dark:bg-gray-800">
+            <tr className="bg-surface-container-low">
               {onToggleCompare && (
-                <th className="w-10 px-3 py-3 bg-gray-50 dark:bg-gray-800" />
+                <th className="w-10 px-3 py-3 bg-surface-container-low" />
               )}
               {columns.map((col) => (
                 <th
                   key={col.key}
                   onClick={() => toggleSort(col.key)}
-                  className={`px-4 py-3 font-medium text-gray-600 dark:text-gray-400 cursor-pointer hover:text-gray-900 dark:hover:text-gray-100 select-none whitespace-nowrap bg-gray-50 dark:bg-gray-800 ${
+                  className={`px-4 py-3 font-medium text-outline cursor-pointer hover:text-on-surface select-none whitespace-nowrap bg-surface-container-low ${
                     col.align === "right" ? "text-right" : "text-left"
                   }`}
                 >
@@ -137,7 +137,7 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, comp
                 <tr
                   key={v.id}
                   onClick={() => onSelectVehicle?.(v.id)}
-                  className={`border-b border-gray-100 dark:border-gray-700 hover:bg-blue-50/50 dark:hover:bg-gray-700/50 transition-colors${onSelectVehicle ? " cursor-pointer" : ""}`}
+                  className={`border-b border-outline-variant/30 hover:bg-surface-container-low/50 transition-colors${onSelectVehicle ? " cursor-pointer" : ""}`}
                 >
                   {onToggleCompare && (
                     <td className="w-10 px-3 py-3">
@@ -147,7 +147,7 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, comp
                         disabled={disabled}
                         onChange={() => onToggleCompare(v.id)}
                         onClick={(e) => e.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
+                        className="h-4 w-4 rounded border-outline-variant accent-primary cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
                       />
                     </td>
                   )}
@@ -169,10 +169,10 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, comp
       </div>
 
       {sorted.length > visibleCount && (
-        <div className="flex justify-center py-3 border-t border-gray-200 dark:border-gray-700">
+        <div className="flex justify-center py-3 border-t border-outline-variant">
           <button
             onClick={() => setVisibleCount((c) => c + pageSize)}
-            className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 px-4 py-2"
+            className="text-sm text-primary hover:text-primary-dim px-4 py-2"
           >
             Show more ({sorted.length - visibleCount} remaining)
           </button>

@@ -184,12 +184,12 @@ export default function FuzzyCombobox({
           setOpen(true);
         }}
         onKeyDown={handleKeyDown}
-        className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-800 dark:text-gray-100 text-sm w-48"
+        className="border border-outline-variant rounded-lg px-3 py-2 bg-surface text-on-surface text-sm w-48"
       />
       {open && (
         <ul
           ref={listRef}
-          className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-lg text-sm"
+          className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-outline-variant bg-surface shadow-lg text-sm"
         >
           {hasSelection && (
             <li
@@ -198,10 +198,10 @@ export default function FuzzyCombobox({
                 if (!isMulti) setOpen(false);
               }}
               onMouseEnter={() => setHighlightIndex(0)}
-              className={`px-3 py-2 cursor-pointer text-gray-500 dark:text-gray-400 ${
+              className={`px-3 py-2 cursor-pointer text-outline ${
                 highlightIndex === 0
-                  ? "bg-blue-50 dark:bg-blue-900/30"
-                  : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                  ? "bg-primary-container"
+                  : "hover:bg-surface-container-low"
               }`}
             >
               {placeholder}
@@ -219,9 +219,9 @@ export default function FuzzyCombobox({
                 onMouseEnter={() => setHighlightIndex(idx)}
                 className={`px-3 py-2 cursor-pointer flex items-center gap-2 ${
                   idx === highlightIndex
-                    ? "bg-blue-50 dark:bg-blue-900/30"
-                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
-                } ${isSelected ? "font-semibold text-blue-600 dark:text-blue-400" : "dark:text-gray-100"}`}
+                    ? "bg-primary-container"
+                    : "hover:bg-surface-container-low"
+                } ${isSelected ? "font-semibold text-primary" : ""}`}
               >
                 {isMulti && (
                   <span className="flex-shrink-0 w-4 text-center">
@@ -233,7 +233,7 @@ export default function FuzzyCombobox({
             );
           })}
           {filtered.length === 0 && (
-            <li className="px-3 py-2 text-gray-400 dark:text-gray-500">
+            <li className="px-3 py-2 text-outline">
               No matches
             </li>
           )}

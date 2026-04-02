@@ -1,6 +1,5 @@
 import { formatMarketName, formatNumber } from "@/utils/format";
 import { getMarketSummaries } from "@/data";
-import type { Segment } from "@/types/ev";
 
 interface MarketSelectorProps {
   markets: string[];
@@ -14,20 +13,11 @@ const marketDescriptions: Record<string, string> = {
   ca: "Canada",
 };
 
-const marketFlags: Record<string, string> = {
-  eu: "\u{1F1EA}\u{1F1FA}",
-  us: "\u{1F1FA}\u{1F1F8}",
-  uk: "\u{1F1EC}\u{1F1E7}",
-  ca: "\u{1F1E8}\u{1F1E6}",
-};
-
-const segmentLabels: Record<Segment, string> = {
-  sedan: "Sedan",
-  suv: "SUV",
-  hatchback: "Hatch",
-  truck: "Truck",
-  van: "Van",
-  crossover: "CUV",
+const marketFlagSrc: Record<string, string> = {
+  eu: "/flags/eu.svg",
+  us: "/flags/us.svg",
+  uk: "/flags/gb.svg",
+  ca: "/flags/ca.svg",
 };
 
 const summaries = getMarketSummaries();
@@ -45,47 +35,40 @@ export default function MarketSelector({
           <button
             key={market}
             onClick={() => onSelect(market)}
-            className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 text-left hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg hover:scale-[1.01] transition-all cursor-pointer"
+            className="group bg-surface rounded-xl border border-outline-variant p-6 text-left hover:border-primary hover:shadow-lg hover:scale-[1.01] transition-all cursor-pointer"
           >
-            <div className="flex items-center justify-between mb-3">
-              <div className="text-2xl font-bold">
-                {marketFlags[market] && (
-                  <span className="mr-2">{marketFlags[market]}</span>
-                )}
-                {formatMarketName(market)}
+            <div className="flex items-center gap-4 mb-3">
+              {marketFlagSrc[market] && (
+                <img
+                  src={marketFlagSrc[market]}
+                  alt={`${formatMarketName(market)} flag`}
+                  className="w-12 h-12 shrink-0"
+                />
+              )}
+              <div>
+                <div className="text-2xl font-bold font-headline">
+                  {formatMarketName(market)}
+                </div>
+                <div className="text-sm text-outline">
+                  {marketDescriptions[market] ?? `${formatMarketName(market)} market`}
+                </div>
               </div>
-            </div>
-            <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-              {marketDescriptions[market] ?? `${formatMarketName(market)} market`}
             </div>
 
             {stats && (
-              <>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm mb-4">
-                  <div>
-                    <div className="text-gray-400 dark:text-gray-500 text-xs">Vehicles</div>
-                    <div className="font-semibold">{formatNumber(stats.vehicleCount)}</div>
-                  </div>
-                  <div>
-                    <div className="text-gray-400 dark:text-gray-500 text-xs">Manufacturers</div>
-                    <div className="font-semibold">{formatNumber(stats.manufacturerCount)}</div>
-                  </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm mb-4">
+                <div>
+                  <div className="text-outline text-xs">Vehicles</div>
+                  <div className="font-semibold">{formatNumber(stats.vehicleCount)}</div>
                 </div>
-
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {stats.segments.map((seg) => (
-                    <span
-                      key={seg}
-                      className="text-xs px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
-                    >
-                      {segmentLabels[seg as Segment] ?? seg}
-                    </span>
-                  ))}
+                <div>
+                  <div className="text-outline text-xs">Manufacturers</div>
+                  <div className="font-semibold">{formatNumber(stats.manufacturerCount)}</div>
                 </div>
-              </>
+              </div>
             )}
 
-            <div className="flex items-center text-sm font-medium text-blue-600 dark:text-blue-400">
+            <div className="flex items-center text-sm font-medium text-primary">
               Explore
               <svg
                 className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"

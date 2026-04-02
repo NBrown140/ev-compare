@@ -1,108 +1,65 @@
-import { useMemo } from "react";
 import MarketSelector from "@/components/MarketSelector";
-import { useMarkets, useMarketSummaries } from "@/hooks/useMarketData";
-import { formatNumber } from "@/utils/format";
+import { useMarkets } from "@/hooks/useMarketData";
 
 interface HomeProps {
   onSelectMarket: (market: string) => void;
 }
 
-function StatItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="text-center">
-      <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-        {value}
-      </div>
-      <div className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide">
-        {label}
-      </div>
-    </div>
-  );
-}
-
 export default function Home({ onSelectMarket }: HomeProps) {
   const markets = useMarkets();
-  const summaries = useMarketSummaries();
-
-  const totals = useMemo(() => {
-    let vehicles = 0;
-    let manufacturers = 0;
-    for (const market of markets) {
-      const s = summaries[market];
-      if (s) {
-        vehicles += s.vehicleCount;
-        manufacturers += s.manufacturerCount;
-      }
-    }
-    return { vehicles, manufacturers, markets: markets.length };
-  }, [markets, summaries]);
 
   return (
     <div>
       {/* Hero */}
       <div className="animate-fade-in-up text-center py-12 sm:py-16 lg:py-20">
-        <h1
-          className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
-          style={{ fontFamily: "'DM Serif Display', serif" }}
-        >
-          Find the right electric vehicle
+        <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
+          Everyone else buys on vibes.
+          <br />
+          You buy on evidence.
         </h1>
-        <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-          Compare {formatNumber(totals.vehicles)} vehicles from{" "}
-          {formatNumber(totals.manufacturers)} manufacturers across real-world
-          markets.
+        <p className="text-lg text-outline max-w-2xl mx-auto">
+          The EV comparison tool for people who read the fine print.
         </p>
       </div>
 
       {/* Market cards */}
       <div className="mb-16">
-        <div className="text-xs font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4">
+        <div className="text-xs font-medium uppercase tracking-widest text-outline mb-4">
           Choose a market
         </div>
         <MarketSelector markets={markets} onSelect={onSelectMarket} />
       </div>
 
-      {/* Stats bar */}
-      <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div className="flex justify-center gap-12 sm:gap-16">
-          <StatItem
-            label="Vehicles tracked"
-            value={formatNumber(totals.vehicles)}
-          />
-          <StatItem
-            label="Manufacturers"
-            value={formatNumber(totals.manufacturers)}
-          />
-          <StatItem label="Markets" value={formatNumber(totals.markets)} />
-        </div>
-      </div>
-
-      {/* Open data & contribute */}
-      <div className="mt-10 text-center text-xs text-gray-400 dark:text-gray-500 leading-relaxed space-y-1">
-        <p>
-          The full dataset is freely available as{" "}
-          <a
-            href="https://github.com/NBrown140/ev-compare/tree/main/data/markets"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-          >
-            CSV files on GitHub
-          </a>
-          .
-        </p>
-        <p>
-          Spot an error or a missing vehicle?{" "}
+      {/* Contribute & Sponsor */}
+      <div className="border-t border-outline-variant pt-8 grid gap-6 sm:grid-cols-2 max-w-2xl mx-auto text-sm text-outline">
+        <div>
+          <h3 className="font-semibold text-on-surface mb-2">Contribute data</h3>
+          <p className="mb-2">
+            All vehicle data is open-source CSV on GitHub. Spot an error, a missing vehicle, or an entire market? Pull requests are welcome.
+          </p>
           <a
             href="https://github.com/NBrown140/ev-compare/blob/main/CONTRIBUTING.md"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            className="text-primary hover:text-primary-dim transition-colors"
           >
-            See how to contribute
+            Read the contributing guide
           </a>
-          .
-        </p>
+        </div>
+        <div>
+          <h3 className="font-semibold text-on-surface mb-2">Sponsor this project</h3>
+          <p className="mb-2">
+            EV Compare is free, ad-free, and funded by people who care about transparent data. Your support keeps it running.
+          </p>
+          <a
+            href="https://github.com/sponsors/NBrown140"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-primary-dim transition-colors"
+          >
+            Sponsor on GitHub
+          </a>
+        </div>
       </div>
     </div>
   );
