@@ -1,6 +1,6 @@
 # EV Compare
 
-An open-source tool to compare electric vehicles across markets. Built with React, TypeScript, and Vite.
+An open-source database and web application to compare electric vehicles across markets. Built with React, TypeScript, and Vite.
 
 ## Contributing data
 
