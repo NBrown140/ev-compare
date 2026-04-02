@@ -33,7 +33,7 @@ export default function Home({ onSelectMarket }: HomeProps) {
       {/* Contribute & Sponsor */}
       <div className="border-t border-outline-variant pt-8 grid gap-6 sm:grid-cols-2 max-w-2xl mx-auto text-sm text-outline">
         <div>
-          <h3 className="font-semibold text-on-surface mb-2">Contribute data</h3>
+          <h3 className="font-semibold text-on-surface mb-2">🛠️ Contribute data</h3>
           <p className="mb-2">
             All vehicle data is open-source CSV on GitHub. Spot an error, a missing vehicle, or an entire market? Pull requests are welcome.
           </p>
@@ -47,7 +47,7 @@ export default function Home({ onSelectMarket }: HomeProps) {
           </a>
         </div>
         <div>
-          <h3 className="font-semibold text-on-surface mb-2">Sponsor this project</h3>
+          <h3 className="font-semibold text-on-surface mb-2">💜 Sponsor this project</h3>
           <p className="mb-2">
             EV Compare is free, ad-free, and funded by people who care about transparent data. Your support keeps it running.
           </p>

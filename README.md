@@ -2,6 +2,10 @@
 
 An open-source database and web application to compare electric vehicles across markets. Built with React, TypeScript, and Vite.
 
+## Roadmap
+
+See [ROADMAP.md](ROADMAP.md) for planned features and ideas.
+
 ## Contributing data
 
 Vehicle data lives in CSV files under `data/markets/` (e.g., `eu.csv`, `us.csv`). The columns are defined in `data/schema.json`.
