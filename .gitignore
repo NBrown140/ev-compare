@@ -27,3 +27,6 @@ dist-ssr
 src/data/generated/
 
 .claude/
+
+# Local planning
+ROADMAP.md
