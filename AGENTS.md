@@ -8,7 +8,7 @@ See [DESIGN.md](./DESIGN.md) for the design system. You must use it anytime you 
 
 Vehicle data lives in CSV files under `data/markets/` (one per market). Each row is a vehicle variant with specs, pricing, and sourcing info.
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full guide on:No
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full guide on:
 - CSV column format and naming conventions
 - Source requirements (Wayback Machine archived URLs)
 - Adding new markets

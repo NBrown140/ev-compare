@@ -13,7 +13,7 @@ export default function Home({ onSelectMarket }: HomeProps) {
       {/* Hero */}
       <div className="animate-fade-in-up text-center py-12 sm:py-16 lg:py-20">
         <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-          Everyone else buys on vibes.
+          Most people buy on vibes.
           <br />
           You buy on evidence.
         </h1>
