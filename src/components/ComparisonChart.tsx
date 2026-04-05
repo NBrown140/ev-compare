@@ -97,6 +97,9 @@ interface ViolinSegmentData {
 const VIOLIN_MARGIN = { top: 20, right: 30, bottom: 40, left: 55 };
 const VIOLIN_HEIGHT = 380;
 
+const SWARM_MARGIN = { top: 20, right: 30, bottom: 40, left: 55 };
+const SWARM_HEIGHT = 220;
+
 function SegmentViolinPlot({
   data,
   colorMap,
@@ -393,6 +396,239 @@ function SegmentViolinPlot({
   );
 }
 
+interface SwarmPoint {
+  id: string;
+  name: string;
+  variant: string | null;
+  manufacturer: string;
+  model_year: string;
+  segment: string;
+  drivetrain: string;
+  battery_chemistry: string;
+  price: number;
+  currency: string;
+  range_km: number;
+}
+
+function PriceDistributionPlot({
+  points,
+  kde,
+  colorMap,
+  colorByKey,
+  highlightCategory,
+  chartColors,
+  onSelectVehicle,
+}: {
+  points: SwarmPoint[];
+  kde: { value: number; density: number }[];
+  colorMap: Map<string, string>;
+  colorByKey: ColorByKey;
+  highlightCategory: string | null;
+  chartColors: ReturnType<typeof useChartColors>;
+  onSelectVehicle?: (id: string) => void;
+}) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const dotsRef = useRef<SVGGElement>(null);
+  const [tooltip, setTooltip] = useState<{
+    x: number;
+    y: number;
+    point: SwarmPoint;
+  } | null>(null);
+  const { containerRef, width } = useResizeObserverWidth(600);
+
+  useEffect(() => {
+    const container = dotsRef.current;
+    if (!container) return;
+    const circles = container.querySelectorAll<SVGCircleElement>("circle[data-category]");
+    const toRaise: SVGCircleElement[] = [];
+    for (const circle of circles) {
+      const cat = circle.getAttribute("data-category");
+      const match = !highlightCategory || cat === highlightCategory;
+      circle.style.opacity = match ? "0.7" : "0.1";
+      if (highlightCategory && match) toRaise.push(circle);
+    }
+    for (const circle of toRaise) {
+      circle.parentNode?.appendChild(circle);
+    }
+  }, [highlightCategory]);
+
+  const innerW = width - SWARM_MARGIN.left - SWARM_MARGIN.right;
+  const innerH = SWARM_HEIGHT - SWARM_MARGIN.top - SWARM_MARGIN.bottom;
+
+  const prices = points.map((p) => p.price);
+  const pMin = prices.length ? Math.min(...prices) : 0;
+  const pMax = prices.length ? Math.max(...prices) : 100000;
+  const pRange = pMax - pMin || 10000;
+  const xMin = pMin - pRange * 0.05;
+  const xMax = pMax + pRange * 0.05;
+
+  const xScale = (price: number) =>
+    ((price - xMin) / (xMax - xMin)) * innerW;
+
+  const currency = points.length > 0 ? points[0].currency : "USD";
+
+  const xTicks = useMemo(() => {
+    const tickCount = 6;
+    const step = (xMax - xMin) / (tickCount - 1);
+    return Array.from({ length: tickCount }, (_, i) =>
+      Math.round(xMin + i * step),
+    );
+  }, [xMin, xMax]);
+
+  const maxDensity = kde.length > 0 ? Math.max(...kde.map((k) => k.density)) : 0;
+  const kdeMaxHalfHeight = innerH * 0.4;
+
+  function stableJitter(id: string): number {
+    let h = 2166136261;
+    for (let i = 0; i < id.length; i++) {
+      h ^= id.charCodeAt(i);
+      h = (h * 16777619) >>> 0;
+    }
+    return (h / 0xffffffff) - 0.5;
+  }
+
+  if (points.length < 2) {
+    return (
+      <div ref={containerRef} className="flex items-center justify-center py-12 text-sm text-outline">
+        Not enough data to show price distribution.
+      </div>
+    );
+  }
+
+  // Build KDE backdrop path
+  const topPath = kde
+    .map((k) => {
+      const x = xScale(k.value);
+      const y = innerH / 2 - (k.density / maxDensity) * kdeMaxHalfHeight;
+      return `${x},${y}`;
+    })
+    .join(" L");
+  const bottomPath = [...kde]
+    .reverse()
+    .map((k) => {
+      const x = xScale(k.value);
+      const y = innerH / 2 + (k.density / maxDensity) * kdeMaxHalfHeight;
+      return `${x},${y}`;
+    })
+    .join(" L");
+
+  return (
+    <div ref={containerRef} className="relative">
+      <svg
+        ref={svgRef}
+        width={width}
+        height={SWARM_HEIGHT}
+        className="overflow-visible"
+      >
+        <g transform={`translate(${SWARM_MARGIN.left},${SWARM_MARGIN.top})`}>
+          {/* Grid lines */}
+          {xTicks.map((tick) => (
+            <line
+              key={tick}
+              x1={xScale(tick)}
+              x2={xScale(tick)}
+              y1={0}
+              y2={innerH}
+              stroke={chartColors.gridStroke}
+              strokeDasharray="3 3"
+            />
+          ))}
+
+          {/* KDE backdrop */}
+          {maxDensity > 0 && (
+            <path
+              d={`M ${topPath} L ${bottomPath} Z`}
+              fill={chartColors.violinFill}
+              fillOpacity={0.5}
+              stroke={chartColors.violinStroke}
+              strokeWidth={1}
+            />
+          )}
+
+          {/* Dots */}
+          <g ref={dotsRef}>
+            {points.map((pt) => {
+              const nearestKde = kde.reduce((best, k) =>
+                Math.abs(k.value - pt.price) < Math.abs(best.value - pt.price)
+                  ? k
+                  : best,
+              );
+              const localHalfHeight =
+                maxDensity > 0
+                  ? (nearestKde.density / maxDensity) * kdeMaxHalfHeight * 0.85
+                  : 10;
+              const jitter = stableJitter(pt.id) * 2 * localHalfHeight;
+
+              return (
+                <circle
+                  key={pt.id}
+                  data-category={pt[colorByKey]}
+                  cx={xScale(pt.price)}
+                  cy={innerH / 2 + jitter}
+                  r={5}
+                  fill={colorMap.get(pt[colorByKey]) ?? "#93c5fd"}
+                  style={{ opacity: 0.7 }}
+                  stroke={chartColors.dotStroke}
+                  strokeWidth={1}
+                  className="cursor-pointer"
+                  onMouseEnter={(e) => {
+                    const svgRect = svgRef.current?.getBoundingClientRect();
+                    if (!svgRect) return;
+                    setTooltip({
+                      x: e.clientX - svgRect.left,
+                      y: e.clientY - svgRect.top - 10,
+                      point: pt,
+                    });
+                  }}
+                  onMouseLeave={() => setTooltip(null)}
+                  onClick={() => onSelectVehicle?.(pt.id)}
+                />
+              );
+            })}
+          </g>
+
+          {/* X-axis labels */}
+          {xTicks.map((tick) => (
+            <text
+              key={tick}
+              x={xScale(tick)}
+              y={innerH + 24}
+              textAnchor="middle"
+              fontSize={12}
+              fill={chartColors.tickFill}
+            >
+              {formatCurrency(tick, currency)}
+            </text>
+          ))}
+        </g>
+      </svg>
+
+      {/* Tooltip */}
+      {tooltip && (
+        <div
+          className="absolute pointer-events-none z-10 bg-surface border border-outline-variant rounded-lg p-3 shadow-lg text-sm"
+          style={{
+            left: tooltip.x,
+            top: tooltip.y,
+            transform: "translate(-50%, -100%)",
+          }}
+        >
+          <div className="font-semibold">{tooltip.point.name}</div>
+          {tooltip.point.variant && (
+            <div className="text-outline">
+              {shortenVariant(tooltip.point.variant)}
+            </div>
+          )}
+          <div>
+            Price: {formatCurrency(tooltip.point.price, tooltip.point.currency)}
+          </div>
+          <div>Range: {tooltip.point.range_km} km</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ComparisonChart({ vehicles, onSelectVehicle }: ComparisonChartProps) {
   const chartColors = useChartColors();
 
@@ -499,6 +735,29 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
       });
     }
     return result;
+  }, [vehicles, topManufacturers, shouldBucket]);
+
+  const swarmData = useMemo(() => {
+    const points: SwarmPoint[] = vehicles
+      .filter((v) => v.price_local > 0)
+      .map((v) => ({
+        id: v.id,
+        name: `${v.manufacturer} ${v.model}`,
+        variant: v.variant,
+        manufacturer:
+          shouldBucket && !topManufacturers.has(v.manufacturer)
+            ? OTHER_LABEL
+            : v.manufacturer,
+        model_year: String(v.model_year),
+        segment: v.segment,
+        drivetrain: v.drivetrain ?? "Unknown",
+        battery_chemistry: v.battery_chemistry ?? "Unknown",
+        price: v.price_local,
+        currency: v.currency,
+        range_km: v.range_km,
+      }));
+    const kde = gaussianKDE(points.map((p) => p.price));
+    return { points, kde };
   }, [vehicles, topManufacturers, shouldBucket]);
 
   return (
@@ -612,6 +871,24 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
         />
         <p className="text-xs text-outline mt-2">
           Higher is better. Values show km per 1,000 in local currency.
+        </p>
+      </div>
+
+      <div className="bg-surface rounded-xl border border-outline-variant p-6">
+        <h3 className="text-lg font-semibold mb-4">
+          Price Distribution
+        </h3>
+        <PriceDistributionPlot
+          points={swarmData.points}
+          kde={swarmData.kde}
+          colorMap={colorMap}
+          colorByKey={colorBy}
+          highlightCategory={highlightCategory}
+          chartColors={chartColors}
+          onSelectVehicle={onSelectVehicle}
+        />
+        <p className="text-xs text-outline mt-2">
+          Distribution of prices across all filtered vehicles.
         </p>
       </div>
 
