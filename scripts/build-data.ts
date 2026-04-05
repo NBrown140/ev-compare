@@ -26,6 +26,33 @@ interface Source {
 
 type SourcesMap = Record<string, Source[]>;
 
+function validateHeaders(headers: string[] | undefined, file: string): string[] {
+  if (!headers) {
+    return [`${file}: missing header row`];
+  }
+
+  const errors: string[] = [];
+  const expectedHeaders = schema.columns.map((col) => col.name);
+  const missing = expectedHeaders.filter((header) => !headers.includes(header));
+  const unexpected = headers.filter((header) => !expectedHeaders.includes(header));
+
+  if (missing.length > 0) {
+    errors.push(`${file}: missing columns [${missing.join(", ")}]`);
+  }
+
+  if (unexpected.length > 0) {
+    errors.push(`${file}: unexpected columns [${unexpected.join(", ")}]`);
+  }
+
+  if (missing.length === 0 && unexpected.length === 0) {
+    const orderMismatch = headers.some((header, index) => header !== expectedHeaders[index]);
+    if (orderMismatch) {
+      errors.push(`${file}: column order must match data/schema.json exactly`);
+    }
+  }
+
+  return errors;
+}
 
 function validate(
   row: Record<string, string>,
@@ -217,10 +244,12 @@ for (const file of csvFiles) {
   markets.push(market);
 
   const csv = fs.readFileSync(path.join(MARKETS_DIR, file), "utf-8");
-  const { data, errors } = Papa.parse<Record<string, string>>(csv, {
+  const { data, errors, meta } = Papa.parse<Record<string, string>>(csv, {
     header: true,
     skipEmptyLines: true,
   });
+
+  allErrors.push(...validateHeaders(meta.fields, file));
 
   if (errors.length > 0) {
     for (const e of errors) {
@@ -229,6 +258,7 @@ for (const file of csvFiles) {
   }
 
   const vehicleRows = new Map<string, Record<string, string>>();
+  const seenIds = new Map<string, number>();
   for (let i = 0; i < data.length; i++) {
     allErrors.push(...validate(data[i], i + 2, file));
 
@@ -242,7 +272,18 @@ for (const file of csvFiles) {
     }
 
     const id = data[i].id?.trim();
-    if (id) vehicleRows.set(id, data[i]);
+    if (!id) continue;
+
+    const previousRow = seenIds.get(id);
+    if (previousRow != null) {
+      allErrors.push(
+        `${file}:${i + 2} — duplicate id "${id}" (first seen at row ${previousRow})`
+      );
+      continue;
+    }
+
+    seenIds.set(id, i + 2);
+    vehicleRows.set(id, data[i]);
   }
 
   // Validate sources for this market

@@ -3,6 +3,7 @@ import type { EV, Segment } from "@/types/ev";
 import { formatCurrency, shortenVariant } from "@/utils/format";
 import { useChartColors } from "@/hooks/useChartColors";
 import { gaussianKDE } from "@/utils/statistics";
+import { useResizeObserverWidth } from "@/hooks/useResizeObserverWidth";
 
 interface ComparisonChartProps {
   vehicles: EV[];
@@ -136,21 +137,8 @@ function SegmentViolinPlot({
     y: number;
     point: ViolinPoint;
   } | null>(null);
-  const [containerWidth, setContainerWidth] = useState(600);
+  const { containerRef, width } = useResizeObserverWidth(600);
 
-  const containerRef = useCallback((node: HTMLDivElement | null) => {
-    if (!node) return;
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setContainerWidth(entry.contentRect.width);
-      }
-    });
-    observer.observe(node);
-    setContainerWidth(node.clientWidth);
-    return () => observer.disconnect();
-  }, []);
-
-  const width = containerWidth;
   const innerW = width - VIOLIN_MARGIN.left - VIOLIN_MARGIN.right;
   const innerH = VIOLIN_HEIGHT - VIOLIN_MARGIN.top - VIOLIN_MARGIN.bottom;
 

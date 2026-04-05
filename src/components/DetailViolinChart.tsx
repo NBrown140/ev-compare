@@ -1,8 +1,9 @@
-import { useState, useMemo, useCallback, useRef } from "react";
+import { useState, useMemo, useRef } from "react";
 import type { EV } from "@/types/ev";
 import { formatCurrency, shortenVariant } from "@/utils/format";
 import { useChartColors } from "@/hooks/useChartColors";
 import { gaussianKDE } from "@/utils/statistics";
+import { useResizeObserverWidth } from "@/hooks/useResizeObserverWidth";
 
 interface DetailViolinChartProps {
   vehicle: EV;
@@ -47,19 +48,7 @@ export default function DetailViolinChart({
     y: number;
     point: ViolinPoint;
   } | null>(null);
-  const [containerWidth, setContainerWidth] = useState(400);
-
-  const containerRef = useCallback((node: HTMLDivElement | null) => {
-    if (!node) return;
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setContainerWidth(entry.contentRect.width);
-      }
-    });
-    observer.observe(node);
-    setContainerWidth(node.clientWidth);
-    return () => observer.disconnect();
-  }, []);
+  const { containerRef, width } = useResizeObserverWidth(400);
 
   const segmentPoints = useMemo(() => {
     const points: ViolinPoint[] = [];
@@ -77,14 +66,13 @@ export default function DetailViolinChart({
       });
     }
     return points;
-  }, [allVehicles, vehicle.segment, vehicle.price_local]);
+  }, [allVehicles, vehicle.segment]);
 
   const kde = useMemo(
     () => gaussianKDE(segmentPoints.map((p) => p.rangePerPrice)),
     [segmentPoints],
   );
 
-  const width = containerWidth;
   const innerW = width - MARGIN.left - MARGIN.right;
   const innerH = HEIGHT - MARGIN.top - MARGIN.bottom;
 

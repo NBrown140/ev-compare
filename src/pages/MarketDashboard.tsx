@@ -39,7 +39,7 @@ export default function MarketDashboard({
   onBackFromCompare,
 }: MarketDashboardProps) {
   const { data: vehicles, loading } = useMarketData(market);
-  const sources = useMarketSources(market);
+  const sources = useMarketSources(market, selectedVehicleId != null);
   const {
     filters,
     setFilters,

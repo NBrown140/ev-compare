@@ -3,6 +3,8 @@ import { getMarketData, getMarkets, getMarketSources, getMarketSummaries } from 
 import type { EV } from "@/types/ev";
 import type { MarketSummaries, SourcesMap } from "@/types/ev";
 
+const sourcesCache = new Map<string, SourcesMap | null>();
+
 export function useMarkets(): string[] {
   return useMemo(() => getMarkets(), []);
 }
@@ -35,14 +37,37 @@ export function useMarketData(market: string | null): { data: EV[]; loading: boo
   return { data, loading };
 }
 
-export function useMarketSources(market: string | null): SourcesMap | null {
+export function useMarketSources(
+  market: string | null,
+  enabled = true
+): SourcesMap | null {
   const [sources, setSources] = useState<SourcesMap | null>(null);
+
   useEffect(() => {
     if (!market) {
       setSources(null);
       return;
     }
-    getMarketSources(market).then(setSources);
-  }, [market]);
+
+    if (!enabled) return;
+
+    if (sourcesCache.has(market)) {
+      setSources(sourcesCache.get(market) ?? null);
+      return;
+    }
+
+    let cancelled = false;
+    setSources(null);
+    getMarketSources(market).then((result) => {
+      if (cancelled) return;
+      sourcesCache.set(market, result);
+      setSources(result);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [market, enabled]);
+
   return sources;
 }

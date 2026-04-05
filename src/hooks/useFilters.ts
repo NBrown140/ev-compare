@@ -176,11 +176,11 @@ export function useFilters(vehicles: EV[]) {
       if (!inRange(v.length_mm, filters.lengthMm)) return false;
       if (!inRange(v.width_mm, filters.widthMm)) return false;
       if (!inRange(v.ground_clearance_mm, filters.groundClearanceMm)) return false;
-      if (filters.drivetrain !== "all" && v.drivetrain != null && v.drivetrain !== filters.drivetrain) return false;
-      if (filters.batteryChemistry !== "all" && v.battery_chemistry != null && v.battery_chemistry !== filters.batteryChemistry) return false;
-      if (filters.chargePortType !== "all" && v.charge_port_type != null && v.charge_port_type !== filters.chargePortType) return false;
-      if (filters.v2lCapable != null && v.v2l_capable != null && v.v2l_capable !== filters.v2lCapable) return false;
-      if (filters.plugAndCharge != null && v.plug_and_charge != null && v.plug_and_charge !== filters.plugAndCharge) return false;
+      if (filters.drivetrain !== "all" && v.drivetrain !== filters.drivetrain) return false;
+      if (filters.batteryChemistry !== "all" && v.battery_chemistry !== filters.batteryChemistry) return false;
+      if (filters.chargePortType !== "all" && v.charge_port_type !== filters.chargePortType) return false;
+      if (filters.v2lCapable != null && v.v2l_capable !== filters.v2lCapable) return false;
+      if (filters.plugAndCharge != null && v.plug_and_charge !== filters.plugAndCharge) return false;
       return true;
     });
   }, [vehicles, filters]);
