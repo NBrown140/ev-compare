@@ -4,8 +4,11 @@ import { SECTIONS, FIELD_LABELS, formatFieldValue } from "@/utils/vehicleFields"
 import { formatCurrency } from "@/utils/format";
 import DetailViolinChart from "@/components/DetailViolinChart";
 
+const REPO_URL = "https://github.com/NBrown140/ev-compare";
+
 interface VehicleDetailProps {
   vehicle: EV;
+  market: string;
   trims: EV[];
   modelYears: EV[];
   allVehicles: EV[];
@@ -37,8 +40,30 @@ function buildFootnotes(
   return { fieldToNotes, footnotes };
 }
 
+function buildIssueUrl(vehicle: EV, market: string): string {
+  const params = new URLSearchParams({
+    title: `[Vehicle data] ${vehicle.manufacturer} ${vehicle.model} (${vehicle.model_year})`,
+    body: [
+      "## Vehicle",
+      `- ID: ${vehicle.id}`,
+      `- Market: ${market}`,
+      `- Model: ${vehicle.manufacturer} ${vehicle.model}`,
+      `- Variant: ${vehicle.variant ?? "Standard"}`,
+      `- Model year: ${vehicle.model_year}`,
+      "",
+      "## What looks wrong?",
+      "",
+      "## Suggested correction or source",
+      "",
+    ].join("\n"),
+  });
+
+  return `${REPO_URL}/issues/new?${params.toString()}`;
+}
+
 export default function VehicleDetail({
   vehicle,
+  market,
   trims,
   modelYears,
   allVehicles,
@@ -51,6 +76,9 @@ export default function VehicleDetail({
   const { fieldToNotes, footnotes } = buildFootnotes(vehicle.id, sources);
   const isInCompare = compareIds?.includes(vehicle.id) ?? false;
   const compareFull = (compareIds?.length ?? 0) >= 5 && !isInCompare;
+  const issueUrl = buildIssueUrl(vehicle, market);
+  const contributingUrl = `${REPO_URL}/blob/main/CONTRIBUTING.md`;
+  const downloadUrl = `${REPO_URL}/raw/main/data/markets/${market}.csv`;
 
   return (
     <div className={`space-y-6 ${compareIds && compareIds.length > 0 ? "pb-20" : ""}`}>
@@ -220,6 +248,45 @@ export default function VehicleDetail({
           />
         </div>
       </div>
+
+      <section className="bg-surface-container-low rounded-xl p-5">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl">
+            <h3 className="text-sm font-semibold text-outline uppercase tracking-wide mb-2">
+              Help improve this entry
+            </h3>
+            <p className="text-sm text-on-surface">
+              Found something off? This entry is part of an open-source dataset.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <a
+              href={issueUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full bg-primary-container px-3.5 py-1.5 text-sm font-medium text-primary hover:bg-primary-container/80 transition-colors"
+            >
+              Report an error
+            </a>
+            <a
+              href={contributingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full bg-surface px-3.5 py-1.5 text-sm font-medium text-on-surface hover:bg-surface-container transition-colors"
+            >
+              Suggest an edit
+            </a>
+            <a
+              href={downloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full bg-surface px-3.5 py-1.5 text-sm font-medium text-on-surface hover:bg-surface-container transition-colors"
+            >
+              Download dataset
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Footnotes */}
       {footnotes.length > 0 && (

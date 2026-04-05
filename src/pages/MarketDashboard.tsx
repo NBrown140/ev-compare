@@ -85,6 +85,7 @@ export default function MarketDashboard({
       <>
         <VehicleDetail
           vehicle={selectedVehicle}
+          market={market}
           trims={modelTrims}
           modelYears={otherYears}
           allVehicles={vehicles}

@@ -35,7 +35,7 @@ export default function Home({ onSelectMarket }: HomeProps) {
         <div>
           <h3 className="font-semibold text-on-surface mb-2">🛠️ Contribute data</h3>
           <p className="mb-2">
-            All vehicle data is open-source CSV on GitHub. Spot an error, a missing vehicle, or an entire market? Pull requests are welcome.
+            All vehicle data is open-source on GitHub. Spot an error, a missing vehicle, or an entire market? Pull requests are welcome.
           </p>
           <a
             href="https://github.com/NBrown140/ev-compare/blob/main/CONTRIBUTING.md"
