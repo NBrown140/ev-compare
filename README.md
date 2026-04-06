@@ -1,5 +1,7 @@
 # EV Compare
 
+[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-pink?logo=github)](https://github.com/sponsors/NBrown140)
+
 An open-source database and web application to compare electric vehicles across markets. Built with React, TypeScript, and Vite.
 
 
