@@ -405,8 +405,8 @@ function validateIncentiveFile(
     );
   }
 
-  if (inc.source && !inc.source.startsWith(WAYBACK_PREFIX)) {
-    errors.push(`${filePath}: "source" must be a Wayback Machine URL`);
+  if (inc.source && !inc.source.startsWith("https://")) {
+    errors.push(`${filePath}: "source" must be an HTTPS URL`);
   }
 
   if (!Array.isArray(inc.rules) || inc.rules.length === 0) {

@@ -1,0 +1,17 @@
+id: us-me-efficiency-maine
+name: "Efficiency Maine EV Rebate"
+market: us
+region: me
+region_label: "Maine"
+level: "State"
+currency: USD
+effective_date: "2024-01-01"
+expiry_date: null
+source: "https://www.efficiencymaine.com/electric-vehicle-incentives-for-low-and-moderate-income/"
+description: "$2,000 rebate for new BEVs (businesses/government). Low-income residents can receive up to $7,500. MSRP must be $55,000 or less for new vehicles."
+disclaimer: "From 2026-2028, at least half of all EV rebate funding must go to low/moderate-income residents. Income-qualified buyers must be pre-qualified before purchase. Amount shown is the standard rebate; enhanced amounts require income qualification."
+
+rules:
+  - amount: 2000
+    conditions:
+      price_local_max: 55000

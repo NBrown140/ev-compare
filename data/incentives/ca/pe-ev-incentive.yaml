@@ -1,0 +1,15 @@
+id: ca-pe-ev-incentive
+name: "PEI Electric Vehicle Incentive"
+market: ca
+region: pe
+region_label: "Prince Edward Island"
+level: "Province"
+currency: CAD
+effective_date: "2025-06-02"
+expiry_date: null
+source: "https://www.princeedwardisland.ca/en/information/environment-energy-and-climate-action/electric-vehicle-incentive"
+description: "$4,000 rebate for new BEVs, $2,000 for PHEVs. No MSRP cap on new vehicles. Point-of-sale rebate at PEI dealerships."
+disclaimer: "Tesla vehicles are not eligible as of March 25, 2025. Purchasers must commit to owning the vehicle for at least 1 year. Private sales do not qualify. Follows Transport Canada's eligible vehicle list."
+
+rules:
+  - amount: 4000

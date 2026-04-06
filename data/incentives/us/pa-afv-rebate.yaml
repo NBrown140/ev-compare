@@ -1,0 +1,17 @@
+id: us-pa-afv-rebate
+name: "Pennsylvania Alternative Fuel Vehicle Rebate"
+market: us
+region: pa
+region_label: "Pennsylvania"
+level: "State"
+currency: USD
+effective_date: "2025-07-01"
+expiry_date: "2026-06-30"
+source: "https://www.pa.gov/agencies/dep/programs-and-services/grants-loans-rebates/alternative-fuel-vehicle-rebates-for-consumers"
+description: "$3,000 rebate for new or pre-owned BEVs. Low-income buyers receive an additional $1,000. PHEVs receive $1,500. MSRP cap approximately $45,000."
+disclaimer: "Pennsylvania residents only. Low-to-moderate income focus. First-come, first-served with limited funding (~500 rebates). Must apply within 6 months of purchase."
+
+rules:
+  - amount: 3000
+    conditions:
+      price_local_max: 45000

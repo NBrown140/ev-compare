@@ -1,0 +1,17 @@
+id: us-ct-cheapr
+name: "Connecticut CHEAPR (Hydrogen and Electric Automobile Purchase Rebate)"
+market: us
+region: ct
+region_label: "Connecticut"
+level: "State"
+currency: USD
+effective_date: "2025-10-01"
+expiry_date: null
+source: "https://portal.ct.gov/DEEP/Air/Mobile-Sources/CHEAPR/CHEAPR---Home"
+description: "$1,000 point-of-sale rebate for new BEVs, $500 for PHEVs. Base MSRP must be under $50,000. Income-qualified buyers (CHEAPR+) can receive up to $4,000 for BEVs."
+disclaimer: "Standard rebate restricted to buyers with income at or below 300% of federal poverty level or in a concentrated poverty census tract starting January 2026. CHEAPR+ requires additional income qualification."
+
+rules:
+  - amount: 1000
+    conditions:
+      price_local_max: 50000

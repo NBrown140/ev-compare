@@ -1,0 +1,17 @@
+id: uk-electric-car-grant
+name: "Electric Car Grant (ECG)"
+market: uk
+region: federal
+region_label: "National"
+level: "National"
+currency: GBP
+effective_date: "2025-07-16"
+expiry_date: null
+source: "https://www.gov.uk/plug-in-vehicle-grants/cars"
+description: "Up to GBP 3,750 grant for new BEVs with RRP at or below GBP 37,000. Band 1 (GBP 3,750) for manufacturers meeting full sustainability criteria; Band 2 (GBP 1,500) for other qualifying manufacturers."
+disclaimer: "Grant amount depends on manufacturer sustainability scoring, not vehicle specs. Band 1 currently limited to Renault and Mini/BMW. Most other major OEMs qualify for Band 2. Variants up to GBP 42,000 may qualify if at least one variant of the model family is at or below GBP 37,000. Applied automatically at point of sale."
+
+rules:
+  - amount: 1500
+    conditions:
+      price_local_max: 42000

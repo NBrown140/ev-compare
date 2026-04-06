@@ -279,9 +279,14 @@ export default function VehicleDetail({
           </h3>
           <dl className="divide-y divide-outline-variant/30">
             {incentiveBreakdown.map((item) => (
-              <div key={item.program} className="flex justify-between py-2 text-sm">
-                <dt className="text-outline">{item.program}</dt>
-                <dd className="font-medium text-tertiary">
+              <div key={item.program} className="flex justify-between items-baseline py-2 text-sm gap-4">
+                <dt className="text-outline">
+                  {item.program}
+                  <span className="ml-1.5 text-[10px] px-1.5 py-0.5 rounded bg-surface-container-low text-outline">
+                    {item.regionLabel}
+                  </span>
+                </dt>
+                <dd className="font-medium text-tertiary whitespace-nowrap">
                   -{formatCurrency(item.amount, vehicle.currency)}
                 </dd>
               </div>
@@ -299,7 +304,7 @@ export default function VehicleDetail({
                 .filter((item) => item.disclaimer)
                 .map((item) => (
                   <p key={item.program} className="text-xs text-outline italic">
-                    {item.program}: {item.disclaimer}
+                    {item.regionLabel}: {item.disclaimer}
                   </p>
                 ))}
             </div>

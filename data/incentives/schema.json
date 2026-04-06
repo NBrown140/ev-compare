@@ -60,7 +60,7 @@
     "region_label": { "type": "string", "description": "Display label for the region (e.g. 'Federal', 'California', 'Quebec')" },
     "currency": { "type": "string", "description": "ISO 4217 currency code (e.g. 'USD', 'CAD', 'EUR')" },
     "effective_date": { "type": "string", "description": "When the program took effect, YYYY-MM-DD" },
-    "source": { "type": "string", "description": "Wayback Machine archived URL documenting the program" },
+    "source": { "type": "string", "description": "HTTPS URL to the official program page (live URL, not Wayback Machine)" },
     "level": { "type": "string", "description": "Grouping level for mutual exclusivity (e.g. 'Federal', 'State', 'Province'). Only one region per level can be selected." },
     "rules": { "type": "array", "description": "Ordered list of { amount, conditions? } objects -- see HOW RULES WORK above" }
   },

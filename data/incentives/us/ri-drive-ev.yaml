@@ -1,0 +1,17 @@
+id: us-ri-drive-ev
+name: "Rhode Island DRIVE EV"
+market: us
+region: ri
+region_label: "Rhode Island"
+level: "State"
+currency: USD
+effective_date: "2026-01-05"
+expiry_date: null
+source: "https://drive.ri.gov/drive-ev-project/drive-ev"
+description: "Up to $3,000 rebate for new BEVs/FCEVs, $2,000 for PHEVs. MSRP must be $60,000 or less. Income-qualified buyers (DRIVE+) receive an additional $1,500."
+disclaimer: "Rhode Island residents only. Must purchase from licensed RI dealer. One rebate per individual per 48-month period. Applications within 120 days of purchase. First-come, first-served."
+
+rules:
+  - amount: 3000
+    conditions:
+      price_local_max: 60000

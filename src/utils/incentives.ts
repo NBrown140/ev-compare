@@ -2,6 +2,7 @@ import type { MarketIncentives } from "@/types/ev";
 
 export interface IncentiveBreakdownItem {
   program: string;
+  regionLabel: string;
   amount: number;
   disclaimer?: string;
 }
@@ -47,6 +48,7 @@ export function getVehicleIncentiveBreakdown(
       const program = regionMeta.programs.find((p) => p.id === programId);
       items.push({
         program: program?.name ?? programId,
+        regionLabel: regionMeta.label,
         amount,
         disclaimer: program?.disclaimer,
       });

@@ -1,0 +1,20 @@
+id: us-de-cvrp
+name: "Delaware Clean Vehicle Rebate Program"
+market: us
+region: de
+region_label: "Delaware"
+level: "State"
+currency: USD
+effective_date: "2025-05-01"
+expiry_date: "2026-04-30"
+source: "https://dnrec.delaware.gov/climate-coastal-energy/clean-transportation/vehicle-rebates/"
+description: "$2,500 rebate for new BEVs under $40,000 MSRP, $1,500 for BEVs $40,000-$50,000, $1,000 for PHEVs under $50,000. Applied within 90 days of purchase."
+disclaimer: "Rebate must be applied for within 90 days of purchase date. Subject to funding availability."
+
+rules:
+  - amount: 2500
+    conditions:
+      price_local_max: 40000
+  - amount: 1500
+    conditions:
+      price_local_max: 50000

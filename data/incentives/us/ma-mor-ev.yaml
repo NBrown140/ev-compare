@@ -1,0 +1,17 @@
+id: us-ma-mor-ev
+name: "MOR-EV (Massachusetts Offers Rebates for Electric Vehicles)"
+market: us
+region: ma
+region_label: "Massachusetts"
+level: "State"
+currency: USD
+effective_date: "2014-06-18"
+expiry_date: null
+source: "https://mor-ev.org/"
+description: "$3,500 rebate for new BEVs/FCEVs with MSRP up to $55,000. An additional $1,500 is available for income-qualified buyers (MOR-EV+), and $1,000 for trade-in of an older vehicle."
+disclaimer: "MOR-EV+ requires participation in qualifying income assistance programs. Trade-in bonus requires scrapping a vehicle. Subject to funding availability."
+
+rules:
+  - amount: 3500
+    conditions:
+      price_local_max: 55000

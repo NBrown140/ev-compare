@@ -1,0 +1,18 @@
+id: us-ny-drive-clean
+name: "New York Drive Clean Rebate"
+market: us
+region: ny
+region_label: "New York"
+level: "State"
+currency: USD
+effective_date: "2017-03-01"
+expiry_date: null
+source: "https://www.nyserda.ny.gov/All-Programs/Drive-Clean-Rebate-For-Electric-Cars-Program"
+description: "Up to $2,000 point-of-sale rebate for new EVs. $2,000 for BEVs with 200+ miles range and MSRP at or under $42,000. $500 for vehicles over $42,000 MSRP."
+disclaimer: "Rebate amount depends on vehicle range and MSRP. Vehicles over $42,000 receive only $500. Applied by participating NY dealerships at point of sale. Subject to funding availability."
+
+rules:
+  - amount: 2000
+    conditions:
+      price_local_max: 42000
+  - amount: 500

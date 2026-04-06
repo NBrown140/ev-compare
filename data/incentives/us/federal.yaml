@@ -7,7 +7,7 @@ level: "Federal"
 currency: USD
 effective_date: "2023-01-01"
 expiry_date: "2025-09-30"
-source: "https://web.archive.org/web/20250901120000/https://www.irs.gov/credits-deductions/credits-for-new-clean-vehicles-purchased-in-2023-or-after"
+source: "https://www.irs.gov/credits-deductions/credits-for-new-clean-vehicles-purchased-in-2023-or-after"
 description: "Up to $7,500 tax credit for new clean vehicles. Sedans/hatchbacks must be under $55,000 MSRP; SUVs/trucks/crossovers/vans under $80,000. Credit is the sum of a $3,750 critical minerals component and a $3,750 battery component, each subject to sourcing requirements. Terminated by the One Big Beautiful Bill Act for vehicles acquired after September 30, 2025."
 disclaimer: "Actual credit depends on buyer income, tax liability, and vehicle assembly/battery sourcing requirements. Income limits: $150,000 (single) / $300,000 (joint). Replaced by the OBBBA car loan interest deduction for American-made vehicles starting 2025."
 

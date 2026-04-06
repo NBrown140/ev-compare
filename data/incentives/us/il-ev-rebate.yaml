@@ -1,0 +1,17 @@
+id: us-il-ev-rebate
+name: "Illinois Electric Vehicle Rebate Program"
+market: us
+region: il
+region_label: "Illinois"
+level: "State"
+currency: USD
+effective_date: "2025-07-01"
+expiry_date: "2026-05-31"
+source: "https://epa.illinois.gov/topics/ceja/electric-vehicle-rebates.html"
+description: "$2,000 rebate for new or used BEVs. Low-income applicants may receive up to $4,000. PHEVs are not eligible. Selling price must be $80,000 or less."
+disclaimer: "Illinois residents only. Income must not exceed 500% of federal poverty level. Low-income adder requires income at or below 80% of regional median. First-come, first-served with $14 million total funding. BEVs only -- PHEVs excluded."
+
+rules:
+  - amount: 2000
+    conditions:
+      price_local_max: 80000

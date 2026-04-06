@@ -106,7 +106,7 @@ region_label: "Federal"           # human-readable label shown in the UI
 currency: USD
 effective_date: "2024-01-01"
 expiry_date: null                 # null = ongoing, or "YYYY-MM-DD"
-source: "https://web.archive.org/web/..." # Wayback Machine URL (required)
+source: "https://example.gov/ev-incentive" # URL to the official program page
 disclaimer: "Amount depends on..."        # optional, shown in the UI
 
 # Rules are evaluated top-to-bottom; first match wins. No match = $0.
@@ -137,7 +137,7 @@ Conditions within a rule are AND'd. A rule with no conditions matches all vehicl
 
 1. Create a YAML file in `data/incentives/{market}/` (e.g., `data/incentives/ca/qc-roulez-vert.yaml`)
 2. Follow the format above
-3. Include a Wayback Machine archived source URL
+3. Include a source URL linking to the official program page
 4. Run `pnpm run build:data` to validate
 
 ## Validating the schema locally

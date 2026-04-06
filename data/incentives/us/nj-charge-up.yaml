@@ -1,0 +1,17 @@
+id: us-nj-charge-up
+name: "Charge Up New Jersey"
+market: us
+region: nj
+region_label: "New Jersey"
+level: "State"
+currency: USD
+effective_date: "2025-07-01"
+expiry_date: "2030-06-30"
+source: "https://chargeup.njcleanenergy.com/"
+description: "$1,500 point-of-sale rebate for new BEVs with MSRP up to $55,000. Income-qualified buyers receive an additional $2,500 via Charge Up+ for a total of $4,000."
+disclaimer: "NJ residents only. Charge Up+ income limits: $75,000 single, $112,500 head of household, $150,000 joint filers. Program legislated through 2030. FY2026 allocated $50 million."
+
+rules:
+  - amount: 1500
+    conditions:
+      price_local_max: 55000
