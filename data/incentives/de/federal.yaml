@@ -1,0 +1,14 @@
+id: de-federal-kaufpraemie
+name: "E-Auto-Kaufpramie (Federal EV Purchase Premium)"
+market: de
+region: federal
+region_label: "Federal"
+level: "Federal"
+currency: EUR
+effective_date: "2026-01-01"
+source: "https://www.bafa.de/DE/Energie/Energieeffizienz/Elektromobilitaet/elektromobilitaet_node.html"
+description: "Base subsidy of EUR 3,000 for new BEVs. Additional social bonus up to EUR 2,000 for lower-income households and family bonus of EUR 500 per child (max 2). Maximum EUR 6,000 for lowest-income families."
+disclaimer: "Private individuals only. Household taxable income must not exceed EUR 80,000 (plus EUR 5,000 per child, max EUR 90,000). Amount shown is the base; actual amount depends on income and family status. Vehicle must be held for at least 3 years."
+
+rules:
+  - amount: 3000

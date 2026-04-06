@@ -31,8 +31,13 @@ export function formatMarketName(market: string): string {
 }
 
 const MARKET_FLAGS: Record<string, string> = {
+  be: "🇧🇪",
   ca: "🇨🇦",
-  eu: "🇪🇺",
+  de: "🇩🇪",
+  fr: "🇫🇷",
+  it: "🇮🇹",
+  nl: "🇳🇱",
+  se: "🇸🇪",
   uk: "🇬🇧",
   us: "🇺🇸",
 };

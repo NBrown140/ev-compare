@@ -43,7 +43,7 @@
     "  - The UI groups regions by level and enforces single-select within each level.",
     "    For example, a US user can pick Federal + one State, but not California + Colorado.",
     "  - All regions sharing the same 'level' string are treated as mutually exclusive.",
-    "  - Level names are freeform per market: 'State' for US, 'Province' for CA, 'Country' for EU.",
+    "  - Level names are freeform per market: 'State' for US, 'Province' for CA, 'Region' for BE.",
     "",
     "TIPS FOR CONTRIBUTORS:",
     "  - Put more specific rules first (narrow conditions), general rules last.",
@@ -55,7 +55,7 @@
   "required_fields": {
     "id": { "type": "string", "description": "Unique identifier across all incentive files (e.g. 'us-federal-ira')" },
     "name": { "type": "string", "description": "Human-readable program name" },
-    "market": { "type": "string", "description": "Must match the parent directory name (e.g. 'us', 'ca', 'eu')" },
+    "market": { "type": "string", "description": "Must match the parent directory name (e.g. 'us', 'ca', 'de', 'fr')" },
     "region": { "type": "string", "description": "'federal' for country-wide, or a sub-region code (e.g. 'ca' for California, 'qc' for Quebec)" },
     "region_label": { "type": "string", "description": "Display label for the region (e.g. 'Federal', 'California', 'Quebec')" },
     "currency": { "type": "string", "description": "ISO 4217 currency code (e.g. 'USD', 'CAD', 'EUR')" },

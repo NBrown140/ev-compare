@@ -220,7 +220,14 @@ function validateSources(
 
 // Expected range rating per market
 const MARKET_RANGE_RATING: Record<string, string> = {
-  eu: "wltp",
+  be: "wltp",
+  ca: "epa",
+  de: "wltp",
+  fr: "wltp",
+  it: "wltp",
+  nl: "wltp",
+  se: "wltp",
+  uk: "wltp",
   us: "epa",
 };
 

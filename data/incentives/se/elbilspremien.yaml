@@ -1,0 +1,16 @@
+id: se-elbilspremien
+name: "Elbilspremien (Electric Car Premium)"
+market: se
+region: federal
+region_label: "National"
+level: "National"
+currency: SEK
+effective_date: "2026-03-18"
+source: "https://www.naturvardsverket.se/amnesomraden/klimatomstallningen/elbilspremien/"
+description: "Monthly payment of SEK 1,300 for up to 3 years (total SEK 46,800). Lowest-income households receive an additional starting bonus of SEK 18,000 (total SEK 64,800)."
+disclaimer: "Targeted at low-income rural households only. Must reside in one of 177 rural municipalities or 433 areas with limited public transport. Household income must not exceed 80% of Swedish average. Must not already own or lease a BEV. Paid as monthly installments, not a lump sum."
+
+rules:
+  - amount: 46800
+    conditions:
+      price_local_max: 450000

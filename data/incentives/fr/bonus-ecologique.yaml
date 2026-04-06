@@ -1,0 +1,16 @@
+id: fr-bonus-ecologique
+name: "Bonus Ecologique"
+market: fr
+region: federal
+region_label: "National"
+level: "National"
+currency: EUR
+effective_date: "2025-01-01"
+source: "https://www.service-public.gouv.fr/particuliers/vosdroits/F39188"
+description: "EUR 3,500 to EUR 5,700 for new BEVs depending on household income. Additional EUR 1,000 European battery bonus if both vehicle assembly and battery cell production are in the EEA."
+disclaimer: "Amount depends on reference tax income per share (RFR/P). Vehicles must score at least 60 on the environmental lifecycle assessment, which effectively excludes most vehicles manufactured in China. Price cap EUR 47,000 incl. VAT. Weight limit 2,400 kg. One bonus per person per 3 years."
+
+rules:
+  - amount: 3500
+    conditions:
+      price_local_max: 47000

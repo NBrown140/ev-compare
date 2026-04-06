@@ -1,0 +1,17 @@
+id: it-ecobonus-bev
+name: "Ecobonus Veicoli Elettrici"
+market: it
+region: federal
+region_label: "National"
+level: "National"
+currency: EUR
+effective_date: "2025-10-22"
+expiry_date: "2026-06-30"
+source: "https://alternative-fuels-observatory.ec.europa.eu/transport-mode/road/italy/incentives-legislations"
+description: "EUR 9,000 to EUR 13,750 for new BEVs with mandatory scrapping of an older vehicle (Euro 0-5). Amount depends on household ISEE income indicator."
+disclaimer: "Fund was exhausted within hours of opening and is currently unavailable. Requires scrapping of an existing Euro 0-5 vehicle. ISEE household income must be under EUR 40,000. Must reside in a Functional Urban Area (FUA) municipality. Vehicle must be held for at least 24 months."
+
+rules:
+  - amount: 9000
+    conditions:
+      price_local_max: 42700

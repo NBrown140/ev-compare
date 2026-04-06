@@ -5,7 +5,7 @@ Thanks for helping keep EV data accurate and up to date!
 ## Adding or updating vehicle data
 
 1. Fork this repo
-2. Edit the CSV file for the relevant market in `data/markets/` (e.g., `eu.csv`, `us.csv`)
+2. Edit the CSV file for the relevant market in `data/markets/` (e.g., `de.csv`, `us.csv`)
 3. Follow the column format defined in `data/schema.json`
 4. Submit a pull request
 
@@ -14,7 +14,7 @@ Thanks for helping keep EV data accurate and up to date!
 - **id**: Use the format `manufacturer-model-variant-year` in lowercase with hyphens (e.g., `tesla-model-3-lr-2025`)
 - **price_local**: MSRP in local currency before incentives
 - **range_km**: Official rated range in kilometers
-- **range_rating**: `wltp` for EU, `epa` for US
+- **range_rating**: `wltp` for European markets (DE, FR, NL, SE, BE, IT, UK), `epa` for North American markets (US, CA)
 ### Sources
 
 Every CSV column (except `id`) must be backed by a source. Sources live in a JSON file alongside each market CSV (e.g., `us.sources.json` next to `us.csv`), keyed by vehicle `id`.
@@ -56,8 +56,8 @@ When data comes from multiple sources, add multiple entries and split the fields
 
 ### Adding a new market
 
-1. Create a new CSV file in `data/markets/` (e.g., `cn.csv`)
-2. Create a matching sources file (e.g., `cn.sources.json`)
+1. Create a new CSV file in `data/markets/` (e.g., `jp.csv`)
+2. Create a matching sources file (e.g., `jp.sources.json`)
 3. Use the same column headers as existing files
 4. Include at least 5 vehicles with accurate data
 

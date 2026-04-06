@@ -7,17 +7,27 @@ interface MarketSelectorProps {
 }
 
 const marketDescriptions: Record<string, string> = {
-  eu: "European Union",
-  us: "United States",
-  uk: "United Kingdom",
+  be: "Belgium",
   ca: "Canada",
+  de: "Germany",
+  fr: "France",
+  it: "Italy",
+  nl: "Netherlands",
+  se: "Sweden",
+  uk: "United Kingdom",
+  us: "United States",
 };
 
 const marketFlagSrc: Record<string, string> = {
-  eu: "/flags/eu.svg",
-  us: "/flags/us.svg",
-  uk: "/flags/gb.svg",
+  be: "/flags/be.svg",
   ca: "/flags/ca.svg",
+  de: "/flags/de.svg",
+  fr: "/flags/fr.svg",
+  it: "/flags/it.svg",
+  nl: "/flags/nl.svg",
+  se: "/flags/se.svg",
+  uk: "/flags/gb.svg",
+  us: "/flags/us.svg",
 };
 
 const summaries = getMarketSummaries();
