@@ -45,7 +45,7 @@ export default function MarketSelector({
           <button
             key={market}
             onClick={() => onSelect(market)}
-            className="group bg-surface rounded-xl border border-outline-variant p-6 text-left hover:border-primary hover:shadow-lg hover:scale-[1.01] transition-all cursor-pointer"
+            className="group bg-surface-container-low rounded-xl p-6 text-left hover:bg-surface-container-highest hover:scale-[1.01] transition-all cursor-pointer"
           >
             <div className="flex items-center gap-4 mb-3">
               {marketFlagSrc[market] && (
