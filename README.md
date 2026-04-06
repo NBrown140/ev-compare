@@ -1,6 +1,12 @@
 # EV Compare
 
 [![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-pink?logo=github)](https://github.com/sponsors/NBrown140)
+[![License: MIT](https://img.shields.io/github/license/NBrown140/ev-compare)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/NBrown140/ev-compare)](https://github.com/NBrown140/ev-compare/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/NBrown140/ev-compare)](https://github.com/NBrown140/ev-compare/commits/main)
+[![Build](https://img.shields.io/github/actions/workflow/status/NBrown140/ev-compare/validate.yml)](https://github.com/NBrown140/ev-compare/actions)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)]()
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](CONTRIBUTING.md)
 
 An open-source database and web application to compare electric vehicles across markets. Built with React, TypeScript, and Vite.
 
