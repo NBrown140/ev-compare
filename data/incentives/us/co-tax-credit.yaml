@@ -1,0 +1,20 @@
+id: us-co-imvc
+name: "Colorado Innovative Motor Vehicle Credit"
+market: us
+region: co
+region_label: "Colorado"
+level: "State"
+currency: USD
+effective_date: "2026-01-01"
+expiry_date: "2028-12-31"
+source: "https://web.archive.org/web/20260301120000/https://tax.colorado.gov/income-tax-topics-innovative-motor-vehicle-credit"
+description: "Colorado state income tax credit for the purchase or lease of a new EV. In 2026, the base credit is $750 for EVs under $80,000 MSRP, with an additional $2,500 for EVs under $35,000 MSRP. The additional low-price credit runs through 2028."
+disclaimer: "Credit applies against Colorado state income tax. Purchasers may assign the credit to a dealer for a point-of-sale discount. Vehicle must be titled and registered in Colorado. Lease term must be at least 2 years."
+
+rules:
+  - amount: 3250
+    conditions:
+      price_local_max: 35000
+  - amount: 750
+    conditions:
+      price_local_max: 80000

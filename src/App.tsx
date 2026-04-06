@@ -11,17 +11,20 @@ type NavState = {
   tab: "table" | "charts";
   compare: string[];
   comparePage: boolean;
+  regions: string[];
 };
 
 function readUrlState(): NavState {
   const p = new URLSearchParams(location.search);
   const compareRaw = p.get("compare");
+  const regionsRaw = p.get("regions");
   return {
     market: p.get("market"),
     vehicle: p.get("vehicle"),
     tab: (p.get("tab") as "table" | "charts") ?? "table",
     compare: compareRaw ? compareRaw.split(",").filter(Boolean) : [],
     comparePage: p.get("view") === "compare",
+    regions: regionsRaw ? regionsRaw.split(",").filter(Boolean) : [],
   };
 }
 
@@ -32,6 +35,7 @@ function writeUrl(state: NavState, push: boolean) {
   if (state.tab !== "table") p.set("tab", state.tab);
   if (state.compare.length > 0) p.set("compare", state.compare.join(","));
   if (state.comparePage) p.set("view", "compare");
+  if (state.regions.length > 0) p.set("regions", state.regions.join(","));
   const qs = p.toString();
   if (push) history.pushState(null, "", qs ? `?${qs}` : "/");
   else history.replaceState(null, "", qs ? `?${qs}` : "/");
@@ -67,7 +71,7 @@ export default function App() {
   return (
     <Layout
       onNavigateHome={() =>
-        navigate({ market: null, vehicle: null, tab: "table", compare: [], comparePage: false })
+        navigate({ market: null, vehicle: null, tab: "table", compare: [], comparePage: false, regions: [] })
       }
     >
       {nav.market ? (
@@ -77,7 +81,8 @@ export default function App() {
           activeTab={nav.tab}
           compareIds={nav.compare}
           comparePage={nav.comparePage}
-          onBack={() => navigate({ market: null, vehicle: null, tab: "table", compare: [], comparePage: false })}
+          selectedRegions={nav.regions}
+          onBack={() => navigate({ market: null, vehicle: null, tab: "table", compare: [], comparePage: false, regions: [] })}
           onSelectVehicle={(id) =>
             navigate({ ...nav, vehicle: id, tab: "table", comparePage: false })
           }
@@ -86,11 +91,12 @@ export default function App() {
           onClearCompare={clearCompare}
           onCompare={() => navigate({ ...nav, vehicle: null, comparePage: true })}
           onBackFromCompare={() => navigate({ ...nav, comparePage: false })}
+          onRegionsChange={(regions) => navigate({ ...nav, regions }, false)}
         />
       ) : (
         <Home
           onSelectMarket={(market) =>
-            navigate({ market, vehicle: null, tab: "table", compare: [], comparePage: false })
+            navigate({ market, vehicle: null, tab: "table", compare: [], comparePage: false, regions: [] })
           }
         />
       )}

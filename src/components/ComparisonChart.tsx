@@ -1,12 +1,15 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
-import type { EV, Segment } from "@/types/ev";
+import type { EV, MarketIncentives, Segment } from "@/types/ev";
 import { formatCurrency, shortenVariant } from "@/utils/format";
 import { useChartColors } from "@/hooks/useChartColors";
 import { gaussianKDE } from "@/utils/statistics";
 import { useResizeObserverWidth } from "@/hooks/useResizeObserverWidth";
+import { getVehicleIncentiveTotal } from "@/utils/incentives";
 
 interface ComparisonChartProps {
   vehicles: EV[];
+  incentives?: MarketIncentives | null;
+  selectedRegions?: string[];
   onSelectVehicle?: (id: string) => void;
 }
 
@@ -629,8 +632,21 @@ function PriceDistributionPlot({
   );
 }
 
-export default function ComparisonChart({ vehicles, onSelectVehicle }: ComparisonChartProps) {
+export default function ComparisonChart({ vehicles, incentives, selectedRegions, onSelectVehicle }: ComparisonChartProps) {
   const chartColors = useChartColors();
+
+  const hasIncentives = !!incentives && !!selectedRegions && selectedRegions.length > 0;
+  const [usePostIncentive, setUsePostIncentive] = useState(true);
+  const applyIncentives = hasIncentives && usePostIncentive;
+
+  const getPrice = useCallback(
+    (v: EV) => {
+      if (!applyIncentives) return v.price_local;
+      const discount = getVehicleIncentiveTotal(incentives!, v.id, selectedRegions!);
+      return v.price_local - discount;
+    },
+    [applyIncentives, incentives, selectedRegions],
+  );
 
   const [colorBy, setColorBy] = useState<ColorByKey>("manufacturer");
   const [hoveredCategory, setHoveredCategoryRaw] = useState<string | null>(null);
@@ -676,10 +692,10 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
         drivetrain: v.drivetrain ?? "Unknown",
         battery_chemistry: v.battery_chemistry ?? "Unknown",
         range_km: v.range_km,
-        price: v.price_local,
+        price: getPrice(v),
         currency: v.currency,
       })),
-    [vehicles, topManufacturers, shouldBucket],
+    [vehicles, topManufacturers, shouldBucket, getPrice],
   );
 
   const colorMap = useMemo(
@@ -700,8 +716,9 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
   const violinData = useMemo(() => {
     const bySegment = new Map<Segment, ViolinPoint[]>();
     for (const v of vehicles) {
-      if (v.price_local <= 0) continue;
-      const rangePerPrice = (v.range_km / v.price_local) * 1000;
+      const price = getPrice(v);
+      if (price <= 0) continue;
+      const rangePerPrice = (v.range_km / price) * 1000;
       const seg = v.segment;
       if (!bySegment.has(seg)) bySegment.set(seg, []);
       bySegment.get(seg)!.push({
@@ -719,7 +736,7 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
         rangePerPrice,
         currency: v.currency,
         range_km: v.range_km,
-        price: v.price_local,
+        price,
       });
     }
 
@@ -735,11 +752,11 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
       });
     }
     return result;
-  }, [vehicles, topManufacturers, shouldBucket]);
+  }, [vehicles, topManufacturers, shouldBucket, getPrice]);
 
   const swarmData = useMemo(() => {
     const points: SwarmPoint[] = vehicles
-      .filter((v) => v.price_local > 0)
+      .filter((v) => getPrice(v) > 0)
       .map((v) => ({
         id: v.id,
         name: `${v.manufacturer} ${v.model}`,
@@ -752,18 +769,19 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
         segment: v.segment,
         drivetrain: v.drivetrain ?? "Unknown",
         battery_chemistry: v.battery_chemistry ?? "Unknown",
-        price: v.price_local,
+        price: getPrice(v),
         currency: v.currency,
         range_km: v.range_km,
       }));
     const kde = gaussianKDE(points.map((p) => p.price));
     return { points, kde };
-  }, [vehicles, topManufacturers, shouldBucket]);
+  }, [vehicles, topManufacturers, shouldBucket, getPrice]);
 
   return (
     <div className="space-y-6">
       {/* Shared color controls */}
       <div className="bg-surface rounded-xl border border-outline-variant px-5 py-3 space-y-2.5">
+        <div className="flex items-center gap-4 flex-wrap">
         <label className="flex items-center gap-1.5 text-sm text-outline">
           Color by
           <select
@@ -782,6 +800,18 @@ export default function ComparisonChart({ vehicles, onSelectVehicle }: Compariso
             ))}
           </select>
         </label>
+        {hasIncentives && (
+          <label className="flex items-center gap-1.5 text-sm text-outline cursor-pointer">
+            <input
+              type="checkbox"
+              checked={usePostIncentive}
+              onChange={(e) => setUsePostIncentive(e.target.checked)}
+              className="h-4 w-4 rounded border-outline-variant accent-primary cursor-pointer"
+            />
+            Use post-incentive prices
+          </label>
+        )}
+        </div>
         <div ref={legendRef} className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-outline">
           {[...colorMap.entries()].map(([label, color]) => {
             if (label === OTHER_LABEL) {

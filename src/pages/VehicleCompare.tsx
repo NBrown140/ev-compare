@@ -1,10 +1,16 @@
 import { Fragment } from "react";
-import type { EV } from "@/types/ev";
+import type { EV, MarketIncentives } from "@/types/ev";
 import { SECTIONS, FIELD_LABELS, formatFieldValue } from "@/utils/vehicleFields";
+import { formatCurrency } from "@/utils/format";
+import { getVehicleIncentiveTotal } from "@/utils/incentives";
+import RegionSelector from "@/components/RegionSelector";
 
 interface VehicleCompareProps {
   vehicles: EV[];
   compareIds: string[];
+  incentives: MarketIncentives | null;
+  selectedRegions: string[];
+  onRegionsChange: (regions: string[]) => void;
   onBack: () => void;
   onToggleCompare: (id: string) => void;
 }
@@ -75,6 +81,9 @@ function getBestIndex(
 export default function VehicleCompare({
   vehicles,
   compareIds,
+  incentives,
+  selectedRegions,
+  onRegionsChange,
   onBack,
   onToggleCompare,
 }: VehicleCompareProps) {
@@ -111,6 +120,14 @@ export default function VehicleCompare({
           Compare Vehicles ({compareVehicles.length})
         </h2>
       </div>
+
+      {incentives && (
+        <RegionSelector
+          incentives={incentives}
+          selectedRegions={selectedRegions}
+          onChange={onRegionsChange}
+        />
+      )}
 
       <div className="overflow-x-auto rounded-xl border border-outline-variant">
         <table className="w-full text-sm">
@@ -168,27 +185,67 @@ export default function VehicleCompare({
                   {/* Field rows */}
                   {visibleFields.map((field) => {
                     const bestIdx = getBestIndex(compareVehicles, field);
+                    const showPostIncentive =
+                      field === "price_local" &&
+                      selectedRegions.length > 0;
+                    const incentiveAmounts = showPostIncentive
+                      ? compareVehicles.map((v) =>
+                          getVehicleIncentiveTotal(incentives, v.id, selectedRegions)
+                        )
+                      : null;
+                    const hasAnyIncentive = incentiveAmounts?.some((a) => a > 0);
                     return (
-                      <tr
-                        key={field}
-                        className="border-t border-outline-variant/30"
-                      >
-                        <td className="sticky left-0 z-10 bg-surface px-4 py-2 text-outline font-medium whitespace-nowrap">
-                          {FIELD_LABELS[field] ?? field}
-                        </td>
-                        {compareVehicles.map((v, i) => (
-                          <td
-                            key={v.id}
-                            className={`px-4 py-2 whitespace-nowrap ${
-                              bestIdx === i
-                                ? "text-tertiary font-semibold"
-                                : ""
-                            }`}
-                          >
-                            {formatFieldValue(v, field)}
+                      <Fragment key={field}>
+                        <tr className="border-t border-outline-variant/30">
+                          <td className="sticky left-0 z-10 bg-surface px-4 py-2 text-outline font-medium whitespace-nowrap">
+                            {FIELD_LABELS[field] ?? field}
                           </td>
-                        ))}
-                      </tr>
+                          {compareVehicles.map((v, i) => (
+                            <td
+                              key={v.id}
+                              className={`px-4 py-2 whitespace-nowrap ${
+                                bestIdx === i
+                                  ? "text-tertiary font-semibold"
+                                  : ""
+                              }`}
+                            >
+                              {formatFieldValue(v, field)}
+                            </td>
+                          ))}
+                        </tr>
+                        {hasAnyIncentive && (
+                          <tr className="border-t border-outline-variant/30">
+                            <td className="sticky left-0 z-10 bg-surface px-4 py-2 text-outline font-medium whitespace-nowrap">
+                              Est. after incentives
+                            </td>
+                            {compareVehicles.map((v, i) => {
+                              const amt = incentiveAmounts![i];
+                              const postPrice = v.price_local - amt;
+                              const postPrices = compareVehicles.map(
+                                (cv, j) => cv.price_local - incentiveAmounts![j]
+                              );
+                              const bestPostIdx = postPrices.reduce(
+                                (best, p, j) => (p < postPrices[best] ? j : best),
+                                0
+                              );
+                              return (
+                                <td
+                                  key={v.id}
+                                  className={`px-4 py-2 whitespace-nowrap text-xs ${
+                                    bestPostIdx === i
+                                      ? "text-tertiary font-semibold"
+                                      : "text-outline"
+                                  }`}
+                                >
+                                  {amt > 0
+                                    ? `~${formatCurrency(postPrice, v.currency)}`
+                                    : "\u2014"}
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        )}
+                      </Fragment>
                     );
                   })}
                 </Fragment>

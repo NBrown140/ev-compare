@@ -1,10 +1,12 @@
-import { useMarketData, useMarketSources } from "@/hooks/useMarketData";
+import { useEffect, useRef } from "react";
+import { useMarketData, useMarketIncentives, useMarketSources } from "@/hooks/useMarketData";
 import { useFilters } from "@/hooks/useFilters";
 import { formatMarketName, getMarketFlag } from "@/utils/format";
 import FilterBar from "@/components/FilterBar";
 import EVTable from "@/components/EVTable";
 import ComparisonChart from "@/components/ComparisonChart";
 import CompareBar from "@/components/CompareBar";
+import RegionSelector from "@/components/RegionSelector";
 import VehicleDetail from "@/pages/VehicleDetail";
 import VehicleCompare from "@/pages/VehicleCompare";
 import { getModelTrims, getModelYears } from "@/utils/vehicleGroup";
@@ -15,6 +17,7 @@ interface MarketDashboardProps {
   activeTab: "table" | "charts";
   compareIds: string[];
   comparePage: boolean;
+  selectedRegions: string[];
   onBack: () => void;
   onSelectVehicle: (id: string | null) => void;
   onTabChange: (tab: "table" | "charts") => void;
@@ -22,6 +25,7 @@ interface MarketDashboardProps {
   onClearCompare: () => void;
   onCompare: () => void;
   onBackFromCompare: () => void;
+  onRegionsChange: (regions: string[]) => void;
 }
 
 export default function MarketDashboard({
@@ -30,6 +34,7 @@ export default function MarketDashboard({
   activeTab,
   compareIds,
   comparePage,
+  selectedRegions,
   onBack,
   onSelectVehicle,
   onTabChange,
@@ -37,9 +42,29 @@ export default function MarketDashboard({
   onClearCompare,
   onCompare,
   onBackFromCompare,
+  onRegionsChange,
 }: MarketDashboardProps) {
   const { data: vehicles, loading } = useMarketData(market);
   const sources = useMarketSources(market, selectedVehicleId != null);
+  const incentives = useMarketIncentives(market);
+
+  // Auto-select federal-level regions on first load
+  const defaultApplied = useRef<string | null>(null);
+  useEffect(() => {
+    if (!incentives || defaultApplied.current === market) return;
+    if (selectedRegions.length > 0) {
+      defaultApplied.current = market;
+      return;
+    }
+    const federalRegions = Object.entries(incentives.regions)
+      .filter(([, r]) => r.level === "Federal")
+      .map(([id]) => id);
+    if (federalRegions.length > 0) {
+      onRegionsChange(federalRegions);
+    }
+    defaultApplied.current = market;
+  }, [incentives, market, selectedRegions.length, onRegionsChange]);
+
   const {
     filters,
     setFilters,
@@ -74,6 +99,9 @@ export default function MarketDashboard({
       <VehicleCompare
         vehicles={vehicles}
         compareIds={compareIds}
+        incentives={incentives}
+        selectedRegions={selectedRegions}
+        onRegionsChange={onRegionsChange}
         onBack={onBackFromCompare}
         onToggleCompare={onToggleCompare}
       />
@@ -90,6 +118,9 @@ export default function MarketDashboard({
           modelYears={otherYears}
           allVehicles={vehicles}
           sources={sources}
+          incentives={incentives}
+          selectedRegions={selectedRegions}
+          onRegionsChange={onRegionsChange}
           onBack={() => onSelectVehicle(null)}
           onSelectVehicle={onSelectVehicle}
           compareIds={compareIds}
@@ -138,6 +169,14 @@ export default function MarketDashboard({
         onReset={resetFilters}
       />
 
+      {incentives && (
+        <RegionSelector
+          incentives={incentives}
+          selectedRegions={selectedRegions}
+          onChange={onRegionsChange}
+        />
+      )}
+
       <div className="inline-flex rounded-lg bg-surface-container-low p-1">
         {(["table", "charts"] as const).map((tab) => (
           <button
@@ -160,10 +199,14 @@ export default function MarketDashboard({
           onSelectVehicle={onSelectVehicle}
           compareIds={compareIds}
           onToggleCompare={onToggleCompare}
+          incentives={incentives}
+          selectedRegions={selectedRegions}
         />
       ) : (
         <ComparisonChart
           vehicles={filtered}
+          incentives={incentives}
+          selectedRegions={selectedRegions}
           onSelectVehicle={onSelectVehicle}
         />
       )}

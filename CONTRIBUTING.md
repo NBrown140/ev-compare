@@ -91,6 +91,55 @@ When researching EV specs, the following sources are generally reliable. Always 
 - **[carwow.co.uk](https://www.carwow.co.uk)** / **[carwow.de](https://www.carwow.de)** — EU pricing comparisons
 - **[edmunds.com](https://www.edmunds.com)** — US pricing and incentives
 
+## Adding or updating incentives
+
+Government incentives live in YAML files under `data/incentives/{market}/` (e.g., `data/incentives/us/federal.yaml`). Each file describes one incentive program.
+
+### Incentive file format
+
+```yaml
+id: us-federal-ira                # unique across all incentive files
+name: "Federal Clean Vehicle Tax Credit"
+market: us                        # must match the parent directory
+region: federal                   # "federal" or a sub-region code (e.g., "ca", "qc")
+region_label: "Federal"           # human-readable label shown in the UI
+currency: USD
+effective_date: "2024-01-01"
+expiry_date: null                 # null = ongoing, or "YYYY-MM-DD"
+source: "https://web.archive.org/web/..." # Wayback Machine URL (required)
+disclaimer: "Amount depends on..."        # optional, shown in the UI
+
+# Rules are evaluated top-to-bottom; first match wins. No match = $0.
+rules:
+  - amount: 7500
+    conditions:
+      price_local_max: 55000
+      segments: [sedan, hatchback]
+  - amount: 7500
+    conditions:
+      price_local_max: 80000
+      segments: [suv, truck, crossover, van]
+```
+
+### Supported condition fields
+
+| Field | Type | Meaning |
+|---|---|---|
+| `price_local_max` | number | Vehicle MSRP must be <= this value |
+| `price_local_min` | number | Vehicle MSRP must be >= this value |
+| `segments` | string[] | Vehicle segment must be in this list |
+| `model_years` | number[] | Vehicle model year must be in this list |
+| `battery_capacity_kwh_min` | number | Battery capacity must be >= this value |
+
+Conditions within a rule are AND'd. A rule with no conditions matches all vehicles.
+
+### Adding a new incentive
+
+1. Create a YAML file in `data/incentives/{market}/` (e.g., `data/incentives/ca/qc-roulez-vert.yaml`)
+2. Follow the format above
+3. Include a Wayback Machine archived source URL
+4. Run `pnpm run build:data` to validate
+
 ## Validating the schema locally
 
 This is not absolutely required as it will be validated in the CI, but it allows finding schema errors faster.

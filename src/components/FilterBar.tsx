@@ -81,7 +81,7 @@ function EditableValue({
             cancel();
           }
         }}
-        className="w-[5.5ch] min-w-0 text-[11px] tabular-nums bg-surface text-on-surface border border-primary rounded px-1 py-0 text-right outline-none focus:ring-1 focus:ring-primary"
+        className="w-[8ch] min-w-0 text-[11px] tabular-nums bg-surface text-on-surface border border-primary rounded px-1 py-0 text-right outline-none focus:ring-1 focus:ring-primary"
       />
     );
   }

@@ -1,7 +1,9 @@
 import type { EV } from "@/types/ev";
-import type { Source, SourcesMap } from "@/types/ev";
+import type { MarketIncentives, Source, SourcesMap } from "@/types/ev";
 import { SECTIONS, FIELD_LABELS, formatFieldValue } from "@/utils/vehicleFields";
 import { formatCurrency } from "@/utils/format";
+import { getVehicleIncentiveBreakdown, getVehicleIncentiveTotal } from "@/utils/incentives";
+import RegionSelector from "@/components/RegionSelector";
 import DetailViolinChart from "@/components/DetailViolinChart";
 
 const REPO_URL = "https://github.com/NBrown140/ev-compare";
@@ -13,6 +15,9 @@ interface VehicleDetailProps {
   modelYears: EV[];
   allVehicles: EV[];
   sources: SourcesMap | null;
+  incentives: MarketIncentives | null;
+  selectedRegions: string[];
+  onRegionsChange: (regions: string[]) => void;
   onBack: () => void;
   onSelectVehicle?: (id: string) => void;
   compareIds?: string[];
@@ -68,12 +73,17 @@ export default function VehicleDetail({
   modelYears,
   allVehicles,
   sources,
+  incentives,
+  selectedRegions,
+  onRegionsChange,
   onBack,
   onSelectVehicle,
   compareIds,
   onToggleCompare,
 }: VehicleDetailProps) {
   const { fieldToNotes, footnotes } = buildFootnotes(vehicle.id, sources);
+  const incentiveTotal = getVehicleIncentiveTotal(incentives, vehicle.id, selectedRegions);
+  const incentiveBreakdown = getVehicleIncentiveBreakdown(incentives, vehicle.id, selectedRegions);
   const isInCompare = compareIds?.includes(vehicle.id) ?? false;
   const compareFull = (compareIds?.length ?? 0) >= 5 && !isInCompare;
   const issueUrl = buildIssueUrl(vehicle, market);
@@ -182,6 +192,14 @@ export default function VehicleDetail({
         </div>
       )}
 
+      {incentives && (
+        <RegionSelector
+          incentives={incentives}
+          selectedRegions={selectedRegions}
+          onChange={onRegionsChange}
+        />
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Specs - left column */}
         <div className="lg:col-span-3 space-y-6">
@@ -228,6 +246,11 @@ export default function VehicleDetail({
                               ))}
                             </sup>
                           )}
+                          {field === "price_local" && incentiveTotal > 0 && (
+                            <div className="text-xs text-tertiary mt-0.5">
+                              ~{formatCurrency(vehicle.price_local - incentiveTotal, vehicle.currency)} after incentives
+                            </div>
+                          )}
                         </dd>
                       </div>
                     );
@@ -248,6 +271,41 @@ export default function VehicleDetail({
           />
         </div>
       </div>
+
+      {incentiveTotal > 0 && (
+        <div className="bg-surface rounded-xl border border-outline-variant p-5">
+          <h3 className="text-sm font-semibold text-outline uppercase tracking-wide mb-3">
+            Estimated Incentives
+          </h3>
+          <dl className="divide-y divide-outline-variant/30">
+            {incentiveBreakdown.map((item) => (
+              <div key={item.program} className="flex justify-between py-2 text-sm">
+                <dt className="text-outline">{item.program}</dt>
+                <dd className="font-medium text-tertiary">
+                  -{formatCurrency(item.amount, vehicle.currency)}
+                </dd>
+              </div>
+            ))}
+            <div className="flex justify-between py-2 text-sm font-semibold">
+              <dt>Estimated price after incentives</dt>
+              <dd className="text-tertiary">
+                ~{formatCurrency(vehicle.price_local - incentiveTotal, vehicle.currency)}
+              </dd>
+            </div>
+          </dl>
+          {incentiveBreakdown.some((item) => item.disclaimer) && (
+            <div className="mt-3 space-y-1">
+              {incentiveBreakdown
+                .filter((item) => item.disclaimer)
+                .map((item) => (
+                  <p key={item.program} className="text-xs text-outline italic">
+                    {item.program}: {item.disclaimer}
+                  </p>
+                ))}
+            </div>
+          )}
+        </div>
+      )}
 
       <section className="bg-surface-container-low rounded-xl p-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">

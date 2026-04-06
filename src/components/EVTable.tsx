@@ -1,6 +1,7 @@
-import { useCallback, useRef, useState } from "react";
-import type { EV } from "@/types/ev";
+import { useState } from "react";
+import type { EV, MarketIncentives } from "@/types/ev";
 import { formatCurrency, formatNumber } from "@/utils/format";
+import { getVehicleIncentiveTotal } from "@/utils/incentives";
 
 type SortKey = keyof EV;
 type SortDir = "asc" | "desc";
@@ -11,6 +12,8 @@ interface EVTableProps {
   onSelectVehicle?: (id: string) => void;
   compareIds?: string[];
   onToggleCompare?: (id: string) => void;
+  incentives?: MarketIncentives | null;
+  selectedRegions?: string[];
 }
 
 const columns: { key: SortKey; label: string; align?: "right" }[] = [
@@ -27,20 +30,11 @@ const columns: { key: SortKey; label: string; align?: "right" }[] = [
   { key: "fast_charge_kw", label: "DC Fast (kW)", align: "right" },
 ];
 
-export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, compareIds, onToggleCompare }: EVTableProps) {
+export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, compareIds, onToggleCompare, incentives, selectedRegions }: EVTableProps) {
   const compareFull = (compareIds?.length ?? 0) >= 5;
   const [sortKey, setSortKey] = useState<SortKey>("price_per_range_km");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [visibleCount, setVisibleCount] = useState(pageSize);
-
-  const headRef = useRef<HTMLDivElement>(null);
-  const bodyRef = useRef<HTMLDivElement>(null);
-
-  const onBodyScroll = useCallback(() => {
-    if (headRef.current && bodyRef.current) {
-      headRef.current.scrollLeft = bodyRef.current.scrollLeft;
-    }
-  }, []);
 
   const sorted = [...vehicles].sort((a, b) => {
     const av = a[sortKey];
@@ -61,10 +55,27 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, comp
     }
   };
 
+  const hasIncentives = incentives && selectedRegions && selectedRegions.length > 0;
+
+  const getIncentiveAmount = (v: EV) =>
+    hasIncentives ? getVehicleIncentiveTotal(incentives, v.id, selectedRegions) : 0;
+
   const renderCell = (v: EV, key: SortKey) => {
     switch (key) {
-      case "price_local":
+      case "price_local": {
+        const incentiveAmount = getIncentiveAmount(v);
+        if (incentiveAmount > 0) {
+          return (
+            <>
+              {formatCurrency(v.price_local, v.currency)}
+              <div className="text-xs text-tertiary whitespace-nowrap">
+                ~{formatCurrency(v.price_local - incentiveAmount, v.currency)} after incentives
+              </div>
+            </>
+          );
+        }
         return formatCurrency(v.price_local, v.currency);
+      }
       case "price_per_range_km":
         return v.price_per_range_km != null
           ? formatCurrency(v.price_per_range_km, v.currency)
@@ -84,14 +95,10 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, comp
 
   return (
     <div className="rounded-xl border border-outline-variant">
-      {/* Sticky header */}
-      <div
-        ref={headRef}
-        className="sticky top-0 z-10 overflow-hidden rounded-t-xl border-b border-outline-variant"
-      >
+      <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead>
-            <tr className="bg-surface-container-low">
+          <thead className="sticky top-0 z-10">
+            <tr className="bg-surface-container-low border-b border-outline-variant">
               {onToggleCompare && (
                 <th className="w-10 px-3 py-3 bg-surface-container-low" />
               )}
@@ -109,22 +116,6 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, comp
                       {sortDir === "asc" ? "\u2191" : "\u2193"}
                     </span>
                   )}
-                </th>
-              ))}
-            </tr>
-          </thead>
-        </table>
-      </div>
-
-      {/* Scrollable body */}
-      <div ref={bodyRef} className="overflow-x-auto" onScroll={onBodyScroll}>
-        <table className="w-full text-sm">
-          <thead className="sr-only">
-            <tr>
-              {onToggleCompare && <th className="w-10">Compare</th>}
-              {columns.map((col) => (
-                <th key={col.key} className={`px-4 py-3 whitespace-nowrap ${col.align === "right" ? "text-right" : "text-left"}`}>
-                  {col.label}
                 </th>
               ))}
             </tr>

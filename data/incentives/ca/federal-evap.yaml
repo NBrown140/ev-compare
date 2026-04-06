@@ -1,0 +1,17 @@
+id: ca-federal-evap
+name: "Electric Vehicle Affordability Program (EVAP)"
+market: ca
+region: federal
+region_label: "Federal"
+level: "Federal"
+currency: CAD
+effective_date: "2026-02-16"
+expiry_date: "2031-03-31"
+source: "https://web.archive.org/web/20260401120000/https://tc.canada.ca/en/road-transportation/innovative-technologies/zero-emission-vehicles/electric-vehicle-affordability-program-evap"
+description: "Up to $5,000 for battery-electric and fuel cell vehicles ($2,500 for PHEVs). Final transaction value must be $50,000 or less, except for Canadian-made EVs which have no price cap. Vehicle must be made in Canada or a free-trade agreement country."
+disclaimer: "Incentive amounts will gradually decline over the 5-year program. One incentive per person over the full program. Final transaction value includes all options and accessories. Program runs until March 31, 2031 or until $2.3B in funding is exhausted."
+
+rules:
+  - amount: 5000
+    conditions:
+      price_local_max: 50000

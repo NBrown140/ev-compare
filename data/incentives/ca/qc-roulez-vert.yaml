@@ -1,0 +1,17 @@
+id: ca-qc-roulez-vert
+name: "Roulez vert"
+market: ca
+region: qc
+region_label: "Quebec"
+level: "Province"
+currency: CAD
+effective_date: "2025-04-01"
+expiry_date: "2026-12-31"
+source: "https://web.archive.org/web/20260401120000/https://www.quebec.ca/en/transports/electric-transportation/financial-assistance-electric-vehicle/new-vehicle/amount-financial-assistance"
+description: "$2,000 rebate for new fully electric or hydrogen fuel cell vehicles. MSRP must be under $65,000. PHEVs receive $1,000 (battery >= 15 kWh) or $500 (smaller battery). Program ends December 31, 2026."
+disclaimer: "Amounts are being gradually reduced. Vehicle must be registered in the owner's name in Quebec. Vehicles registered between Feb 1 - March 31, 2025 during the temporary suspension are not eligible."
+
+rules:
+  - amount: 2000
+    conditions:
+      price_local_max: 65000

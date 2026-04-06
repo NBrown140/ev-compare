@@ -1,0 +1,22 @@
+id: ca-bc-go-electric
+name: "CleanBC Go Electric Passenger Vehicle Rebate"
+market: ca
+region: bc
+region_label: "British Columbia"
+level: "Province"
+currency: CAD
+effective_date: "2015-01-01"
+expiry_date: "2025-05-15"
+source: "https://web.archive.org/web/20250401120000/https://goelectricbc.gov.bc.ca/personal-rebate/"
+description: "Up to $4,000 rebate for new battery-electric or long-range plug-in hybrid vehicles (85+ km electric range), or $2,000 for shorter-range PHEVs. Program paused May 15, 2025 and officially ended November 2025. BC has deferred passenger EV rebates to the federal government."
+disclaimer: "Program is closed. BC no longer offers provincial passenger EV purchase rebates. Federal EVAP remains available."
+
+rules:
+  - amount: 4000
+    conditions:
+      price_local_max: 50000
+      segments: [sedan, hatchback, coupe]
+  - amount: 4000
+    conditions:
+      price_local_max: 70000
+      segments: [suv, truck, crossover, van]

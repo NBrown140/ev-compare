@@ -66,3 +66,22 @@ export interface Source {
 }
 
 export type SourcesMap = Record<string, Source[]>;
+
+export interface IncentiveProgram {
+  id: string;
+  name: string;
+  description?: string;
+  disclaimer?: string;
+  source: string;
+}
+
+export interface IncentiveRegion {
+  label: string;
+  level: string;
+  programs: IncentiveProgram[];
+}
+
+export interface MarketIncentives {
+  regions: Record<string, IncentiveRegion>;
+  vehicles: Record<string, Record<string, Record<string, number>>>;
+}

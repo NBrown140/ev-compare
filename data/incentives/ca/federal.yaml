@@ -1,0 +1,17 @@
+id: ca-federal-izev
+name: "iZEV Program"
+market: ca
+region: federal
+region_label: "Federal"
+level: "Federal"
+currency: CAD
+effective_date: "2019-05-01"
+expiry_date: "2025-03-31"
+source: "https://web.archive.org/web/20250101120000/https://tc.canada.ca/en/road-transportation/innovative-technologies/zero-emission-vehicles/incentives-purchasing-zero-emission-vehicles"
+description: "Up to $5,000 incentive for the purchase or lease of eligible battery-electric and fuel cell vehicles ($2,500 for PHEVs). Program paused January 12, 2025 and officially closed March 31, 2025. Replaced by EVAP starting February 2026."
+disclaimer: "Program is closed. No additional funding was allocated for 2025-26. See EVAP for the replacement federal program."
+
+rules:
+  - amount: 5000
+    conditions:
+      price_local_max: 55000

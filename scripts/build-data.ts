@@ -1,10 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import Papa from "papaparse";
+import YAML from "yaml";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DATA_DIR = path.join(ROOT, "data");
 const MARKETS_DIR = path.join(DATA_DIR, "markets");
+const INCENTIVES_DIR = path.join(DATA_DIR, "incentives");
 const OUT_DIR = path.join(ROOT, "src", "data", "generated");
 
 interface Column {
@@ -338,6 +340,237 @@ fs.writeFileSync(
   path.join(OUT_DIR, "markets.json"),
   JSON.stringify(summaries, null, 2)
 );
+
+// --- Incentives ---
+
+interface IncentiveRule {
+  amount: number;
+  conditions: Record<string, unknown>;
+}
+
+interface IncentiveFile {
+  id: string;
+  name: string;
+  market: string;
+  region: string;
+  region_label: string;
+  level: string;
+  currency: string;
+  effective_date: string;
+  expiry_date?: string | null;
+  source: string;
+  description?: string;
+  disclaimer?: string;
+  rules: IncentiveRule[];
+}
+
+interface IncentiveOutput {
+  regions: Record<string, {
+    label: string;
+    level: string;
+    programs: { id: string; name: string; description?: string; disclaimer?: string; source: string }[];
+  }>;
+  vehicles: Record<string, Record<string, Record<string, number>>>;
+}
+
+const VALID_CONDITION_FIELDS = new Set([
+  "price_local_max",
+  "price_local_min",
+  "segments",
+  "model_years",
+  "battery_capacity_kwh_min",
+]);
+
+const REQUIRED_INCENTIVE_FIELDS = [
+  "id", "name", "market", "region", "region_label", "level",
+  "currency", "effective_date", "source", "rules",
+] as const;
+
+function validateIncentiveFile(
+  inc: IncentiveFile,
+  expectedMarket: string,
+  filePath: string
+): string[] {
+  const errors: string[] = [];
+
+  for (const field of REQUIRED_INCENTIVE_FIELDS) {
+    if (inc[field] == null || inc[field] === "") {
+      errors.push(`${filePath}: missing required field "${field}"`);
+    }
+  }
+
+  if (inc.market && inc.market !== expectedMarket) {
+    errors.push(
+      `${filePath}: "market" is "${inc.market}" but file is in "${expectedMarket}/" directory`
+    );
+  }
+
+  if (inc.source && !inc.source.startsWith(WAYBACK_PREFIX)) {
+    errors.push(`${filePath}: "source" must be a Wayback Machine URL`);
+  }
+
+  if (!Array.isArray(inc.rules) || inc.rules.length === 0) {
+    errors.push(`${filePath}: "rules" must be a non-empty array`);
+  } else {
+    for (let i = 0; i < inc.rules.length; i++) {
+      const rule = inc.rules[i];
+      if (typeof rule.amount !== "number") {
+        errors.push(`${filePath}: rules[${i}].amount must be a number`);
+      }
+      if (rule.conditions) {
+        for (const key of Object.keys(rule.conditions)) {
+          if (!VALID_CONDITION_FIELDS.has(key)) {
+            errors.push(`${filePath}: rules[${i}] unknown condition "${key}"`);
+          }
+        }
+      }
+    }
+  }
+
+  return errors;
+}
+
+function evaluateIncentive(
+  vehicle: Record<string, unknown>,
+  rules: IncentiveRule[]
+): number {
+  for (const rule of rules) {
+    if (!rule.conditions || Object.keys(rule.conditions).length === 0) {
+      return rule.amount;
+    }
+
+    let match = true;
+    const cond = rule.conditions;
+
+    if (cond.price_local_max != null) {
+      if ((vehicle.price_local as number) > (cond.price_local_max as number)) match = false;
+    }
+    if (cond.price_local_min != null) {
+      if ((vehicle.price_local as number) < (cond.price_local_min as number)) match = false;
+    }
+    if (cond.segments != null) {
+      if (!(cond.segments as string[]).includes(vehicle.segment as string)) match = false;
+    }
+    if (cond.model_years != null) {
+      if (!(cond.model_years as number[]).includes(vehicle.model_year as number)) match = false;
+    }
+    if (cond.battery_capacity_kwh_min != null) {
+      if ((vehicle.battery_capacity_kwh as number) < (cond.battery_capacity_kwh_min as number)) match = false;
+    }
+
+    if (match) return rule.amount;
+  }
+  return 0;
+}
+
+// Process incentive YAML files per market
+const incentiveErrors: string[] = [];
+const seenIncentiveIds = new Set<string>();
+
+if (fs.existsSync(INCENTIVES_DIR)) {
+  const marketDirs = fs.readdirSync(INCENTIVES_DIR).filter((d) => {
+    const full = path.join(INCENTIVES_DIR, d);
+    return fs.statSync(full).isDirectory();
+  });
+
+  for (const marketDir of marketDirs) {
+    const yamlFiles = fs
+      .readdirSync(path.join(INCENTIVES_DIR, marketDir))
+      .filter((f) => f.endsWith(".yaml") || f.endsWith(".yml"))
+      .sort();
+
+    if (yamlFiles.length === 0) continue;
+
+    const incentives: IncentiveFile[] = [];
+
+    for (const file of yamlFiles) {
+      const filePath = path.join("data/incentives", marketDir, file);
+      const raw = fs.readFileSync(path.join(INCENTIVES_DIR, marketDir, file), "utf-8");
+      const parsed = YAML.parse(raw) as IncentiveFile;
+
+      incentiveErrors.push(...validateIncentiveFile(parsed, marketDir, filePath));
+
+      if (parsed.id) {
+        if (seenIncentiveIds.has(parsed.id)) {
+          incentiveErrors.push(`${filePath}: duplicate incentive id "${parsed.id}"`);
+        }
+        seenIncentiveIds.add(parsed.id);
+      }
+
+      incentives.push(parsed);
+    }
+
+    if (incentiveErrors.length > 0) continue;
+
+    // Build output for this market
+    const output: IncentiveOutput = { regions: {}, vehicles: {} };
+
+    // Sort so Federal-level regions come first, then alphabetically by level/region
+    incentives.sort((a, b) => {
+      if (a.level === b.level) return a.region.localeCompare(b.region);
+      if (a.level === "Federal") return -1;
+      if (b.level === "Federal") return 1;
+      return a.level.localeCompare(b.level);
+    });
+
+    // Filter out expired or not-yet-effective programs
+    const today = new Date().toISOString().slice(0, 10);
+    const activeIncentives = incentives.filter((inc) => {
+      if (inc.effective_date && inc.effective_date > today) return false;
+      if (inc.expiry_date && inc.expiry_date < today) return false;
+      return true;
+    });
+
+    for (const inc of activeIncentives) {
+      if (!output.regions[inc.region]) {
+        output.regions[inc.region] = { label: inc.region_label, level: inc.level, programs: [] };
+      }
+      output.regions[inc.region].programs.push({
+        id: inc.id,
+        name: inc.name,
+        source: inc.source,
+        ...(inc.description ? { description: inc.description } : {}),
+        ...(inc.disclaimer ? { disclaimer: inc.disclaimer } : {}),
+      });
+    }
+
+    // Load parsed vehicle data for this market
+    const vehicleJsonPath = path.join(OUT_DIR, `${marketDir}.json`);
+    if (!fs.existsSync(vehicleJsonPath)) continue;
+
+    const vehicles = JSON.parse(
+      fs.readFileSync(vehicleJsonPath, "utf-8")
+    ) as Record<string, unknown>[];
+
+    for (const vehicle of vehicles) {
+      const id = vehicle.id as string;
+      if (!id) continue;
+
+      const vehicleIncentives: Record<string, Record<string, number>> = {};
+
+      for (const inc of activeIncentives) {
+        const amount = evaluateIncentive(vehicle, inc.rules);
+        if (!vehicleIncentives[inc.region]) {
+          vehicleIncentives[inc.region] = {};
+        }
+        vehicleIncentives[inc.region][inc.id] = amount;
+      }
+
+      output.vehicles[id] = vehicleIncentives;
+    }
+
+    fs.writeFileSync(
+      path.join(OUT_DIR, `${marketDir}.incentives.json`),
+      JSON.stringify(output, null, 2)
+    );
+  }
+}
+
+if (incentiveErrors.length > 0) {
+  console.error("Incentive validation errors:");
+  for (const e of incentiveErrors) console.error(`  ✗ ${e}`);
+  process.exit(1);
+}
 
 console.log(
   `✓ Built ${csvFiles.length} market(s): ${markets.join(", ")} → src/data/generated/`

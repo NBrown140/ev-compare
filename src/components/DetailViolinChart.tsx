@@ -1,15 +1,18 @@
-import { useState, useMemo, useRef } from "react";
-import type { EV } from "@/types/ev";
+import { useState, useMemo, useCallback, useRef } from "react";
+import type { EV, MarketIncentives } from "@/types/ev";
 import { formatCurrency, shortenVariant } from "@/utils/format";
 import { useChartColors } from "@/hooks/useChartColors";
 import { gaussianKDE } from "@/utils/statistics";
 import { useResizeObserverWidth } from "@/hooks/useResizeObserverWidth";
+import { getVehicleIncentiveTotal } from "@/utils/incentives";
 
 interface DetailViolinChartProps {
   vehicle: EV;
   allVehicles: EV[];
   highlightIds?: string[];
   onSelectVehicle?: (id: string) => void;
+  incentives?: MarketIncentives | null;
+  selectedRegions?: string[];
 }
 
 interface ViolinPoint {
@@ -39,8 +42,23 @@ export default function DetailViolinChart({
   allVehicles,
   highlightIds,
   onSelectVehicle,
+  incentives,
+  selectedRegions,
 }: DetailViolinChartProps) {
   const chartColors = useChartColors();
+
+  const hasIncentives = !!incentives && !!selectedRegions && selectedRegions.length > 0;
+  const [usePostIncentive, setUsePostIncentive] = useState(true);
+  const applyIncentives = hasIncentives && usePostIncentive;
+
+  const getPrice = useCallback(
+    (v: EV) => {
+      if (!applyIncentives) return v.price_local;
+      const discount = getVehicleIncentiveTotal(incentives!, v.id, selectedRegions!);
+      return v.price_local - discount;
+    },
+    [applyIncentives, incentives, selectedRegions],
+  );
 
   const svgRef = useRef<SVGSVGElement>(null);
   const [tooltip, setTooltip] = useState<{

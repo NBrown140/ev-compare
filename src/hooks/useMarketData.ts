@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { getMarketData, getMarkets, getMarketSources, getMarketSummaries } from "@/data";
+import { getMarketData, getMarketIncentives, getMarkets, getMarketSources, getMarketSummaries } from "@/data";
 import type { EV } from "@/types/ev";
-import type { MarketSummaries, SourcesMap } from "@/types/ev";
+import type { MarketIncentives, MarketSummaries, SourcesMap } from "@/types/ev";
 
 const sourcesCache = new Map<string, SourcesMap | null>();
+const incentivesCache = new Map<string, MarketIncentives | null>();
 
 export function useMarkets(): string[] {
   return useMemo(() => getMarkets(), []);
@@ -70,4 +71,36 @@ export function useMarketSources(
   }, [market, enabled]);
 
   return sources;
+}
+
+export function useMarketIncentives(
+  market: string | null
+): MarketIncentives | null {
+  const [incentives, setIncentives] = useState<MarketIncentives | null>(null);
+
+  useEffect(() => {
+    if (!market) {
+      setIncentives(null);
+      return;
+    }
+
+    if (incentivesCache.has(market)) {
+      setIncentives(incentivesCache.get(market) ?? null);
+      return;
+    }
+
+    let cancelled = false;
+    setIncentives(null);
+    getMarketIncentives(market).then((result) => {
+      if (cancelled) return;
+      incentivesCache.set(market, result);
+      setIncentives(result);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [market]);
+
+  return incentives;
 }
