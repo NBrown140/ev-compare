@@ -90,49 +90,65 @@ export default function RegionSelector({
   });
 
   return (
-    <div className="space-y-3">
-      <div className="flex items-center gap-3 flex-wrap">
-        <span className="text-xs font-medium text-outline uppercase tracking-wide">
+    <div className="rounded-xl border border-outline-variant bg-surface-container-low/60">
+      {/* Header */}
+      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-outline-variant/60">
+        <svg
+          className="w-3.5 h-3.5 text-outline"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+        </svg>
+        <span className="text-xs font-semibold uppercase tracking-wider text-outline">
           Incentives
         </span>
-        {[...levels.entries()].map(([level, ids], levelIdx) => (
-          <div key={level} className="flex items-center gap-1.5">
-            {levelIdx > 0 && (
-              <span className="w-px h-4 bg-outline-variant mx-1" />
-            )}
-            <span className="text-[11px] text-outline">{level}</span>
-            {ids.map((id) => {
-              const region = incentives.regions[id];
-              const isSelected = selectedRegions.includes(id);
-              return (
-                <button
-                  key={id}
-                  onClick={() => toggle(id)}
-                  className={`px-3 py-1.5 rounded-lg border text-sm font-medium transition-colors ${
-                    isSelected
-                      ? "border-primary-dim bg-primary-container text-primary"
-                      : "border-outline-variant bg-surface text-outline hover:border-outline hover:bg-surface-container-low"
-                  }`}
-                >
-                  {region.label}
-                </button>
-              );
-            })}
-          </div>
-        ))}
       </div>
 
-      {selectedProgramsWithRegion.length > 0 && (
-        <div className="rounded-lg bg-surface-container-low/50 px-4 py-3 divide-y divide-outline-variant/30">
-          {selectedProgramsWithRegion.map(({ program, regionLabel }) => (
-            <ProgramDetail
-              key={program.id}
-              program={program}
-              regionLabel={regionLabel}
-            />
+      {/* Region chips */}
+      <div className="px-4 py-3 space-y-3">
+        <div className="flex items-center gap-3 flex-wrap">
+          {[...levels.entries()].map(([level, ids], levelIdx) => (
+            <div key={level} className="flex items-center gap-1.5">
+              {levelIdx > 0 && (
+                <span className="w-px h-4 bg-outline-variant mx-1" />
+              )}
+              <span className="text-[11px] text-outline">{level}</span>
+              {ids.map((id) => {
+                const region = incentives.regions[id];
+                const isSelected = selectedRegions.includes(id);
+                return (
+                  <button
+                    key={id}
+                    onClick={() => toggle(id)}
+                    className={`px-3 py-1.5 rounded-lg border text-sm font-medium transition-colors ${
+                      isSelected
+                        ? "border-primary-dim bg-primary-container text-primary"
+                        : "border-outline-variant bg-surface text-outline hover:border-outline hover:bg-surface-container-low"
+                    }`}
+                  >
+                    {region.label}
+                  </button>
+                );
+              })}
+            </div>
           ))}
         </div>
-      )}
+
+        {selectedProgramsWithRegion.length > 0 && (
+          <div className="rounded-lg bg-surface-container/40 px-4 py-3 divide-y divide-outline-variant/30">
+            {selectedProgramsWithRegion.map(({ program, regionLabel }) => (
+              <ProgramDetail
+                key={program.id}
+                program={program}
+                regionLabel={regionLabel}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
