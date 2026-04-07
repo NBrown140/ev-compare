@@ -570,8 +570,11 @@ export default function FilterBar({
       </div>
 
       {/* Advanced filters */}
-      {showAdvanced && (
-        <div className="border-t border-outline-variant/60 px-4 py-4 space-y-6">
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${showAdvanced ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <div className="overflow-hidden min-h-0">
+          <div className="border-t border-outline-variant/60 px-4 py-4 space-y-6">
           {/* Battery & Charging */}
           <section>
             <h4 className="text-[11px] font-semibold text-outline uppercase tracking-widest mb-3">
@@ -757,7 +760,8 @@ export default function FilterBar({
             </div>
           </section>
         </div>
-      )}
+      </div>
+    </div>
     </div>
   );
 }
