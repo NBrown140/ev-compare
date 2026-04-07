@@ -18,7 +18,7 @@ export default function Home({ onSelectMarket }: HomeProps) {
           You buy on evidence.
         </h1>
         <p className="text-lg text-outline max-w-2xl mx-auto">
-          The EV comparison tool for people who read the fine print.
+          Every spec. Every price. Every source cited.
         </p>
       </div>
 
