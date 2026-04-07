@@ -45,6 +45,11 @@
   --ds-outline-variant: #44474e;
 }
 
+html, body {
+  background-color: var(--ds-background);
+  overscroll-behavior: none;
+}
+
 /* --- Register tokens with Tailwind v4 --- */
 @theme {
   --color-background: var(--ds-background);

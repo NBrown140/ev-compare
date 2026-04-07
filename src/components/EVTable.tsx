@@ -2,12 +2,14 @@ import { useState } from "react";
 import type { EV, MarketIncentives } from "@/types/ev";
 import { formatCurrency, formatNumber } from "@/utils/format";
 import { getVehicleIncentiveTotal } from "@/utils/incentives";
+import { downloadCSV } from "@/utils/export";
 
 type SortKey = keyof EV;
 type SortDir = "asc" | "desc";
 
 interface EVTableProps {
   vehicles: EV[];
+  market?: string;
   pageSize?: number;
   onSelectVehicle?: (id: string) => void;
   compareIds?: string[];
@@ -30,7 +32,7 @@ const columns: { key: SortKey; label: string; align?: "right" }[] = [
   { key: "fast_charge_kw", label: "DC Fast (kW)", align: "right" },
 ];
 
-export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, compareIds, onToggleCompare, incentives, selectedRegions }: EVTableProps) {
+export default function EVTable({ vehicles, market, pageSize = 50, onSelectVehicle, compareIds, onToggleCompare, incentives, selectedRegions }: EVTableProps) {
   const compareFull = (compareIds?.length ?? 0) >= 5;
   const [sortKey, setSortKey] = useState<SortKey>("price_per_range_km");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
@@ -59,6 +61,34 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, comp
 
   const getIncentiveAmount = (v: EV) =>
     hasIncentives ? getVehicleIncentiveTotal(incentives, v.id, selectedRegions) : 0;
+
+  const handleExport = () => {
+    const rows = sorted.map((v) => {
+      const row: Record<string, string | number | null> = {
+        Manufacturer: v.manufacturer,
+        Model: v.model,
+        Year: v.model_year,
+        Variant: v.variant ?? null,
+        Segment: v.segment ?? null,
+        Price: v.price_local,
+        Currency: v.currency,
+        "Range (km)": v.range_km,
+        "Range Rating": v.range_rating?.toUpperCase() ?? null,
+        "Battery (kWh)": v.battery_capacity_kwh,
+        "Price/km": v.price_per_range_km ?? null,
+        "Wh/km": v.efficiency_wh_km ?? null,
+        "DC Fast (kW)": v.fast_charge_kw ?? null,
+      };
+      if (hasIncentives) {
+        const amt = getIncentiveAmount(v);
+        row["Est. Price After Incentives"] = amt > 0 ? v.price_local - amt : v.price_local;
+      }
+      return row;
+    });
+    const date = new Date().toISOString().slice(0, 10);
+    const prefix = market ? `ev-compare-${market}` : "ev-compare";
+    downloadCSV(rows, `${prefix}-${date}.csv`);
+  };
 
   const renderCell = (v: EV, key: SortKey) => {
     switch (key) {
@@ -95,6 +125,17 @@ export default function EVTable({ vehicles, pageSize = 50, onSelectVehicle, comp
 
   return (
     <div className="rounded-xl border border-outline-variant">
+      <div className="flex justify-end px-3 py-2 border-b border-outline-variant/30">
+        <button
+          onClick={handleExport}
+          className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-low px-3 py-1.5 text-sm font-medium text-outline hover:bg-surface-container transition-colors cursor-pointer"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+          </svg>
+          Export CSV
+        </button>
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="sticky top-0 z-10">

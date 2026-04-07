@@ -196,6 +196,7 @@ export default function MarketDashboard({
       {activeTab === "table" ? (
         <EVTable
           vehicles={filtered}
+          market={market}
           onSelectVehicle={onSelectVehicle}
           compareIds={compareIds}
           onToggleCompare={onToggleCompare}
