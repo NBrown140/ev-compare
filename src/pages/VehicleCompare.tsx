@@ -5,6 +5,7 @@ import { formatCurrency } from "@/utils/format";
 import { getVehicleIncentiveTotal } from "@/utils/incentives";
 import { downloadCSV } from "@/utils/export";
 import RegionSelector from "@/components/RegionSelector";
+import OverflowMenu from "@/components/OverflowMenu";
 
 interface VehicleCompareProps {
   vehicles: EV[];
@@ -168,15 +169,6 @@ export default function VehicleCompare({
         <h2 className="text-2xl font-bold">
           Compare Vehicles ({compareVehicles.length})
         </h2>
-        <button
-          onClick={handleExport}
-          className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-low px-3 py-1.5 text-sm font-medium text-outline hover:bg-surface-container transition-colors cursor-pointer ml-auto"
-        >
-          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-          </svg>
-          Export CSV
-        </button>
       </div>
 
       {incentives && (
@@ -218,6 +210,13 @@ export default function VehicleCompare({
                   </div>
                 </th>
               ))}
+              <th className="sticky right-0 z-10 w-10 px-2 py-4 bg-surface-container-low align-top">
+                <OverflowMenu items={[{
+                  label: "Export CSV",
+                  icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>,
+                  onClick: handleExport,
+                }]} />
+              </th>
             </tr>
           </thead>
 
@@ -233,7 +232,7 @@ export default function VehicleCompare({
                   {/* Section header */}
                   <tr>
                     <td
-                      colSpan={compareVehicles.length + 1}
+                      colSpan={compareVehicles.length + 2}
                       className="bg-surface-container-low/50 px-4 py-2 text-xs font-semibold text-outline uppercase tracking-wide border-t border-outline-variant"
                     >
                       {section.title}

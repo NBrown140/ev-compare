@@ -3,6 +3,7 @@ import type { EV, MarketIncentives } from "@/types/ev";
 import { formatCurrency, formatNumber } from "@/utils/format";
 import { getVehicleIncentiveTotal } from "@/utils/incentives";
 import { downloadCSV } from "@/utils/export";
+import OverflowMenu from "./OverflowMenu";
 
 type SortKey = keyof EV;
 type SortDir = "asc" | "desc";
@@ -62,8 +63,8 @@ export default function EVTable({ vehicles, market, pageSize = 50, onSelectVehic
   const getIncentiveAmount = (v: EV) =>
     hasIncentives ? getVehicleIncentiveTotal(incentives, v.id, selectedRegions) : 0;
 
-  const handleExport = () => {
-    const rows = sorted.map((v) => {
+  const buildExportRows = (evs: EV[]) =>
+    evs.map((v) => {
       const row: Record<string, string | number | null> = {
         Manufacturer: v.manufacturer,
         Model: v.model,
@@ -85,9 +86,18 @@ export default function EVTable({ vehicles, market, pageSize = 50, onSelectVehic
       }
       return row;
     });
+
+  const exportCSV = (rows: Record<string, string | number | null>[], suffix?: string) => {
     const date = new Date().toISOString().slice(0, 10);
     const prefix = market ? `ev-compare-${market}` : "ev-compare";
-    downloadCSV(rows, `${prefix}-${date}.csv`);
+    downloadCSV(rows, `${prefix}${suffix ? `-${suffix}` : ""}-${date}.csv`);
+  };
+
+  const handleExport = () => exportCSV(buildExportRows(sorted));
+
+  const handleExportSelected = () => {
+    const selected = sorted.filter((v) => compareIds?.includes(v.id));
+    exportCSV(buildExportRows(selected), "selected");
   };
 
   const renderCell = (v: EV, key: SortKey) => {
@@ -123,19 +133,14 @@ export default function EVTable({ vehicles, market, pageSize = 50, onSelectVehic
     }
   };
 
+  const exportIcon = (
+    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+    </svg>
+  );
+
   return (
     <div className="rounded-xl border border-outline-variant">
-      <div className="flex justify-end px-3 py-2 border-b border-outline-variant/30">
-        <button
-          onClick={handleExport}
-          className="inline-flex items-center gap-1.5 rounded-full bg-surface-container-low px-3 py-1.5 text-sm font-medium text-outline hover:bg-surface-container transition-colors cursor-pointer"
-        >
-          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-          </svg>
-          Export CSV
-        </button>
-      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="sticky top-0 z-10">
@@ -159,6 +164,14 @@ export default function EVTable({ vehicles, market, pageSize = 50, onSelectVehic
                   )}
                 </th>
               ))}
+              <th className="sticky right-0 w-10 px-2 py-3 bg-surface-container-low">
+                <OverflowMenu items={[
+                  { label: "Export all as CSV", icon: exportIcon, onClick: handleExport },
+                  ...((compareIds?.length ?? 0) > 0
+                    ? [{ label: `Export selected (${compareIds!.length})`, icon: exportIcon, onClick: handleExportSelected }]
+                    : []),
+                ]} />
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -172,13 +185,12 @@ export default function EVTable({ vehicles, market, pageSize = 50, onSelectVehic
                   className={`border-b border-outline-variant/30 hover:bg-surface-container-low/50 transition-colors${onSelectVehicle ? " cursor-pointer" : ""}`}
                 >
                   {onToggleCompare && (
-                    <td className="w-10 px-3 py-3">
+                    <td className="w-10 px-3 py-3" onClick={(e) => e.stopPropagation()}>
                       <input
                         type="checkbox"
                         checked={isChecked}
                         disabled={disabled}
                         onChange={() => onToggleCompare(v.id)}
-                        onClick={(e) => e.stopPropagation()}
                         className="h-4 w-4 rounded border-outline-variant accent-primary cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
                       />
                     </td>
@@ -193,6 +205,7 @@ export default function EVTable({ vehicles, market, pageSize = 50, onSelectVehic
                       {renderCell(v, col.key)}
                     </td>
                   ))}
+                  <td className="sticky right-0 w-10 bg-surface" />
                 </tr>
               );
             })}
