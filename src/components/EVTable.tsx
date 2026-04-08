@@ -35,18 +35,28 @@ const columns: { key: SortKey; label: string; align?: "right" }[] = [
 
 export default function EVTable({ vehicles, market, pageSize = 50, onSelectVehicle, compareIds, onToggleCompare, incentives, selectedRegions }: EVTableProps) {
   const compareFull = (compareIds?.length ?? 0) >= 5;
-  const [sortKey, setSortKey] = useState<SortKey>("price_per_range_km");
+  const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [visibleCount, setVisibleCount] = useState(pageSize);
 
-  const sorted = [...vehicles].sort((a, b) => {
-    const av = a[sortKey];
-    const bv = b[sortKey];
+  const cmpValues = (av: unknown, bv: unknown): number => {
     if (av == null && bv == null) return 0;
     if (av == null) return 1;
     if (bv == null) return -1;
-    const cmp = av < bv ? -1 : av > bv ? 1 : 0;
-    return sortDir === "asc" ? cmp : -cmp;
+    return av < bv ? -1 : av > bv ? 1 : 0;
+  };
+
+  const sorted = [...vehicles].sort((a, b) => {
+    if (sortKey) {
+      const cmp = cmpValues(a[sortKey], b[sortKey]);
+      return sortDir === "asc" ? cmp : -cmp;
+    }
+    // Default: year desc, then manufacturer asc, then model asc
+    return (
+      cmpValues(b.model_year, a.model_year) ||
+      cmpValues(a.manufacturer, b.manufacturer) ||
+      cmpValues(a.model, b.model)
+    );
   });
 
   const toggleSort = (key: SortKey) => {
@@ -54,7 +64,7 @@ export default function EVTable({ vehicles, market, pageSize = 50, onSelectVehic
       setSortDir((d) => (d === "asc" ? "desc" : "asc"));
     } else {
       setSortKey(key);
-      setSortDir("asc");
+      setSortDir(key === "model_year" ? "desc" : "asc");
     }
   };
 
